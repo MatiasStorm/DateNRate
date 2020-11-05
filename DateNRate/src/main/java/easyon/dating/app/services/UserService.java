@@ -16,12 +16,17 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public List<User> getUsers(){
+    public List<User> getListOfUsers(){
         return userDao.selectUsers();
     }
 
     public void createUser(User user){
         userDao.createUser(user);
+    }
+
+    public User getUser(int userId){
+        return userDao.getUser(userId);
+
     }
 
 }

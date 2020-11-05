@@ -4,13 +4,12 @@ import easyon.dating.app.models.Message;
 import easyon.dating.app.models.User;
 import easyon.dating.app.services.RatingService;
 import easyon.dating.app.services.UserService;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 @Controller
@@ -25,7 +24,7 @@ public class DemoController {
 
     @GetMapping("/")
     public String index(Model model){
-        List<User> user = userService.getUsers();
+        List<User> user = userService.getListOfUsers();
         model.addAttribute("user", user.get(0));
         return "index";
     }
@@ -58,9 +57,13 @@ public class DemoController {
     }
 
     @GetMapping("/userProfile")
-    public String userProfile(Model model){
+    public String userProfile(@RequestParam int userId, Model model){
         model.addAttribute("ratings", ratingService.getRatings());
+        model.addAttribute("user", userService.getUser(userId));
         return "userProfile";
     }
+
+
+
 
 }
