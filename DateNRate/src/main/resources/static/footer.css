@@ -1,0 +1,21 @@
+footer {
+    margin-top: 10vh;
+    background-color: #222;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    color: white;
+}
+
+footer img {
+    border-radius: 50%;
+    max-height: 120px;
+    margin: 25px 15px;
+}
+
+footer .imgLogo{
+    border-radius: 0;
+    max-height: 120px;
+    margin: 25px 15px;
+
+}

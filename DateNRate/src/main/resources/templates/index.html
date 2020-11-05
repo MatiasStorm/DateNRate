@@ -1,15 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/footer.css">
+    <link rel="stylesheet" type="text/css" href="/index.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
 </head>
 <body>
-    <h1>This is the index page!</h1>
-    <h1 th:text="${user.userId}"></h1>
-    <h1 th:text="${user.firstName}"></h1>
-    <h1 th:text="${user.lastName}"></h1>
-    <h1 th:text="${user.userDescription}"></h1>
+<div>
+    <img class="imgHeader" src="/images/dateNrateFrontPagePicture.png"/>
+
+</div>
+
+<div class="signupBox">
+    <div class="signupBoxHeader">
+    <h2>Velkommen til dit dating eventyr</h2>
+        <button class="button">Opret bruger</button>
+        <button class="button">Login</button>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+<!--    <h1 th:text="${user.userId}"></h1>-->
+<!--    <h1 th:text="${user.firstName}"></h1>-->
+<!--    <h1 th:text="${user.lastName}"></h1>-->
+<!--    <h1 th:text="${user.userDescription}"></h1>-->
+
+<footer th:replace="/includes/footer :: footer"></footer>
 
 </body>
 </html>
