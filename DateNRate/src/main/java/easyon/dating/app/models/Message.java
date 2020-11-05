@@ -8,7 +8,7 @@ public class Message {
     private int senderId;
     private int recieverId;
     private LocalDateTime massageDate;
-    private String massage;
+    private String message;
     private boolean isRead;
 
     public int getMessageId() {
@@ -43,12 +43,12 @@ public class Message {
         this.massageDate = massageDate;
     }
 
-    public String getMassage() {
-        return massage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMassage(String massage) {
-        this.massage = massage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public boolean isRead() {

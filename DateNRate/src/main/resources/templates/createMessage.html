@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Message</title>
+</head>
+<body>
+    <form method="post" th:action="@{/createMessage/submit}" th:object="${message}">
+        <label>Besked:</label>
+        <br/>
+        <textarea th:field="*{message}"></textarea>
+        <input th:field="*{senderId}" hidden="true">
+        <input th:field="*{recieverId}" hidden="true">
+        <br/>
+        <button>Fortryd</button>
+        <button type="submit">Send</button>
+    </form>
+
+</body>
+</html>
