@@ -25,6 +25,12 @@ public class UserDAO {
         );
     }
 
+    public User getUser(int id){
+        return jdbcTemplate.query("SELECT * FROM " + table + " WHERE user_id =  ?",
+               new UserMapper(), id
+        ).get(0);
+    }
+
     public void createUser(User user){
         jdbcTemplate.update(
                 "INSERT into users(first_name, last_name, email, password, username, date_of_birth) VALUES(?, ?, ?, ?, ?, ?)",
