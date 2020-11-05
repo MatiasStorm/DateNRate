@@ -13,6 +13,7 @@ public class RatingDAO {
     private final JdbcTemplate jdbcTemplate;
     private final String table = "ratings";
 
+
     @Autowired
     public RatingDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

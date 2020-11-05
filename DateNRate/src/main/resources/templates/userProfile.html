@@ -3,15 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/userProfile.css">
 </head>
 <body>
-    <h1 th:each="r: ${ratings}" th:text="${r.ratingName}">
 
-    </h1>
+    <div>
+        <div>
+            <div>
+                <img src="/images/mand_default.webp">
+            </div>
+            <div>
+                <h3>Rating: 10/10</h3>
+                <h4 th:text="${user.username}"></h4>
+                <h5>Indsæt by, brug join i UserDAO</h5>
+            </div>
+            <div>
 
-    <h1 th:text="${user.userDescription}">
+            </div>
 
-    </h1>
+        </div>
+        <div class="box" th:text="${user.userDescription}">
+            <div class="boxHeader"> <p>Om mig</p> </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!--<form method="post" th:action="@{/userProfile/createUserRating}" th:object="${userRatings}">-->
+
+
+<!--    <div th:each="r, iter : ${ratings}">-->
+<!--        <label th:text="${r.ratingName}"></label>-->
+<!--&lt;!&ndash;        <input type="number" th:field="*{userRatings[iter.index]}">&ndash;&gt;-->
+<!--        <select>-->
+<!--        <option value="1">1</option>-->
+<!--        <option value="2">2</option>-->
+<!--        <option value="3">3</option>-->
+<!--        <option value="4">4</option>-->
+<!--        <option value="5">5</option>-->
+<!--        <option value="6">6</option>-->
+<!--        <option value="7">7</option>-->
+<!--        <option value="8">8</option>-->
+<!--        <option value="9">9</option>-->
+<!--        <option value="10">10</option>-->
+<!--        </select>-->
+<!--     </div>-->
+<!--    <button type="submit">Bedøm</button>-->
+<!--    <button>Fortryd</button>-->
+<!--</form>-->
+
 
 
 
