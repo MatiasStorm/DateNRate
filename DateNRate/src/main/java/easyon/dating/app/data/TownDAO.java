@@ -20,7 +20,6 @@ public class TownDAO {
     }
 
     public List<Town> getTownList() {
-
         return jdbcTemplate.query(
                 "SELECT * FROM " + table,
                 new TownMapper()
