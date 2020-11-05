@@ -2,7 +2,9 @@ package easyon.dating.app.data;
 
 import easyon.dating.app.models.Message;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MessageDAO {
     private final JdbcTemplate jdbcTemplate;
 
