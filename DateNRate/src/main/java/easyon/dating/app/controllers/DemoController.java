@@ -1,5 +1,6 @@
 package easyon.dating.app.controllers;
 
+import easyon.dating.app.models.Message;
 import easyon.dating.app.models.User;
 import easyon.dating.app.services.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,14 +28,30 @@ public class DemoController {
     }
 
     @GetMapping("/createUser")
-    public String createUserGet(Model model, User user){
+    public String createUser(Model model, User user){
         return "createUser";
     }
 
     @PostMapping("/createUser/submit")
-    public String createUserPost(User user){
+    public String createUserSubmit(User user){
         userService.createUser(user);
         return "redirect:/";
+    }
+
+
+    @GetMapping("/createMessage")
+    public String createMessage(Message message){
+        return "createMessage";
+    }
+
+    @PostMapping("/createMessage/submit")
+    public String createMessageSubmit(Message message){
+        return "redirect:/messages";
+    }
+
+    @GetMapping("/messages")
+    public String messages(){
+        return "messages";
     }
 
 
