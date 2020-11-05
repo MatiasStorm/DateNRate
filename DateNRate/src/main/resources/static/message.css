@@ -1,9 +1,26 @@
 .messagesContainer {
     margin: 1%;
     border: solid 1px grey;
-
+    padding: 10px;
+    border-radius: 10px ;
 }
 
 .message{
     border-bottom: solid 1px black;
+    margin-bottom: 10px;
 }
+
+.messageDate, .messageSender {
+    display: inline;
+}
+
+messageDate{
+    margin-left: 10px;
+}
+
+.messageSender {
+    color: black;
+}
+
+
+

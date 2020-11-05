@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <title>Messages</title>
     <link rel="stylesheet" type="text/css" href="/message.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
 </head>
 <body>
-    <h1>Beskeder:</h1>
-    <div class="messagesContainer">
-        <div class="message" th:each="message, iter : ${messages}">
-            <div th:object="${senders[iter.index]}">
-                <h3 th:text="'Fra: ' + *{firstName} + ' ' + *{lastName}"></h3>
-            </div>
-            <p th:text="${message.message}"></p>
+<h1>Beskeder:</h1>
+<div class="messagesContainer">
+    <div class="message" th:each="message, iter : ${messages}">
+        <div th:object="${senders[iter.index]}">
+            <a class="cleanA" th:href="'/userProfile?userId=' + *{userId}" >
+                <h3 class="messageSender" th:text="*{firstName} + ' ' + *{lastName}"></h3>
+            </a>
+            <p class="messageDate" th:text="${#dates.format(message.messageDate, 'HH:mm dd-MM-yyyy')}"></p>
         </div>
+        <p class="messageText" th:text="${message.message}"></p>
     </div>
+</div>
 
 </body>
 </html>

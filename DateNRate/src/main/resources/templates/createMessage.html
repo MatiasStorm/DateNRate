@@ -5,16 +5,16 @@
     <title>Create Message</title>
 </head>
 <body>
-    <form method="post" th:action="@{/createMessage/submit}" th:object="${message}">
-        <label>Besked:</label>
-        <br/>
-        <textarea th:field="*{message}"></textarea>
-        <input th:field="*{senderId}" hidden="true">
-        <input th:field="*{recieverId}" hidden="true">
-        <br/>
-        <button>Fortryd</button>
-        <button type="submit">Send</button>
-    </form>
+<form method="post" th:action="@{/createMessage/submit}" th:object="${message}">
+    <label>Besked:</label>
+    <br/>
+    <textarea th:field="*{message}"></textarea>
+    <input th:field="*{senderId}" hidden="true">
+    <input th:field="*{recieverId}" hidden="true">
+    <br/>
+    <button>Fortryd</button>
+    <button type="submit">Send</button>
+</form>
 
 </body>
 </html>

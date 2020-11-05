@@ -1,7 +1,7 @@
 package easyon.dating.app.models;
 
 import java.time.LocalDateTime;
-import java.sql.Date;
+import java.util.Date;
 
 public class Message {
 
