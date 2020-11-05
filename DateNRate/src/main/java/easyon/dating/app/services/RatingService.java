@@ -23,6 +23,7 @@ public class RatingService {
         return ratingDAO.selectRatings();
     }
 
+
 }
 
 

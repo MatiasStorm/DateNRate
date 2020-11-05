@@ -1,9 +1,12 @@
 package easyon.dating.app.controllers;
 
 import easyon.dating.app.models.Message;
+import easyon.dating.app.models.Rating;
 import easyon.dating.app.models.User;
+import easyon.dating.app.models.UserRating;
 import easyon.dating.app.services.MessageService;
 import easyon.dating.app.services.RatingService;
+import easyon.dating.app.services.UserRatingService;
 import easyon.dating.app.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +21,13 @@ public class DemoController {
     private final UserService userService;
     private final MessageService messageService;
     private  final RatingService ratingService;
+    private final UserRatingService userRatingService;
 
-    public DemoController(UserService userService, RatingService ratingService, MessageService messageService) {
+    public DemoController(UserService userService, RatingService ratingService, MessageService messageService, UserRatingService userRatingService) {
         this.userService = userService;
         this.ratingService = ratingService;
         this.messageService = messageService;
+        this.userRatingService = userRatingService;
     }
 
     @GetMapping("/")
@@ -64,11 +69,18 @@ public class DemoController {
 
     @GetMapping("/userProfile")
     public String userProfile(@RequestParam int userId, Model model){
-        model.addAttribute("ratings", ratingService.getRatings());
+        List<Rating> ratings = ratingService.getRatings();
+        model.addAttribute("ratings", ratings);
         model.addAttribute("user", userService.getUser(userId));
+        model.addAttribute("userRatings",userRatingService.getEmptyUserRatingArray(ratings.size()));
         return "userProfile";
     }
 
+    @PostMapping("/userProfile/createUserRating")
+    public String createUserRating(UserRating userRating) {
+       userRatingService.createUserRating(userRating);
+        return "redirect:/userProfile?userId=4";
+    }
 
 
 
