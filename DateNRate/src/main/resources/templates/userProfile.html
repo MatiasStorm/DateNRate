@@ -5,12 +5,18 @@
     <title>Title</title>
 </head>
 <body>
+    <h1 th:each="r: ${ratings}" th:text="${r.ratingName}">
+
+    </h1>
+
+    <h1 th:text="${ratings[1].ratingId}">
+
+    </h1>
 
 
+<!--  <form method="post" th:action="@{/createUserRating/submit}" th:object="${userRatings}">-->
 
-  <form method="post" th:action="@{/createUserRating/submit}" th:object="${userRatings}">
-
-  </form>
+<!--  </form>-->
 
 
 </body>
