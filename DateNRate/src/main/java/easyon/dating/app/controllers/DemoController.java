@@ -54,5 +54,9 @@ public class DemoController {
         return "messages";
     }
 
+    @GetMapping("/userProfile")
+    public String userProfile(){
+        return "userProfile";
+    }
 
 }
