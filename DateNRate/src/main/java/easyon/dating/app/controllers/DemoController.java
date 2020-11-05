@@ -2,6 +2,7 @@ package easyon.dating.app.controllers;
 
 import easyon.dating.app.models.Message;
 import easyon.dating.app.models.User;
+import easyon.dating.app.services.RatingService;
 import easyon.dating.app.services.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import java.util.List;
 @Controller
 public class DemoController {
     private final UserService userService;
+    private  final RatingService ratingService;
 
-    public DemoController(UserService userService) {
+    public DemoController(UserService userService, RatingService ratingService) {
         this.userService = userService;
+        this.ratingService = ratingService;
     }
 
     @GetMapping("/")
@@ -39,6 +42,7 @@ public class DemoController {
         return "redirect:/";
     }
 
+
     @GetMapping("/createMessage")
     public String createMessage(Message message){
         return "createMessage";
@@ -52,6 +56,12 @@ public class DemoController {
     @GetMapping("/messages")
     public String messages(@RequestParam Integer id){
         return "messages";
+    }
+
+    @GetMapping("/userProfile")
+    public String userProfile(Model model){
+        model.addAttribute("ratings", ratingService.getRatings());
+        return "userProfile";
     }
 
 }
