@@ -5,8 +5,12 @@
     <title>Messages</title>
     <link rel="stylesheet" type="text/css" href="/message.css">
     <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/topPart.css">
 </head>
 <body>
+
+<div th:replace="/includes/topPart :: topPart"></div>
+
 <h1>Beskeder:</h1>
 <div class="messagesContainer">
     <div class="message" th:each="message, iter : ${messages}">
