@@ -19,7 +19,16 @@ public class User {
     private Date dateOfBirth;
     private Date created;
     private String userDescription;
+    private boolean isMale;
 
+
+    public boolean isMale() {
+        return isMale;
+    }
+
+    public void setMale(boolean male) {
+        isMale = male;
+    }
 
     public int getUserId() {
         return userId;
