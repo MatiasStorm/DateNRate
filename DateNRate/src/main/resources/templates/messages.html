@@ -8,8 +8,10 @@
 <body>
     <h1>Beskeder:</h1>
     <div class="messagesContainer">
-        <div class="message" th:each="message : ${messages}">
-            <h3 th:text="'Fra: ' + ${message.senderId}"></h3>
+        <div class="message" th:each="message, iter : ${messages}">
+            <div th:object="${senders[iter.index]}">
+                <h3 th:text="'Fra: ' + *{firstName} + ' ' + *{lastName}"></h3>
+            </div>
             <p th:text="${message.message}"></p>
         </div>
     </div>

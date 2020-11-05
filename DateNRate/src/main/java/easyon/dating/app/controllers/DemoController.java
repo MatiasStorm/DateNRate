@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -65,7 +66,12 @@ public class DemoController {
     @GetMapping("/messages")
     public String messages(@RequestParam Integer userId, Model model){
         List<Message> messages = messageService.getUserMessages(userId);
-        model.addAttribute("messages", messageService.getUserMessages(userId));
+        List<User> senders = new ArrayList<>();
+        for(Message message : messages){
+            senders.add(userService.getUser(message.getSenderId()));
+        }
+        model.addAttribute("messages", messages);
+        model.addAttribute("senders", senders);
         return "messages";
     }
 
@@ -80,7 +86,7 @@ public class DemoController {
 
     @PostMapping("/userProfile/createUserRating")
     public String createUserRating(UserRating userRating) {
-       userRatingService.createUserRating(userRating);
+        userRatingService.createUserRating(userRating);
         return "redirect:/userProfile?userId=4";
     }
 

@@ -11,6 +11,8 @@ public class Message {
     private Date messageDate;
     private String message;
     private boolean isRead;
+    private User senderUser;
+    private User recieverUser;
 
     public int getMessageId() {
         return messageId;
@@ -60,4 +62,19 @@ public class Message {
         isRead = read;
     }
 
+    public User getSenderUser() {
+        return senderUser;
+    }
+
+    public void setSenderUser(User senderUser) {
+        this.senderUser = senderUser;
+    }
+
+    public User getRecieverUser() {
+        return recieverUser;
+    }
+
+    public void setRecieverUser(User recieverUser) {
+        this.recieverUser = recieverUser;
+    }
 }
