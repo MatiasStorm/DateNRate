@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Messages</title>
+    <link rel="stylesheet" type="text/css" href="/message.css">
 </head>
 <body>
-    <div th:each="message : ${messages}">
-        <h1 th:text="From: ${message.}"></h1>
+    <h1>Beskeder:</h1>
+    <div class="messagesContainer">
+        <div class="message" th:each="message, iter : ${messages}">
+            <div th:object="${senders[iter.index]}">
+                <h3 th:text="'Fra: ' + *{firstName} + ' ' + *{lastName}"></h3>
+            </div>
+            <p th:text="${message.message}"></p>
+        </div>
     </div>
 
 </body>

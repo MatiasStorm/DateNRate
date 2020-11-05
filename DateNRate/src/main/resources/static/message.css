@@ -1,0 +1,9 @@
+.messagesContainer {
+    margin: 1%;
+    border: solid 1px grey;
+
+}
+
+.message{
+    border-bottom: solid 1px black;
+}
