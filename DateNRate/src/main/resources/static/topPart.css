@@ -16,12 +16,12 @@
 }
 
 .navbarItem img{
-    max-height: 35%;
+    max-height: 55%;
 }
 
 .navbarBrand img {
     text-decoration: none;
-    margin: 5px;
+    margin: 10px 0px 0px 15px;
 }
 
 .navbarItem img {
@@ -30,7 +30,8 @@
 
 .navbarItem {
     position: relative;
-    top: -25%;
+    top: -15%;
+    margin: 0px 15px;
 }
 
 .navbarBrand, .navbarItem {
