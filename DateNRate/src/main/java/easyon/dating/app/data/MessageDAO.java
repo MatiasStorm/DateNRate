@@ -26,7 +26,7 @@ public class MessageDAO {
 
     public List<Message> getUserMessages(int userId){
         return jdbcTemplate.query(
-                "SELECT * FROM " + table + " WHERE reciever_id = ?",
+                "SELECT * FROM " + table + " WHERE reciever_id = ? ORDER BY message_date DESC ",
                 new MessageMapper(),
                 userId
         );

@@ -3,3 +3,7 @@ body{
     margin: 0;
 }
 
+.cleanA:active, .cleanA:hover, .cleanA:visited, .cleaA:link, .cleanA{
+    color: black;
+    text-decoration: none;
+}
