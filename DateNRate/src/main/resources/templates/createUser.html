@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+</head>
+<body>
+    <form method="post" th:action="@{/createUser/submit}" th:object="${user}" >
+        <label>Brugernavn:</label>
+        <input type="text" th:field="*{username}">
+        <label>Password:</label>
+        <input type="password" th:field="*{password}">
+        <label>Gentag Password:</label>
+        <input type="password" th:field="*{password2}">
+        <label>Fornavn:</label>
+        <input type="text" th:field="*{firstName}">
+        <label>Efternavn:</label>
+        <input type="text" th:field="*{lastName}">
+        <label>Email:</label>
+        <input type="email" th:field="*{email}">
+        <label>Fødselsdato:</label>
+        <input type="date" th:field="*{dateOfBirth}">
+        <button type="submit">Opret</button>
+        <button>Fortryd</button>
+    </form>
+</body>
+</html>

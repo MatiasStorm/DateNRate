@@ -15,14 +15,7 @@ import java.sql.SQLException;
 
 @SpringBootApplication
 public class AppApplication {
-    @PostConstruct
-    public void createSshTunnel() throws JSchException {
-        SSHTunnel tunnel = new SSHTunnel();
-        tunnel.createSshTunnel();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(AppApplication.class, args);
     }
-
 }

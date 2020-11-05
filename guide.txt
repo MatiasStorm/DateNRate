@@ -1,0 +1,6 @@
+1. Html med thymeleaf (post form)
+2. GET og POST mapping i DemoController
+3. Opret create metode i service
+4. Oprete create metode i DAO (Data Access Object)
+5. I create metode i DAO, skriv SQL statement 
+	fx. "INSERT into users(first_name, last_name, email, password, username, date_of_birth) VALUES(?, ?, ?, ?, ?, ?)"
