@@ -36,4 +36,6 @@ public class DemoController {
         userService.createUser(user);
         return "redirect:/";
     }
+
+
 }
