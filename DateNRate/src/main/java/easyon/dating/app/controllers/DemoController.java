@@ -56,11 +56,12 @@ public class DemoController {
     @PostMapping("/createMessage/submit")
     public String createMessageSubmit(Message message){
         messageService.createMessage(message);
-        return "redirect:/messages";
+        return "redirect:/messages?id=4";
     }
 
     @GetMapping("/messages")
-    public String messages(@RequestParam Integer id){
+    public String messages(@RequestParam Integer userId, Model model){
+        model.addAttribute("messages", messageService.getUserMessages(userId));
         return "messages";
     }
 
