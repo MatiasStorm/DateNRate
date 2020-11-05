@@ -7,10 +7,10 @@
 .boxLogin {
     z-index: 1;
     width: 700px;
-    margin-left: -350px;
+    transform: translate(-50%,0%);
     min-height: 290px;
     position: absolute;
-    bottom: -20px;
+    bottom: 175px;
     background: #fff;
     left: 50%;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .2);

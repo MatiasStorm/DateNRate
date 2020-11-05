@@ -3,27 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/userProfile.css">
+    <link rel="stylesheet" type="text/css" href="userProfile.css">
+    <link rel="stylesheet" type="text/css" href="/topPart.css">
+
 </head>
 <body>
+
+<div th:replace="/includes/topPart :: topPart"></div>
 
     <div>
         <div>
             <div>
                 <img src="/images/mand_default.webp">
             </div>
+
             <div>
                 <h3>Rating: 10/10</h3>
                 <h4 th:text="${user.username}"></h4>
                 <h5>Indsæt by, brug join i UserDAO</h5>
             </div>
             <div>
-
+                <button>Send besked</button>
+                <button>Add to favorite</button>
             </div>
 
         </div>
-        <div class="box" th:text="${user.userDescription}">
+        <div class="box">
             <div class="boxHeader"> <p>Om mig</p> </div>
+            <p th:text="${user.userDescription}"> </p>
         </div>
     </div>
 

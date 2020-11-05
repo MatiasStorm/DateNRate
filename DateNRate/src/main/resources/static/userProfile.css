@@ -1,13 +1,11 @@
 
 .box {
     z-index: 1;
-    width: 700px;
-    margin-left: -350px;
+    width: 96%;
+    margin-left: 2%;
     min-height: 290px;
-    position: absolute;
-    bottom: -20px;
+    bottom: 2%;
     background: #fff;
-    left: 50%;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .2);
     border-radius: 12px;
     padding: 0 !important;
