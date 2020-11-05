@@ -59,6 +59,7 @@ public class DemoController {
 
     @GetMapping("/messages")
     public String messages(@RequestParam Integer userId, Model model){
+        List<Message> messages = messageService.getUserMessages(userId);
         model.addAttribute("messages", messageService.getUserMessages(userId));
         return "messages";
     }

@@ -1,13 +1,14 @@
 package easyon.dating.app.models;
 
 import java.time.LocalDateTime;
+import java.sql.Date;
 
 public class Message {
 
     private int messageId;
     private int senderId;
     private int recieverId;
-    private LocalDateTime massageDate;
+    private Date messageDate;
     private String message;
     private boolean isRead;
 
@@ -35,12 +36,12 @@ public class Message {
         this.recieverId = recieverId;
     }
 
-    public LocalDateTime getMassageDate() {
-        return massageDate;
+    public Date getMessageDate() {
+        return messageDate;
     }
 
-    public void setMassageDate(LocalDateTime massageDate) {
-        this.massageDate = massageDate;
+    public void setMessageDate(Date massageDate) {
+        this.messageDate = massageDate;
     }
 
     public String getMessage() {
@@ -58,4 +59,5 @@ public class Message {
     public void setRead(boolean read) {
         isRead = read;
     }
+
 }

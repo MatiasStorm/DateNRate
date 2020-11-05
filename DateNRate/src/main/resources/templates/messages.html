@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Messages</title>
+    <link rel="stylesheet" type="text/css" href="/message.css">
 </head>
 <body>
-    <div th:each="message : ${messages}">
-        <h1 th:text="From: ${message.}"></h1>
+    <h1>Beskeder:</h1>
+    <div class="messagesContainer">
+        <div class="message" th:each="message : ${messages}">
+            <h3 th:text="'Fra: ' + ${message.senderId}"></h3>
+            <p th:text="${message.message}"></p>
+        </div>
     </div>
 
 </body>
