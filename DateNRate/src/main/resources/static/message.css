@@ -1,26 +1,98 @@
-.messagesContainer {
-    margin: 1%;
-    border: solid 1px grey;
+
+.messagePage {
+    display: flex;
+    height: 85vh;
+}
+
+/* User Pane */
+.conversationUserContainer {
+    border-right: solid 1px grey;
     padding: 10px;
-    border-radius: 10px ;
+    width: 30%;
+    height: 100%;
+    overflow: scroll;
+}
+
+.conversationUser{
+    display: flex;
+    height: 40px;
+    padding: 5px;
+    border-radius: 10px;
+}
+.userName {
+    margin: 6px 0px 0px 10px;
+}
+
+.activeConversationUser {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.conversationUser img {
+    border-radius: 50%;
+    max-height: 35px;
+    max-width: 35px;
+}
+
+
+/* CONVERSATION pane */
+.conversationContainer {
+    margin-top: 1%;
+    padding: 10px;
+    width: 60%;
+    height: 100%;
+}
+
+.messagesContainer {
+    height: 90%;
+    overflow: scroll;
 }
 
 .message{
-    border-bottom: solid 1px black;
-    margin-bottom: 10px;
+    display: inline-block;
+    padding: 15px;
+    border-radius: 30px;
+    margin: 4px 0px;
+}
+
+.message p {
+    margin: 0px;
+}
+
+.messageDate{
+    font-size: 10px;
+}
+
+.sendMessage {
+    background-color: cornflowerblue;
+}
+
+.recievedMessage {
+    background-color: lightgrey;
 }
 
 .messageDate, .messageSender {
     display: inline;
 }
 
-messageDate{
-    margin-left: 10px;
+
+
+/* Message Form */
+
+.messageForm {
+    display: flex;
+    justify-content: space-around;
 }
 
-.messageSender {
-    color: black;
+.messageForm textarea {
+    width: 80%;
+    resize: none;
+    border-radius: 20px;
+    border: 0px solid white;
+    padding: 10px;
+    background-color: lightgrey;
 }
 
+.messageForm button {
 
+}
 

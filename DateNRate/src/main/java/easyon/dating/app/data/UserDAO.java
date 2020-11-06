@@ -3,8 +3,10 @@ package easyon.dating.app.data;
 import easyon.dating.app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -12,6 +14,7 @@ public class UserDAO {
 
     private final JdbcTemplate jdbcTemplate;
     private final String table = "users";
+    private final UserMapper userMapper = new UserMapper();
 
     @Autowired
     public UserDAO(JdbcTemplate jdbcTemplate){
@@ -21,13 +24,24 @@ public class UserDAO {
     public List<User> selectUsers(){
         return jdbcTemplate.query(
                 "SELECT * FROM " + table,
-                new UserMapper()
+                userMapper
         );
     }
 
     public User getUser(int id){
-        return jdbcTemplate.queryForObject("SELECT * FROM " + table + " WHERE user_id =  ?",
-               new UserMapper(), id
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM " + table + " WHERE user_id =  ?",
+               userMapper,
+               id
+        );
+    }
+
+    public List<User> getUsersByIds(List<Integer> userIds){
+        String inSql = '(' + String.join(",", Collections.nCopies(userIds.size(), "?")) + ')';
+        return jdbcTemplate.query(
+                "SELECT * FROM " + table + " WHERE user_id IN " + inSql,
+                userMapper,
+                userIds.toArray()
         );
     }
 

@@ -11,18 +11,46 @@
 
 <div th:replace="/includes/topPart :: topPart"></div>
 
-<h1>Beskeder:</h1>
-<div class="messagesContainer">
-    <div class="message" th:each="message, iter : ${messages}">
-        <div th:object="${senders[iter.index]}">
-            <a class="cleanA" th:href="'/userProfile?userId=' + *{userId}" >
-                <h3 class="messageSender" th:text="*{firstName} + ' ' + *{lastName}"></h3>
-            </a>
-            <p class="messageDate" th:text="${#dates.format(message.messageDate, 'HH:mm dd-MM-yyyy')}"></p>
+<div class="messagePage">
+    <div class="conversationUserContainer">
+        <h1>Samtaler:</h1>
+        <div th:class="'conversationUser ' + ${user.userId == activeUserId ? 'activeConversationUser' : '' }"
+             th:each="user : ${conversationUsers}"
+        >
+            <img src="/images/mand_default.webp">
+            <div th:object="${user}">
+                <a class="cleanA" th:href="'/messages?active=' + *{userId}" >
+                    <h3 class="userName" th:text="*{firstName} + ' ' + *{lastName}"></h3>
+                </a>
+            </div>
         </div>
-        <p class="messageText" th:text="${message.message}"></p>
+    </div>
+
+    <div class="conversationContainer">
+        <div class="messagesContainer" id="messageContainer">
+            <div th:style="${message.senderId == myId ?'text-align: right' : ''}" th:each="message : ${activeConversation}">
+                <div th:class="'message ' + ${message.senderId == myId ? 'sendMessage' : 'recievedMessage'}">
+                    <p th:text="${message.message}" ></p>
+                    <span class="messageDate" th:text="${#dates.format(message.messageDate, 'HH:mm dd/MM/yyyy')}"></span>
+                </div>
+            </div>
+        </div>
+        <form method="post" th:action="@{/createMessage}" th:object="${newMessage}" class="messageForm">
+            <textarea placeholder="Skriv en besked..." th:field="*{message}" rows="3"></textarea>
+            <input th:field="*{senderId}" hidden="true">
+            <input th:field="*{recieverId}" hidden="true">
+            <br/>
+            <button type="submit">Send</button>
+        </form>
+
     </div>
 </div>
 
 </body>
+
+<script>
+   let messageContainer = document.getElementById("messageContainer");
+   messageContainer.scrollTop = messageContainer.scrollHeight;
+</script>
+
 </html>

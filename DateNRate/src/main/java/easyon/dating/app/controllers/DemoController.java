@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class DemoController {
@@ -33,6 +33,8 @@ public class DemoController {
 
     @GetMapping("/")
     public String index(Model model){
+        List<User> user = userService.getListOfUsers();
+        model.addAttribute("user", user.get(0));
         return "index";
     }
 
@@ -48,30 +50,35 @@ public class DemoController {
     }
 
 
-    @GetMapping("/createMessage")
-    public String createMessage(@RequestParam int from, @RequestParam int to, Message message){
-        message.setRecieverId(to);
-        message.setSenderId(from);
-        return "createMessage";
-    }
-
-    @PostMapping("/createMessage/submit")
+    @PostMapping("/createMessage")
     public String createMessageSubmit(Message message){
         messageService.createMessage(message);
-        return "redirect:/messages?id=4";
+        return "redirect:/messages?active=" + message.getRecieverId();
     }
 
     @GetMapping("/messages")
-    public String messages(@RequestParam Integer userId, Model model){
-        List<Message> messages = messageService.getUserMessages(userId);
-        List<User> senders = new ArrayList<>();
-        for(Message message : messages){
-            senders.add(userService.getUser(message.getSenderId()));
+    public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, Model model){
+        // TODO Handle erros when there are no messages.
+
+        int recieverId = 1; // CHANGE THIS, when implementing sessions, use loggedin users id
+
+        Message newMessage = new Message();
+        newMessage.setRecieverId(activeUserId);
+        newMessage.setSenderId(recieverId);
+        model.addAttribute("newMessage", newMessage);
+
+        List<User> conversationUsers = messageService.getSenders(recieverId);
+        if(activeUserId == null && conversationUsers.size() > 0){
+            activeUserId = conversationUsers.get(0).getUserId();
         }
-        model.addAttribute("messages", messages);
-        model.addAttribute("senders", senders);
+        List<Message> activeConversation = messageService.getConversation(recieverId, activeUserId);
+        model.addAttribute("conversationUsers", conversationUsers);
+        model.addAttribute("activeConversation", activeConversation);
+        model.addAttribute("myId", recieverId);
+        model.addAttribute("activeUserId", activeUserId);
         return "messages";
     }
+
 
     @GetMapping("/userProfile")
     public String userProfile(@RequestParam int userId, Model model){
