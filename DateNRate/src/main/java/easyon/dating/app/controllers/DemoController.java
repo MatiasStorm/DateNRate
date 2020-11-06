@@ -33,8 +33,6 @@ public class DemoController {
 
     @GetMapping("/")
     public String index(Model model){
-        List<User> user = userService.getListOfUsers();
-        model.addAttribute("user", user.get(0));
         return "index";
     }
 
