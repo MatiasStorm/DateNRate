@@ -58,24 +58,34 @@ public class DemoController {
 
     @GetMapping("/messages")
     public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, Model model){
-        // TODO Handle erros when there are no messages.
+        // TODO Move most of this to service and create a class which will contain all conversation information.
 
         int recieverId = 1; // CHANGE THIS, when implementing sessions, use loggedin users id
+
+        List<User> conversationUsers;
+        if(activeUserId == null){
+            conversationUsers = messageService.getSenders(recieverId);
+            activeUserId = conversationUsers.get(0).getUserId();
+        }
+        else {
+            conversationUsers = messageService.getSenders(recieverId, activeUserId);
+        }
+
+        if(conversationUsers.size() == 0){
+            return "noMessages";
+        }
+
+        List<Message> activeConversation = messageService.getConversation(recieverId, activeUserId);
+        model.addAttribute("conversationUsers", conversationUsers);
+        model.addAttribute("activeConversation", activeConversation);
+        model.addAttribute("myId", recieverId);
+        model.addAttribute("activeUserId", activeUserId);
 
         Message newMessage = new Message();
         newMessage.setRecieverId(activeUserId);
         newMessage.setSenderId(recieverId);
         model.addAttribute("newMessage", newMessage);
 
-        List<User> conversationUsers = messageService.getSenders(recieverId);
-        if(activeUserId == null && conversationUsers.size() > 0){
-            activeUserId = conversationUsers.get(0).getUserId();
-        }
-        List<Message> activeConversation = messageService.getConversation(recieverId, activeUserId);
-        model.addAttribute("conversationUsers", conversationUsers);
-        model.addAttribute("activeConversation", activeConversation);
-        model.addAttribute("myId", recieverId);
-        model.addAttribute("activeUserId", activeUserId);
         return "messages";
     }
 
