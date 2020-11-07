@@ -1,4 +1,4 @@
-package easyon.dating.app.data;
+package easyon.dating.app.repository;
 
 import easyon.dating.app.models.UserRating;
 import org.springframework.beans.factory.annotation.Autowired;

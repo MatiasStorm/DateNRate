@@ -1,7 +1,7 @@
 package easyon.dating.app.services;
 
 
-import easyon.dating.app.data.FavoriteDAO;
+import easyon.dating.app.repository.FavoriteDAO;
 import easyon.dating.app.models.Favorite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

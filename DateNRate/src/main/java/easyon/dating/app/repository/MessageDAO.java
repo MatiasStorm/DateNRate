@@ -1,5 +1,6 @@
-package easyon.dating.app.data;
+package easyon.dating.app.repository;
 
+import easyon.dating.app.mapper.MessageMapper;
 import easyon.dating.app.models.Message;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;

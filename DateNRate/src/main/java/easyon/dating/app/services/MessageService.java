@@ -1,16 +1,13 @@
 package easyon.dating.app.services;
 
-import easyon.dating.app.data.MessageDAO;
-import easyon.dating.app.data.UserDAO;
+import easyon.dating.app.repository.MessageDAO;
+import easyon.dating.app.repository.UserDAO;
 import easyon.dating.app.models.Message;
 import easyon.dating.app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class MessageService {

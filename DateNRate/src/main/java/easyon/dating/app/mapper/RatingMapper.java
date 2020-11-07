@@ -1,9 +1,8 @@
-package easyon.dating.app.data;
+package easyon.dating.app.mapper;
 
 import easyon.dating.app.models.Rating;
 import org.springframework.jdbc.core.RowMapper;
 
-import javax.swing.tree.TreePath;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

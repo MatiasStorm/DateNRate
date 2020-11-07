@@ -1,9 +1,7 @@
 package easyon.dating.app.services;
 
 
-import easyon.dating.app.data.RatingDAO;
-import easyon.dating.app.data.TownDAO;
-import easyon.dating.app.models.Rating;
+import easyon.dating.app.repository.TownDAO;
 import easyon.dating.app.models.Town;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
