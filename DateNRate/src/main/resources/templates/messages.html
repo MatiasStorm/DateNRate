@@ -14,12 +14,12 @@
 <div class="messagePage">
     <div class="conversationUserContainer">
         <h1>Samtaler:</h1>
-        <div th:class="'conversationUser ' + ${user.userId == activeUserId ? 'activeConversationUser' : '' }"
+        <div th:class="'conversationUser ' + ${user.userId == activeUser.userId ? 'activeConversationUser' : '' }"
              th:each="user : ${conversationUsers}"
         >
             <img src="/images/mand_default.webp">
             <div th:object="${user}">
-                <a class="cleanA" th:href="'/messages?active=' + *{userId}" >
+                <a class="cleanA" th:href="'/messages?active=' + *{userId}">
                     <h3 class="userName" th:text="*{firstName} + ' ' + *{lastName}"></h3>
                 </a>
             </div>
@@ -27,11 +27,22 @@
     </div>
 
     <div class="conversationContainer">
+        <div class="activeUserContainer" th:object="${activeUser}">
+            <div style="display: flex" >
+                <img src="/images/mand_default.webp">
+                <h2 class="userName" th:text="*{firstName} + ' ' + *{lastName}"></h2>
+            </div>
+            <a class="cleaA" th:href="'userProfile?userId=' + *{userId}">
+                <button>Gå til profil</button>
+            </a>
+        </div>
         <div class="messagesContainer" id="messageContainer">
-            <div th:style="${message.senderId == myId ?'text-align: right' : ''}" th:each="message : ${activeConversation}">
+            <div th:style="${message.senderId == myId ?'text-align: right' : ''}"
+                 th:each="message : ${activeConversation}">
                 <div th:class="'message ' + ${message.senderId == myId ? 'sendMessage' : 'recievedMessage'}">
-                    <p th:text="${message.message}" ></p>
-                    <span class="messageDate" th:text="${#dates.format(message.messageDate, 'HH:mm dd/MM/yyyy')}"></span>
+                    <p th:text="${message.message}"></p>
+                    <span class="messageDate"
+                          th:text="${#dates.format(message.messageDate, 'HH:mm dd/MM/yyyy')}"></span>
                 </div>
             </div>
         </div>
@@ -49,8 +60,8 @@
 </body>
 
 <script>
-   let messageContainer = document.getElementById("messageContainer");
-   messageContainer.scrollTop = messageContainer.scrollHeight;
+    let messageContainer = document.getElementById("messageContainer");
+    messageContainer.scrollTop = messageContainer.scrollHeight;
 </script>
 
 </html>

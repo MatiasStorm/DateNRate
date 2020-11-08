@@ -75,10 +75,11 @@ public class DemoController {
         }
 
         List<Message> activeConversation = messageService.getConversation(recieverId, activeUserId);
+        User activeUser = userService.getUser(activeUserId);
         model.addAttribute("conversationUsers", conversationUsers);
         model.addAttribute("activeConversation", activeConversation);
         model.addAttribute("myId", recieverId);
-        model.addAttribute("activeUserId", activeUserId);
+        model.addAttribute("activeUser", activeUser);
 
         Message newMessage = new Message();
         newMessage.setRecieverId(activeUserId);
