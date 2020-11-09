@@ -45,6 +45,7 @@ public class UserDAO {
         );
     }
 
+
     public void createUser(User user){
         jdbcTemplate.update(
                 "INSERT into users(first_name, last_name, email, password, username, date_of_birth) VALUES(?, ?, ?, ?, ?, ?)",
@@ -56,5 +57,7 @@ public class UserDAO {
                 user.getDateOfBirth()
         );
     }
+
+
 
 }

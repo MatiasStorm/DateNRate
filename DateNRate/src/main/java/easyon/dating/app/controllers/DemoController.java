@@ -106,6 +106,11 @@ public class DemoController {
     }
 
 
+    @GetMapping ("/search")
+    public String search(){
+        return "search";
+    }
+
 
 
 
