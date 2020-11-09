@@ -12,8 +12,8 @@ public class FavoriteMapper implements RowMapper<Favorite> {
     @Override
     public Favorite mapRow(ResultSet resultSet, int i) throws SQLException {
         Favorite favorite = new Favorite();
-        favorite.setFavoriteUserId(resultSet.getInt("user_id"));
-        favorite.setUserId(resultSet.getInt("favorite_user_id"));
+        favorite.setFavoriteUserId(resultSet.getInt("favorite_user_id"));
+        favorite.setUserId(resultSet.getInt("user_id"));
         return favorite;
     }
 }

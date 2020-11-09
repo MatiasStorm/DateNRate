@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" type="text/css" href="search.css">
+<link rel="stylesheet" type="text/css" href="/main.css">
+<link rel="stylesheet" type="text/css" href="/topPart.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+
+<body>
+
+<div th:replace="/includes/topPart :: topPart"></div>
+
+<div>
+
+<form name="searchBar" action="/postSearch" method="post">
+
+    <input class="searchField" type="search" name="searchParameter" ;>
+    <button>Search</button>
+</form>
+
+</div>
+
+<div th:each="user: ${searchList}">
+    <p th:text="${user.firstName}">  </p>
+    <p th:text="${user.lastName}">  </p>
+    <p th:text="${user.username}">  </p>
+
+
+</div>
+
+
+
+</body>
+</html>
