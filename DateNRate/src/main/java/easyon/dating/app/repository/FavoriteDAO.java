@@ -28,4 +28,13 @@ public class FavoriteDAO {
                 id
         );
     }
+
+    public void addToFavorite(Favorite favorite){
+        jdbcTemplate.update(
+                "INSERT into favorites(user_id, favorite_user_id) VALUES(?, ?)",
+                favorite.getUserId(),
+                favorite.getFavoriteUserId()
+        );
+
+    }
 }
