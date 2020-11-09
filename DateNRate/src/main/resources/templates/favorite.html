@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div th:each="fav : ${favorite}" >
+    <div th:object="${fav}">
+        <h1 th:text="'brugeren har id: ' + *{userId} + ' som har id: ' + *{favoriteUserId} + ' som favorite'"></h1>
+    </div>
+</div>
 
+<!--'brugeren har id: ' + *{userId} + ' som har id: ' + *{favoriteUserId} + ' som favorite'-->
 
 
 </body>
