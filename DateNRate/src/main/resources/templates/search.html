@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Search</title>
 </head>
 <body>
 
+<div>
 
 <form name="searchBar" action="/postSearch" method="post">
-
-<label>Search the site:</label>
-<input type="search" name="searchParameter";
-    >
-
-<button>Search</button>
+    <label>Search the site:</label>
+    <input type="search" name="searchParameter" ;>
+    <button>Search</button>
 </form>
+
+</div>
+
+<div th:each="user: ${searchList}">
+    <p th:text="${user.firstName}">  </p>
+    <p th:text="${user.lastName}">  </p>
+    <p th:text="${user.username}">  </p>
+
+
+</div>
+
+
 
 </body>
 </html>
