@@ -15,7 +15,7 @@ import java.util.List;
 public class DemoController {
     private final UserService userService;
     private final MessageService messageService;
-    private  final RatingService ratingService;
+    private final RatingService ratingService;
     private final UserRatingService userRatingService;
     private final FavoriteService favoriteService;
 
@@ -28,46 +28,45 @@ public class DemoController {
     }
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model) {
         List<User> user = userService.getListOfUsers();
         model.addAttribute("user", user.get(0));
         return "index";
     }
 
     @GetMapping("/createUser")
-    public String createUser(Model model, User user){
+    public String createUser(Model model, User user) {
         return "createUser";
     }
 
     @PostMapping("/createUser/submit")
-    public String createUserSubmit(User user){
+    public String createUserSubmit(User user) {
         userService.createUser(user);
         return "redirect:/";
     }
 
 
     @PostMapping("/createMessage")
-    public String createMessageSubmit(Message message){
+    public String createMessageSubmit(Message message) {
         messageService.createMessage(message);
         return "redirect:/messages?active=" + message.getRecieverId();
     }
 
     @GetMapping("/messages")
-    public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, Model model){
+    public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, Model model) {
         // TODO Move most of this to service and create a class which will contain all conversation information.
 
         int recieverId = 1; // CHANGE THIS, when implementing sessions, use loggedin users id
 
         List<User> conversationUsers;
-        if(activeUserId == null){
+        if (activeUserId == null) {
             conversationUsers = messageService.getSenders(recieverId);
             activeUserId = conversationUsers.get(0).getUserId();
-        }
-        else {
+        } else {
             conversationUsers = messageService.getSenders(recieverId, activeUserId);
         }
 
-        if(conversationUsers.size() == 0){
+        if (conversationUsers.size() == 0) {
             return "noMessages";
         }
 
@@ -88,11 +87,11 @@ public class DemoController {
 
 
     @GetMapping("/userProfile")
-    public String userProfile(@RequestParam int userId, Model model){
+    public String userProfile(@RequestParam int userId, Model model) {
         List<Rating> ratings = ratingService.getRatings();
         model.addAttribute("ratings", ratings);
         model.addAttribute("user", userService.getUser(userId));
-        model.addAttribute("userRatings",userRatingService.getEmptyUserRatingArray(ratings.size()));
+        model.addAttribute("userRatings", userRatingService.getEmptyUserRatingArray(ratings.size()));
         return "userProfile";
     }
 
@@ -103,30 +102,28 @@ public class DemoController {
     }
 
 
-    @PostMapping("/search")
-    public String postSearch(WebRequest request, Model model){
+    @PostMapping("/postSearch")
+    public String postSearch(WebRequest request, Model model) {
 
         String search = request.getParameter("searchParameter");
-       List<User> searchList = userService.searchUser(search);
-       model.addAttribute("searchList", searchList);
-                return "/search";
+        List<User> searchList = userService.searchUser(search);
+        model.addAttribute("searchList", searchList);
+        return "/search";
 
 
     }
 
-    @GetMapping ("/search")
-    public String search(){
+    @GetMapping("/search")
+    public String search() {
         return "/search";
     }
 
     @GetMapping("/favorite")
-    public String favorite(Model model){
-        List<Favorite> favoriteList = favoriteService.getFavoriteList() ;
+    public String favorite(Model model) {
+        List<Favorite> favoriteList = favoriteService.getFavoriteList();
         model.addAttribute("favorite", favoriteList);
         return "favorite";
     }
-
-
 
 
 }
