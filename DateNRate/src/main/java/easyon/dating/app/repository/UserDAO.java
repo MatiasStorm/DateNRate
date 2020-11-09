@@ -48,8 +48,8 @@ public class UserDAO {
 
     public List<User> getUserSearch(String search) {
         List<User> listOfUsers = jdbcTemplate.query(
-                "SELECT * FROM users WHERE first_name LIKE CONCAT ('%', ?, '%') OR last_name LIKE CONCAT ('%', ?, '%') OR username like CONCAT ('%', ?, '%')"
-                ,userMapper, search, search, search);
+                "SELECT * FROM users WHERE first_name LIKE ? OR last_name LIKE ? OR username like?"
+                ,userMapper, "%"+search+"%", "%"+search+"%", "%"+search+"%");
 
        return listOfUsers;
 
