@@ -11,6 +11,14 @@
     </div>
 </div>
 
+<h1>----------------------------------------------------------------------------------</h1>
+
+<div th:each="favoriteUser : ${favoritesAsUsersList}" >
+    <div th:object="${favoriteUser}">
+        <h1 th:text="*{firstName} + ' ' + *{lastName}"></h1>
+    </div>
+</div>
+
 <!--'brugeren har id: ' + *{userId} + ' som har id: ' + *{favoriteUserId} + ' som favorite'-->
 
 
