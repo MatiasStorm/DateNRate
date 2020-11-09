@@ -25,14 +25,17 @@
                     <h3>Indsæt by, brug join i UserDAO</h3>
                 </div>
                 <div class="buttonContainer">
-                    <a class="cleaA">
-                        <button>
+                    <form method="post" action="/postFavorite" th:object="${favorite}">
+                        <input hidden="hidden" type="number" th:field="*{userId}">
+                        <input hidden="hidden" type="number" th:field="*{favoriteUserId}">
+
+                        <button type="submit">
                             <p>
                                 Tilføj til Favorit
                             </p>
                             <img src="/images/heartNav.png">
                         </button>
-                    </a>
+                    </form>
                     <a class="cleaA" th:href="'/messages?active=' + ${user.userId}">
                         <button>
                             <p>

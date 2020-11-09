@@ -36,6 +36,10 @@ public class FavoriteService {
         return userDAO.getUsersByIds(favoriteUserIdAsInt);
     }
 
+    public void addToFavorites(Favorite favorite){
+        favoriteDAO.addToFavorite(favorite);
+    }
+
 
 
 }

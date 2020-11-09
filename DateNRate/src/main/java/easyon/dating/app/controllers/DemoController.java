@@ -87,8 +87,11 @@ public class DemoController {
 
 
     @GetMapping("/userProfile")
-    public String userProfile(@RequestParam int userId, Model model) {
+    public String userProfile(@RequestParam int userId, Model model, Favorite favorite) {
         List<Rating> ratings = ratingService.getRatings();
+        favorite.setFavoriteUserId(userId);
+        favorite.setUserId(1);
+        model.addAttribute("favorite", favorite);
         model.addAttribute("ratings", ratings);
         model.addAttribute("user", userService.getUser(userId));
         model.addAttribute("userRatings", userRatingService.getEmptyUserRatingArray(ratings.size()));
@@ -127,6 +130,14 @@ public class DemoController {
         model.addAttribute("favoritesAsUsersList", favoriteAsUserList);
         return "favorite";
     }
+
+    @PostMapping("/postFavorite")
+    public String postFavorite(Favorite favorite){
+        favoriteService.addToFavorites(favorite);
+        return "redirect:/userProfile?userId=" + favorite.getFavoriteUserId();
+    }
+
+
 
 
 }
