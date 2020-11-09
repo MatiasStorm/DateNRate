@@ -1,13 +1,7 @@
 package easyon.dating.app.controllers;
 
-import easyon.dating.app.models.Message;
-import easyon.dating.app.models.Rating;
-import easyon.dating.app.models.User;
-import easyon.dating.app.models.UserRating;
-import easyon.dating.app.services.MessageService;
-import easyon.dating.app.services.RatingService;
-import easyon.dating.app.services.UserRatingService;
-import easyon.dating.app.services.UserService;
+import easyon.dating.app.models.*;
+import easyon.dating.app.services.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +17,14 @@ public class DemoController {
     private final MessageService messageService;
     private  final RatingService ratingService;
     private final UserRatingService userRatingService;
+    private final FavoriteService favoriteService;
 
-    public DemoController(UserService userService, RatingService ratingService, MessageService messageService, UserRatingService userRatingService) {
+    public DemoController(UserService userService, RatingService ratingService, MessageService messageService, UserRatingService userRatingService, FavoriteService favoriteService) {
         this.userService = userService;
         this.ratingService = ratingService;
         this.messageService = messageService;
         this.userRatingService = userRatingService;
+        this.favoriteService = favoriteService;
     }
 
     @GetMapping("/")
@@ -121,6 +117,13 @@ public class DemoController {
     @GetMapping ("/search")
     public String search(){
         return "/search";
+    }
+
+    @GetMapping("/favorite")
+    public String favorite(Model model){
+        List<Favorite> favoriteList = favoriteService.getFavoriteList() ;
+        model.addAttribute("favorite", favoriteList);
+        return "favorite";
     }
 
 
