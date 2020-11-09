@@ -32,9 +32,10 @@ public class DemoController {
         return "index";
     }
 
-    @PostMapping("/createUser/submit")
+    @PostMapping("/createUser")
     public String createUserSubmit(User user) {
         userService.createUser(user);
+        // TODO should redirect to user profile!
         return "redirect:/";
     }
 
