@@ -8,7 +8,8 @@
 }
 
 .contactContainer {
-   width: 70%
+    width: 70%;
+    margin-top: 7%;
 }
 
 .profilePicture{
@@ -57,11 +58,6 @@
     min-width: 200px;
     cursor: pointer;
     margin: 0px 10px;
-}
-
-.buttonContainer button:hover{
-    background-color: lightgrey;
-    border: 1px solid lightgrey;
 }
 
 @media (max-width: 800px){
