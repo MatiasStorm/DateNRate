@@ -29,4 +29,8 @@ public class UserService {
 
     }
 
+    public List<User> searchUser(String search) {
+        return userDao.getUserSearch(search);
+    }
+
 }

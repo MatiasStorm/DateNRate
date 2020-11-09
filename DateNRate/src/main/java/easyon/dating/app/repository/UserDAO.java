@@ -46,6 +46,17 @@ public class UserDAO {
     }
 
 
+    public List<User> getUserSearch(String search) {
+        List<User> listOfUsers = jdbcTemplate.query(
+                "SELECT * FROM users WHERE first_name LIKE '%?%' OR last_name LIKE '%?%' OR username like '%?%'"
+                ,userMapper, search, search, search);
+
+       return listOfUsers;
+
+    }
+
+
+
     public void createUser(User user){
         jdbcTemplate.update(
                 "INSERT into users(first_name, last_name, email, password, username, date_of_birth) VALUES(?, ?, ?, ?, ?, ?)",

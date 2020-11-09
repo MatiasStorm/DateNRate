@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
 
@@ -106,9 +107,20 @@ public class DemoController {
     }
 
 
+    @PostMapping("/search")
+    public String postSearch(WebRequest request, Model model){
+
+        String search = request.getParameter("searchParameter");
+       List<User> searchList = userService.searchUser(search);
+       model.addAttribute("searchList", searchList);
+                return "/search";
+
+
+    }
+
     @GetMapping ("/search")
     public String search(){
-        return "search";
+        return "/search";
     }
 
 
