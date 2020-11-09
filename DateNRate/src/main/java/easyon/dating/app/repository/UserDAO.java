@@ -59,13 +59,14 @@ public class UserDAO {
 
     public void createUser(User user){
         jdbcTemplate.update(
-                "INSERT into users(first_name, last_name, email, password, username, date_of_birth) VALUES(?, ?, ?, ?, ?, ?)",
+                "INSERT into users(first_name, last_name, email, password, username, date_of_birth, is_male) VALUES(?, ?, ?, ?, ?, ?, ?)",
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
                 user.getUsername(),
-                user.getDateOfBirth()
+                user.getDateOfBirth(),
+                user.getIsMale()
         );
     }
 

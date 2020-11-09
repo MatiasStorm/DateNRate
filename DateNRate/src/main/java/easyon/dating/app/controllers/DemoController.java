@@ -28,15 +28,8 @@ public class DemoController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        List<User> user = userService.getListOfUsers();
-        model.addAttribute("user", user.get(0));
+    public String index(Model model, User user) {
         return "index";
-    }
-
-    @GetMapping("/createUser")
-    public String createUser(Model model, User user) {
-        return "createUser";
     }
 
     @PostMapping("/createUser/submit")

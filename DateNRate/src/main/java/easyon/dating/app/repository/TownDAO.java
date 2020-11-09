@@ -33,4 +33,12 @@ public class TownDAO {
                 townId
         );
     }
+
+    public Town getTownByPostcalCode(int postalCode) {
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM " + table + " WHERE postal_code = ?",
+                new TownMapper(),
+                postalCode
+        );
+    }
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/footer.css">
     <link rel="stylesheet" type="text/css" href="/index.css">
     <link rel="stylesheet" type="text/css" href="/main.css">
-    <link rel="stylesheet" type="text/css" href="/logIn.css">
+    <link rel="stylesheet" type="text/css" href="/modal.css">
 </head>
 <style>
     body, html {
@@ -29,35 +29,74 @@
         <h2>Velkommen til dit dating eventyr</h2>
     </div>
     <div style="display: flex; justify-content: space-around">
-        <button class="button" onclick="window.location.href = '/createUser'">Opret bruger</button>
-        <button class="button" onclick="document.getElementById('id01').style.display='block'">Login</button>
+        <button class="button" onclick="document.getElementById('createUserModal').style.display='block'">Opret bruger
+        </button>
+        <button class="button" onclick="document.getElementById('loginModal').style.display='block'">Login</button>
     </div>
 </div>
 
 
-<div id="id01" class="modal">
-
-    <form class="modal-content animate" action="/action_page.php" method="post">
-        <div class="imgcontainer">
-            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-
-        </div>
-
+<div id="loginModal" class="modal">
+    <form class="modal-content animate">
+    <span onclick="document.getElementById('loginModal').style.display='none'" class="close"
+          title="Close Modal">&times;</span>
         <div class="container">
             <label><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="uname" required>
-
             <label><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <button class="button" type="submit">Login</button>
-
-
-            <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
-                    Cancel
+            <div style="display: flex">
+                <button type="button" onclick="document.getElementById('loginModal').style.display='none'"
+                        class="button">
+                    Fortryd
                 </button>
+                <button class="button" type="submit">Login</button>
+            </div>
+        </div>
+    </form>
+</div>
 
+<div id="createUserModal" class="modal">
+    <form class="modal-content animate" th:action="@{/createUser/submit}" th:object="${user}" method="post">
+        <span onclick="document.getElementById('createUserModal').style.display='none'" class="close"
+              title="Close Modal">&times;</span>
+        <div class="container">
+            <label>Brugernavn:</label>
+            <input type="text" th:field="*{username}" required>
+
+            <label>Password:</label>
+            <input type="password" th:field="*{password}" required>
+
+            <label>Gentag Password:</label>
+            <input type="password" th:field="*{password2}" required>
+
+            <label>Fornavn:</label>
+            <input type="text" th:field="*{firstName}" required>
+
+            <label>Efternavn:</label>
+            <input type="text" th:field="*{lastName}" required>
+
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required>
+
+            <label>Fødselsdato:</label>
+            <input type="date" th:field="*{dateOfBirth}" required>
+
+            <label>Post Nummer:</label>
+            <input type="number" th:field="*{townId}" required>
+
+            <label>Køn:</label>
+            <select name="male" required>
+                <option th:value="1">Mand</option>
+                <option th:value="0">Kvinde</option>
+            </select>
+
+            <div style="display: flex">
+                <button type="button" onclick="document.getElementById('createUserModal').style.display='none'"
+                        class="button">
+                    Fortryd
+                </button>
+                <button class="button" type="submit">Opret</button>
             </div>
         </div>
     </form>
@@ -65,12 +104,16 @@
 
 <script>
     // Get the modal
-    var modal = document.getElementById('id01');
+    var loginModal = document.getElementById('loginModal');
+    var createUserModal = document.getElementById('createUserModal');
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+        if (event.target == loginModal) {
+            loginModal.style.display = "none";
+        }
+        if (event.target == createUserModal) {
+            createUserModal.style.display = "none";
         }
     }
 </script>
