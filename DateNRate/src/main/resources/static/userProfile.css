@@ -3,33 +3,13 @@
     display: flex;
 }
 
-.column-33 {
-    max-width: 33%;
-    width: 33%;
-    line-height: 100%;
-}
-
-.column-30 {
-    max-width: 30%;
+.imageContainer{
     width: 30%;
-    line-height: 100%;
 }
 
-.column-70{
-    max-width: 70%;
+.contactContainer {
     width: 70%;
-}
-
-.column-50 {
-    max-width: 50%;
-    line-height: 100%;
-}
-
-.center {
-     position: relative;
-     top: 50%;
-     left: 50%;
-     transform: translate(-50%, -50%);
+    margin-top: 7%;
 }
 
 .profilePicture{
@@ -39,7 +19,7 @@
 
 .box {
     z-index: 1;
-    width: 100%;
+    width: 50%;
     background: #fff;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .2);
     border-radius: 12px;
@@ -80,6 +60,21 @@
     margin: 0px 10px;
 }
 
-.buttonContainer button:hover{
-    background-color: lightgrey;
+@media (max-width: 800px){
+    .container {
+        display: block;
+    }
+
+    .imageContainer {
+        width: 100%;
+    }
+
+    .contactContainer {
+        width: 100%;
+        margin-left: 15px;
+    }
+
+    .box{
+        width: 100%;
+    }
 }

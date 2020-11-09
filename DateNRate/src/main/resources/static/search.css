@@ -22,7 +22,47 @@ button {
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
-    float: left;
-    width: 80%;
+    width: 60%;
     background: #f1f1f1;
+
+}
+
+.favoritebox {
+
+    width: 25%;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #222222;
+    padding: 50px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.favoritebox img {
+    border-radius: 50%;
+    max-height: 150px;
+    max-width: 150px;
+    margin-left: 10px;
+}
+
+.seachText {
+    font-size: 25px;
+}
+
+.displayFlexFix {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-left: 5px;
+
+}
+
+@media(max-width: 500px) {
+    .favoritebox {width: 100% }
+}
+
+@media(max-width: 1200px) {
+    .favoritebox {width: 50% }
 }

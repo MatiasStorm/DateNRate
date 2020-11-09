@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/footer.css">
     <link rel="stylesheet" type="text/css" href="/index.css">
     <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/logIn.css">
 </head>
 <style>
     body, html {
@@ -23,26 +24,56 @@
 </div>
 
 
-
 <div class="boxLogin">
     <div class="boxHeaderLogin">
-    <h2>Velkommen til dit dating eventyr</h2>
+        <h2>Velkommen til dit dating eventyr</h2>
     </div>
-        <div style="display: flex; justify-content: space-around">
-        <button class="button">Opret bruger</button>
-        <button class="button">Login</button>
-        </div>
+    <div style="display: flex; justify-content: space-around">
+        <button class="button" onclick="window.location.href = '/createUser'">Opret bruger</button>
+        <button class="button" onclick="document.getElementById('id01').style.display='block'">Login</button>
+    </div>
 </div>
 
 
+<div id="id01" class="modal">
+
+    <form class="modal-content animate" action="/action_page.php" method="post">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+        </div>
+
+        <div class="container">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <button class="button" type="submit">Login</button>
 
 
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                    Cancel
+                </button>
 
+            </div>
+        </div>
+    </form>
+</div>
 
-<!--    <h1 th:text="${user.userId}"></h1>-->
-<!--    <h1 th:text="${user.firstName}"></h1>-->
-<!--    <h1 th:text="${user.lastName}"></h1>-->
-<!--    <h1 th:text="${user.userDescription}"></h1>-->
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 <footer th:replace="/includes/footer :: footer"></footer>
 

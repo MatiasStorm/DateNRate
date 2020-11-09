@@ -113,7 +113,6 @@ public class DemoController {
         model.addAttribute("searchList", searchList);
         return "/search";
 
-
     }
 
     @GetMapping("/search")
