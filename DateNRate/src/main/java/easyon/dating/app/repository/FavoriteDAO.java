@@ -13,17 +13,19 @@ public class FavoriteDAO {
 
     private final JdbcTemplate jdbcTemplate;
     private final String table = "favorites";
+    private final FavoriteMapper favoriteMapper = new FavoriteMapper();
 
     @Autowired
     public FavoriteDAO(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Favorite> getFavoriteList() {
+    public List<Favorite> getFavoriteList(int id) {
 
         return jdbcTemplate.query(
-                "SELECT * FROM " + table,
-                new FavoriteMapper()
+                "SELECT * FROM " + table + " WHERE user_id = ?" ,
+                favoriteMapper,
+                id
         );
     }
 }

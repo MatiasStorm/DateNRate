@@ -120,8 +120,9 @@ public class DemoController {
 
     @GetMapping("/favorite")
     public String favorite(Model model) {
-        List<Favorite> favoritesList = favoriteService.getFavoriteList();
-        List<User> favoriteAsUserList = favoriteService.getFavoritesAsUsers();
+        int currentUserId = 1;
+        List<Favorite> favoritesList = favoriteService.getFavoriteList(currentUserId);
+        List<User> favoriteAsUserList = favoriteService.getFavoritesAsUsers(currentUserId);
         model.addAttribute("favoritesList", favoritesList);
         model.addAttribute("favoritesAsUsersList", favoriteAsUserList);
         return "favorite";

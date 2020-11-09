@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="/main.css">
 <link rel="stylesheet" type="text/css" href="/topPart.css">
 
+
 <head>
     <meta charset="UTF-8">
     <title>Search</title>
@@ -13,25 +14,35 @@
 
 <div th:replace="/includes/topPart :: topPart"></div>
 
-<div>
 
 <form name="searchBar" action="/postSearch" method="post">
-
-    <input class="searchField" type="search" name="searchParameter" ;>
-    <button>Search</button>
+    <div class="displayFlexFix">
+        <button>Search</button>
+        <input class="searchField" type="search" name="searchParameter" ;>
+    </div>
 </form>
 
+
+<div class="displayFlexFix">
+    <div class="favoritebox" th:each="user: ${searchList}">
+
+        <a class="cleanA" th:href="'/userProfile?userId=' + ${user.userId}">
+        <img src="/images/mand_default.webp">
+        </a>
+        <a class="cleanA" th:href="'/userProfile?userId=' + ${user.userId}">
+        <div class="seachText">
+            <p th:text="'Fornavn: ' + ${user.firstName}"></p>
+            <p th:text="'Efternavn: ' + ${user.lastName}"></p>
+            <p th:text="'Brugernavn: ' + ${user.username}"></p>
+        </div>
+        </a>
+    </div>
+
+
+
 </div>
-
-<div th:each="user: ${searchList}">
-    <p th:text="${user.firstName}">  </p>
-    <p th:text="${user.lastName}">  </p>
-    <p th:text="${user.username}">  </p>
-
-
-</div>
-
 
 
 </body>
+
 </html>

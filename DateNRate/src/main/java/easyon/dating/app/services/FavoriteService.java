@@ -22,13 +22,13 @@ public class FavoriteService {
         this.userDAO = userDAO;
     }
 
-    public List<Favorite> getFavoriteList(){
-        return favoriteDAO.getFavoriteList();
+    public List<Favorite> getFavoriteList(int id){
+        return favoriteDAO.getFavoriteList(id);
     }
 
 
-    public List<User> getFavoritesAsUsers(){
-        List<Favorite> listOfFavorites = getFavoriteList();
+    public List<User> getFavoritesAsUsers(int id){
+        List<Favorite> listOfFavorites = getFavoriteList(id);
         List<Integer> favoriteUserIdAsInt = new ArrayList<Integer>();
         for (Favorite favorite: listOfFavorites) {
             favoriteUserIdAsInt.add(favorite.getFavoriteUserId());
