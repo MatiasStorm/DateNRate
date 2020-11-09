@@ -5,26 +5,30 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="userProfile.css">
     <link rel="stylesheet" type="text/css" href="/topPart.css">
-
+    <link rel="stylesheet" type="text/css" href="/main.css">
 </head>
 <body>
 
 <div th:replace="/includes/topPart :: topPart"></div>
 
     <div>
-        <div>
-            <div>
-                <img src="/images/mand_default.webp">
+        <div class="container">
+            <div class="column">
+                <img class="profilePicture" img src="/images/mand_default.webp">
             </div>
 
-            <div>
-                <h3>Rating: 10/10</h3>
-                <h4 th:text="${user.username}"></h4>
-                <h5>Indsæt by, brug join i UserDAO</h5>
+            <div class="column">
+                <div class="center">
+                    <h1 th:text="${user.username}"></h1>
+                    <h2>Rating: 10/10</h2>
+                    <h3>Indsæt by, brug join i UserDAO</h3>
+                </div>
             </div>
-            <div>
-                <button>Send besked</button>
-                <button>Add to favorite</button>
+            <div class="column">
+                <div class="center">
+                    <button>Send besked</button>
+                    <button>Add to favorite</button>
+                </div>
             </div>
 
         </div>
