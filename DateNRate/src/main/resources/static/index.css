@@ -65,7 +65,7 @@ body {
 .button {
 
     background-color: rgb(175,0,0);
-    border-radius: 35%;
+    border-radius: 10px;
     border: 4px double #cccccc;
     color: #eeeeee;
     text-align: center;
