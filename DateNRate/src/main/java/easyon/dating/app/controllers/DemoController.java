@@ -50,10 +50,9 @@ public class DemoController {
 
     @PostMapping("/createUser")
     public String createUserSubmit(User user, WebRequest request) {
-        userService.createUser(user);
-        // TODO should redirect to user profile!
-        setSessionInfo(request, user);
-        return "redirect:/userProfile?userId=" + user.getUserId();
+        User newUser = userService.createUser(user);
+        setSessionInfo(request, newUser);
+        return "redirect:/userProfile?userId=" + newUser.getUserId();
     }
 
 
@@ -65,16 +64,18 @@ public class DemoController {
 
     @GetMapping("/messages")
     public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, WebRequest request, Model model) {
-        // TODO Move most of this to service and create a class which will contain all conversation information.
         User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if(loggedInUser == null){ // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
         int recieverId = loggedInUser.getUserId();
 
         List<User> conversationUsers;
         conversationUsers = messageService.getConversationUsers(recieverId);
-        if (conversationUsers.size() == 0 && activeUserId == null) {
+        if (conversationUsers.size() == 0 && activeUserId == null) { // If you don't have any messages, and not send any, display No messges page.
             return "noMessages";
         }
-        if (activeUserId == null) {
+        if (activeUserId == null) { // Set activeUserId as the first user, as default.
             activeUserId = conversationUsers.get(0).getUserId();
         }
 

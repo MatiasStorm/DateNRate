@@ -25,11 +25,6 @@ public class MessageService {
         messageDao.createMessage(message);
     }
 
-//    public List<User> getSenders(int recieverId){
-//        return getSenders(recieverId, 0);
-//    }
-
-
     public List<User> getConversationUsers(int recieverId){
         List<Integer> conversationUserIds = messageDao.getConversationUserIds(recieverId);
         if(conversationUserIds.size() == 0){

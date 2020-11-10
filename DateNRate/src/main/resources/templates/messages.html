@@ -49,7 +49,7 @@
             </div>
         </div>
         <form method="post" th:action="@{/createMessage}" th:object="${newMessage}" class="messageForm">
-            <textarea placeholder="Skriv en besked..." th:field="*{message}" rows="3"></textarea>
+            <textarea placeholder="Skriv en besked..." th:field="*{message}" rows="3" required></textarea>
             <input th:field="*{senderId}" hidden="true">
             <input th:field="*{recieverId}" hidden="true">
             <br/>

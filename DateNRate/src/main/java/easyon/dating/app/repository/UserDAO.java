@@ -66,7 +66,7 @@ public class UserDAO {
 
 
 
-    public void createUser(User user){
+    public User createUser(User user){
         jdbcTemplate.update(
                 "INSERT into users(first_name, last_name, email, password, username, date_of_birth, is_male) VALUES(?, ?, ?, ?, ?, ?, ?)",
                 user.getFirstName(),
@@ -77,6 +77,8 @@ public class UserDAO {
                 user.getDateOfBirth(),
                 user.getIsMale()
         );
+        int newUserId = jdbcTemplate.queryForObject("SELECT last_insert_id() as id", (rs, i) -> rs.getInt("id"));
+        return getUser(newUserId);
     }
 
 
