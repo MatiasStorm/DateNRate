@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="search.css">
+<link rel="stylesheet" type="text/css" href="/main.css">
+<link rel="stylesheet" type="text/css" href="/topPart.css">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+
+<form th:each="tag : ${tagsList}" th:object="${userTag}" method="post" th:action="@{/testPost}">
+    <input name="tagId"  th:value="${tag.tagId}">
+    <input name="userId"  th:value="2">
+
+    <button type="submit" th:text="${tag.tagName}"></button>
+
+</form>
+
+</body>
+</html>
+
+

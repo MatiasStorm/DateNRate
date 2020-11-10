@@ -1,5 +1,7 @@
 package easyon.dating.app.services;
 
+import easyon.dating.app.models.Tag;
+import easyon.dating.app.models.User;
 import easyon.dating.app.repository.UserTagDAO;
 import easyon.dating.app.models.UserTag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,10 @@ public class UserTagService {
 
     public UserTag getUserTag (int userId) {
         return userTagDAO.getUserTag(userId);
+    }
+
+    public void addTagToUser (UserTag userTag, int userId) {
+        userTagDAO.addTagToUser(userTag, userId);
     }
 
 }

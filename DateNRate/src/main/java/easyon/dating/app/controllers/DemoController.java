@@ -20,14 +20,16 @@ public class DemoController {
     private final UserRatingService userRatingService;
     private final FavoriteService favoriteService;
     private final TagService tagService;
+    private final UserTagService userTagService;
 
-    public DemoController(UserService userService, RatingService ratingService, MessageService messageService, UserRatingService userRatingService, FavoriteService favoriteService, TagService tagService) {
+    public DemoController(UserService userService, RatingService ratingService, MessageService messageService, UserRatingService userRatingService, FavoriteService favoriteService, TagService tagService, UserTagService userTagService) {
         this.userService = userService;
         this.ratingService = ratingService;
         this.messageService = messageService;
         this.userRatingService = userRatingService;
         this.favoriteService = favoriteService;
         this.tagService = tagService;
+        this.userTagService = userTagService;
     }
 
     @GetMapping("/")
@@ -153,8 +155,16 @@ public class DemoController {
     }
 
     @GetMapping("/test")
-    public String test(Model model){
-        return "";
+    public String test(Model model, UserTag userTag){
+        model.addAttribute("userTag", userTag);
+        model.addAttribute("tagsList", tagService.getListOfTags());
+        return "/test";
+    }
+    @PostMapping ("/testPost")
+    public String addTagToUser(UserTag userTag, WebRequest request) {
+        int userId = 1;
+        userTagService.addTagToUser(userTag, userId);
+        return "redirect:/test";
     }
 
 
