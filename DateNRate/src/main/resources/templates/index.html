@@ -38,14 +38,14 @@
 
 
 <div id="loginModal" class="modal">
-    <form class="modal-content animate">
+    <form class="modal-content animate" action="/login" method="post">
     <span onclick="document.getElementById('loginModal').style.display='none'" class="close"
           title="Close Modal">&times;</span>
         <div class="container">
             <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <input type="text" placeholder="Enter Username" name="username" required>
             <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input type="password" placeholder="Enter Password" name="password" required>
             <div style="display: flex">
                 <button type="button" onclick="document.getElementById('loginModal').style.display='none'"
                         class="button">

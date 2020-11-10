@@ -60,10 +60,10 @@ public class DemoController {
     }
 
     @GetMapping("/messages")
-    public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, Model model) {
+    public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, WebRequest request, Model model) {
         // TODO Move most of this to service and create a class which will contain all conversation information.
-
-        int recieverId = 1; // CHANGE THIS, when implementing sessions, use loggedin users id
+        User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        int recieverId = loggedInUser.getUserId();
 
         List<User> conversationUsers;
         if (activeUserId == null) {
