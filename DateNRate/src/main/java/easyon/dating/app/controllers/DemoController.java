@@ -191,8 +191,8 @@ public class DemoController {
     }
 
     @PostMapping("/userTagPost")
-    public String addTagToUser(UserTag userTag, WebRequest request) {
-        int userId = 1;
+    public String addTagToUser(UserTag userTag) {
+        int userId = userTag.getUserId();
         userTagService.addTagToUser(userTag, userId);
         return "redirect:/userProfile?userId=" + userTag.getUserId();
     }

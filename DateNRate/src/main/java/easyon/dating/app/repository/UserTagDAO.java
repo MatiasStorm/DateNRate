@@ -46,6 +46,44 @@ public class UserTagDAO {
                 userId
         );
     }
+    public void removeTagFromUser(UserTag userTag, int userId){
+        jdbcTemplate.update(
+                "DELETE FROM " + table + " WHERE tag_id = ? AND user_id = ?",
+                userTag.getTagId(),
+                userId
+        );
+    }
+
+    public UserTag getUsersTag(int tagId, int userId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM " + table + " WHERE tag_id = ? AND user_id = ?",
+                new UserTagMapper(),
+                tagId,
+                userId
+
+        );
+    }
+
+    public List<UserTag> getActiveTagList(int userId) {
+        return jdbcTemplate.query(
+                "SELECT * FROM " + table + " WHERE user_id = ?",
+                new UserTagMapper(),
+                userId
+
+        );
+    }
+
+    public List<UserTag> getInactiveTagList(int userId) {
+        return jdbcTemplate.query(
+                "SELECT * FROM " + table + " WHERE user_id != ?",
+                new UserTagMapper(),
+                userId
+
+        );
+    }
+
+
+
 
 
 }
