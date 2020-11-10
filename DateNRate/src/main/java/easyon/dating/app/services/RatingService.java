@@ -21,6 +21,9 @@ public class RatingService {
     }
 
 
+    public void addToUserRating(Rating rating) {ratingDAO.addToUserRating(rating);}
+
+
 }
 
 
