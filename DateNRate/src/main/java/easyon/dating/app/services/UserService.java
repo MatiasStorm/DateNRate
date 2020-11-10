@@ -72,15 +72,24 @@ public class UserService {
         return userFormError;
     }
 
-
-    public User uploadProfilePicture(MultipartFile picture, User user ) throws IOException {
-        String fileName = "/images/" + picture.getOriginalFilename().replace(" ", "_");
-        String imagePath = "src/main/resources/static" + fileName;
-        String absolutePath = new File(imagePath).getAbsolutePath();
+    private void saveFile(MultipartFile multipartFile, String path) throws IOException {
+        String absolutePath = new File(path).getAbsolutePath();
         File file = new File(absolutePath);
         file.createNewFile();
-        picture.transferTo(file);
-        user.setProfilePicture(fileName);
+        multipartFile.transferTo(file);
+    }
+
+    public User uploadProfilePicture(MultipartFile picture, User user ) throws IOException {
+        String fileName = picture.getOriginalFilename().replace(" ", "_");
+        // Save file in target folder (Enables hot reload of pictures)
+        String targetPath = "target/classes/static/images/" + fileName;
+        saveFile(picture, targetPath);
+        // Save file in static folder (Keeps it between reloads)
+        String picturePath = "/images/" + fileName;
+        String staticPath = "src/main/resources/static" + picturePath;
+        saveFile(picture, staticPath);
+
+        user.setProfilePicture(picturePath);
         return userDao.updateUser(user);
     }
 

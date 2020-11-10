@@ -22,7 +22,13 @@ public class UserMapper implements RowMapper<User>{
         user.setTownId(resultSet.getInt("town_id"));
         user.setPassword(resultSet.getString("password"));
         user.setUsername(resultSet.getString("username"));
-        user.setProfilePicture(resultSet.getString("profile_picture"));
+        String profilePicture = resultSet.getString("profile_picture");
+        if(profilePicture != null){
+            if(profilePicture.length() == 0){
+                profilePicture = null;
+            }
+        }
+        user.setProfilePicture(profilePicture);
         user.setDateOfBirth(resultSet.getDate("date_of_birth"));
         user.setCreated(resultSet.getDate("created"));
         user.setUserDescription(resultSet.getString("user_description"));
