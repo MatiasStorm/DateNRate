@@ -28,7 +28,7 @@
     <div class="favoritebox" th:each="user: ${searchList}">
 
         <a class="cleanA" th:href="'/userProfile?userId=' + ${user.userId}">
-        <img src="/images/mand_default.webp">
+        <img th:src="${user.profilePicture != null ? user.profilePicture : '/images/mand_default.webp'}">
         </a>
         <a class="cleanA" th:href="'/userProfile?userId=' + ${user.userId}">
         <div class="seachText">
