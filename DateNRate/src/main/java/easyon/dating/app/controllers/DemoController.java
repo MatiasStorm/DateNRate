@@ -46,10 +46,11 @@ public class DemoController {
     }
 
     @PostMapping("/createUser")
-    public String createUserSubmit(User user) {
+    public String createUserSubmit(User user, WebRequest request) {
         userService.createUser(user);
         // TODO should redirect to user profile!
-        return "redirect:/";
+        setSessionInfo(request, user);
+        return "redirect:/userProfile?userId=" + user.getUserId();
     }
 
 
