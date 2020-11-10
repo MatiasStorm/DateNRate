@@ -1,6 +1,6 @@
 package easyon.dating.app.services;
 
-import easyon.dating.app.data.UserTagDAO;
+import easyon.dating.app.repository.UserTagDAO;
 import easyon.dating.app.models.UserTag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

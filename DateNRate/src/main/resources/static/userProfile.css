@@ -1,21 +1,80 @@
 
+.container {
+    display: flex;
+}
+
+.imageContainer{
+    width: 30%;
+}
+
+.contactContainer {
+    width: 70%;
+    margin-top: 7%;
+}
+
+.profilePicture{
+    max-width: 100%;
+}
+
+
 .box {
     z-index: 1;
-    width: 96%;
-    margin-left: 2%;
-    min-height: 290px;
-    bottom: 2%;
+    width: 50%;
     background: #fff;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .2);
     border-radius: 12px;
-    padding: 0 !important;
+    margin: 0px 20px;
 }
 
-.boxHeader {
 
+.boxHeader {
     background: #f0f0f0;
-    height: 100px;
-    line-height: 100px;
+    height: 50px;
+    line-height: 50px;
     border-radius: 12px 12px 0 0;
     text-align: center;
+}
+
+.boxHeader p {
+    margin: 0px;
+}
+
+.boxBody p {
+    padding: 0px 15px;
+}
+
+.buttonContainer {
+    max-width: 30%;
+    display: flex;
+    text-align: center;
+}
+
+.buttonContainer img{
+    max-width: 30%;
+}
+
+.buttonContainer button{
+    height: 100px;
+    min-width: 200px;
+    cursor: pointer;
+    margin: 0px 10px;
+}
+
+@media (max-width: 800px){
+    .container {
+        display: block;
+    }
+
+    .imageContainer {
+        width: 100%;
+    }
+
+    .contactContainer {
+        width: 100%;
+        margin-left: 15px;
+    }
+
+    .box{
+        width: 100%;
+    }
 }

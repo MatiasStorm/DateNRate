@@ -1,4 +1,4 @@
-package easyon.dating.app.data;
+package easyon.dating.app.mapper;
 
 import easyon.dating.app.models.Tag;
 import org.springframework.jdbc.core.RowMapper;

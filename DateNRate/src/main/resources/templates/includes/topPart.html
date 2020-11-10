@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/topPart.css">
     <title>topPart</title>
 </head>
 
@@ -11,21 +13,25 @@
         <a class="navbarBrand" href="/">
             <img src="/images/dateNRateLogo.png">
         </a>
-        <span class="navbarCenterItems">
-            <a class="navbarItem" href="/messages?userId=4">
+        <div class="navbarCenterItems">
+            <a class="navbarItem" href="/messages">
                 <img src="/images/mail.png" alt="">
             </a>
-            <a class="navbarItem" href="/favorites">
+            <a class="navbarItem" href="/favorite">
                 <img src="/images/heartNav.png" alt="">
             </a>
-            <a class="navbarItem" href="/favorites">
+            <a class="navbarItem" href="/search">
                 <img src="/images/magnifying_glass.png" alt="">
             </a>
-        </span>
+        </div>
+        <a class="navbarItem" href="/userProfile?userId=" style="margin: 0px 0px 0px 15px">
+            <img src="/images/profile.png" alt="">
+        </a>
+
     </div>
 
 
-<!--    <img class="imgLogo" src="/images/dateNRateLogo.png" alt="">-->
+    <!--    <img class="imgLogo" src="/images/dateNRateLogo.png" alt="">-->
 </div>
 
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -7,34 +8,116 @@
     <link rel="stylesheet" type="text/css" href="/footer.css">
     <link rel="stylesheet" type="text/css" href="/index.css">
     <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/modal.css">
 </head>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0%;
+    }
+</style>
+
+
 <body>
 
-<div>
-    <img class="imgHeader" src="/images/dateNrateFrontPagePicture.png"/>
-
+<div class="imgHeader">
+    &nbsp;
 </div>
+
 
 <div class="boxLogin">
     <div class="boxHeaderLogin">
-    <h2>Velkommen til dit dating eventyr</h2>
-        <button class="button">Opret bruger</button>
-        <button class="button">Login</button>
+        <h2>Velkommen til dit dating eventyr</h2>
     </div>
-
-
-
+    <div style="display: flex; justify-content: space-around">
+        <button class="button" onclick="document.getElementById('createUserModal').style.display='block'">Opret bruger
+        </button>
+        <button class="button" onclick="document.getElementById('loginModal').style.display='block'">Login</button>
+    </div>
 </div>
 
 
+<div id="loginModal" class="modal">
+    <form class="modal-content animate">
+    <span onclick="document.getElementById('loginModal').style.display='none'" class="close"
+          title="Close Modal">&times;</span>
+        <div class="container">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            <div style="display: flex">
+                <button type="button" onclick="document.getElementById('loginModal').style.display='none'"
+                        class="button">
+                    Fortryd
+                </button>
+                <button class="button" type="submit">Login</button>
+            </div>
+        </div>
+    </form>
+</div>
 
+<div id="createUserModal" class="modal">
+    <form class="modal-content animate" th:action="@{/createUser}" th:object="${user}" method="post">
+        <span onclick="document.getElementById('createUserModal').style.display='none'" class="close"
+              title="Close Modal">&times;</span>
+        <div class="container">
+            <label>Brugernavn:</label>
+            <input type="text" th:field="*{username}" required>
 
+            <label>Password:</label>
+            <input type="password" th:field="*{password}" required>
 
+            <label>Gentag Password:</label>
+            <input type="password" th:field="*{password2}" required>
 
-<!--    <h1 th:text="${user.userId}"></h1>-->
-<!--    <h1 th:text="${user.firstName}"></h1>-->
-<!--    <h1 th:text="${user.lastName}"></h1>-->
-<!--    <h1 th:text="${user.userDescription}"></h1>-->
+            <label>Fornavn:</label>
+            <input type="text" th:field="*{firstName}" required>
+
+            <label>Efternavn:</label>
+            <input type="text" th:field="*{lastName}" required>
+
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required>
+
+            <label>Fødselsdato:</label>
+            <input type="date" th:field="*{dateOfBirth}" required>
+
+            <label>Post Nummer:</label>
+            <input type="number" th:field="*{townId}" required>
+
+            <label>Køn:</label>
+            <select name="male" required>
+                <option th:value="1">Mand</option>
+                <option th:value="0">Kvinde</option>
+            </select>
+
+            <div style="display: flex">
+                <button type="button" onclick="document.getElementById('createUserModal').style.display='none'"
+                        class="button">
+                    Fortryd
+                </button>
+                <button class="button" type="submit">Opret</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Get the modal
+    var loginModal = document.getElementById('loginModal');
+    var createUserModal = document.getElementById('createUserModal');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == loginModal) {
+            loginModal.style.display = "none";
+        }
+        if (event.target == createUserModal) {
+            createUserModal.style.display = "none";
+        }
+    }
+</script>
 
 <footer th:replace="/includes/footer :: footer"></footer>
 

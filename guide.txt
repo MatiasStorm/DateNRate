@@ -1,3 +1,5 @@
+Insert Into database!
+
 1. Html med thymeleaf (post form)
 2. GET og POST mapping i DemoController
 3. Opret create metode i service
@@ -15,3 +17,13 @@ Select from database
 
 
 - Indsæt Forenkey til Users og Towns
+
+
+
+Select from database
+
+1. Create mapper under "Data package"
+2. Create DAO klasse under "Data package"
+3. create service under "service package"
+4. create getMapping i controlleren HUSK Model model!
+5. lav html incl thymeleaf!!!

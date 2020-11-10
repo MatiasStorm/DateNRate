@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Messages</title>
@@ -11,18 +12,57 @@
 
 <div th:replace="/includes/topPart :: topPart"></div>
 
-<h1>Beskeder:</h1>
-<div class="messagesContainer">
-    <div class="message" th:each="message, iter : ${messages}">
-        <div th:object="${senders[iter.index]}">
-            <a class="cleanA" th:href="'/userProfile?userId=' + *{userId}" >
-                <h3 class="messageSender" th:text="*{firstName} + ' ' + *{lastName}"></h3>
-            </a>
-            <p class="messageDate" th:text="${#dates.format(message.messageDate, 'HH:mm dd-MM-yyyy')}"></p>
+<div class="messagePage">
+    <div class="conversationUserContainer">
+        <h1>Samtaler:</h1>
+        <div th:each="user : ${conversationUsers}"
+             th:class="'conversationUser ' + ${user.userId == activeUser.userId ? 'activeConversationUser' : '' }"
+        >
+            <img src="/images/mand_default.webp">
+            <div th:object="${user}">
+                <a class="cleanA" th:href="'/messages?active=' + *{userId}">
+                    <h3 class="userName" th:text="*{firstName} + ' ' + *{lastName}"></h3>
+                </a>
+            </div>
         </div>
-        <p class="messageText" th:text="${message.message}"></p>
+    </div>
+
+    <div class="conversationContainer">
+        <div class="activeUserContainer" th:object="${activeUser}">
+            <div style="display: flex" >
+                <img src="/images/mand_default.webp">
+                <h2 class="userName" th:text="*{firstName} + ' ' + *{lastName}"></h2>
+            </div>
+            <a class="cleaA" th:href="'userProfile?userId=' + *{userId}">
+                <button>Gå til profil</button>
+            </a>
+        </div>
+        <div class="messagesContainer" id="messageContainer">
+            <div th:each="message : ${activeConversation}"
+                 th:style="${message.senderId == myId ? 'text-align: right' : ''}"
+                 >
+                <div th:class="'message ' + ${message.senderId == myId ? 'sendMessage' : 'recievedMessage'}">
+                    <p th:text="${message.message}"></p>
+                    <span class="messageDate"
+                          th:text="${#dates.format(message.messageDate, 'HH:mm dd/MM/yyyy')}"></span>
+                </div>
+            </div>
+        </div>
+        <form method="post" th:action="@{/createMessage}" th:object="${newMessage}" class="messageForm">
+            <textarea placeholder="Skriv en besked..." th:field="*{message}" rows="3"></textarea>
+            <input th:field="*{senderId}" hidden="true">
+            <input th:field="*{recieverId}" hidden="true">
+            <br/>
+            <button type="submit">Send</button>
+        </form>
+
     </div>
 </div>
-
 </body>
+
+<script>
+    let messageContainer = document.getElementById("messageContainer");
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+</script>
+
 </html>

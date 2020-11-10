@@ -20,11 +20,11 @@ public class User {
     private boolean isMale;
 
 
-    public boolean isMale() {
+    public boolean getIsMale() {
         return isMale;
     }
 
-    public void setMale(boolean male) {
+    public void setMale(Boolean male) {
         isMale = male;
     }
 

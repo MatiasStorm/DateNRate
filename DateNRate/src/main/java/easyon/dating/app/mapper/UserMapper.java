@@ -1,11 +1,13 @@
-package easyon.dating.app.data;
+package easyon.dating.app.mapper;
 
 import easyon.dating.app.models.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+
+
+
 
 public class UserMapper implements RowMapper<User>{
 
@@ -27,6 +29,8 @@ public class UserMapper implements RowMapper<User>{
 
         return user;
     }
+
+
 
 
 

@@ -1,26 +1,133 @@
-.messagesContainer {
-    margin: 1%;
-    border: solid 1px grey;
+
+.messagePage {
+    display: flex;
+    height: 85vh;
+}
+
+/* User Pane */
+.conversationUserContainer {
+    border-right: solid 1px lightgrey;
     padding: 10px;
-    border-radius: 10px ;
+    width: 30%;
+    height: 100%;
+    overflow: scroll;
+}
+
+.conversationUser{
+    display: flex;
+    height: 40px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.userName {
+    margin: 6px 0px 0px 10px;
+}
+
+.activeConversationUser {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.conversationUser img {
+    border-radius: 50%;
+    max-height: 35px;
+    max-width: 35px;
+}
+
+
+/* CONVERSATION pane */
+.conversationContainer {
+    width: 70%;
+    height: 100%;
+}
+
+.messagesContainer {
+    height: 80%;
+    overflow: scroll;
+    padding: 10px;
 }
 
 .message{
-    border-bottom: solid 1px black;
-    margin-bottom: 10px;
+    display: inline-block;
+    padding: 15px;
+    border-radius: 30px;
+    margin: 5px 0px;
+    box-shadow: 0px 2px 5px grey;
+}
+
+.message p {
+    margin: 0px;
+}
+
+.messageDate{
+    font-size: 10px;
+}
+
+.sendMessage {
+    color: white;
+    background-color: rgb(0, 153, 255);
+}
+
+.recievedMessage {
+    background-color: lightgrey;
 }
 
 .messageDate, .messageSender {
     display: inline;
 }
 
-messageDate{
-    margin-left: 10px;
+.activeUserContainer{
+    display: flex;
+    height: 10%;
+    border-bottom: solid 1px lightgrey;
+    justify-content: space-between;
 }
 
-.messageSender {
-    color: black;
+.activeUserContainer img {
+    border-radius: 50%;
+    max-height: 75px;
+    max-width: 75px;
+    margin-left: 15px;
 }
 
+.activeUserContainer h2 {
+    margin-top: 25px;
+}
 
+.activeUserContainer button {
+    height: 50%;
+    margin-top: 20px;
+    margin-right: 30px;
+    cursor: pointer;
+}
 
+/* Message Form */
+
+.messageForm {
+    display: flex;
+    justify-content: space-around;
+}
+
+.messageForm textarea {
+    width: 80%;
+    resize: none;
+    border-radius: 20px;
+    border: 0px solid white;
+    padding: 10px;
+    background-color: lightgrey;
+}
+
+.messageForm button {
+    margin-right: 40px;
+    background-color: #007bff;
+    border-radius: 20px;
+    font-size: 25px;
+    width: 100px;
+    height: 50px;
+    color: white;
+    margin-top: 13px;
+}
+
+.messageForm button:hover{
+    cursor: pointer;
+}

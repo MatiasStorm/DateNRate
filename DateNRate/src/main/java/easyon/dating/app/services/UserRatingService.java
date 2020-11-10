@@ -1,6 +1,6 @@
 package easyon.dating.app.services;
 
-import easyon.dating.app.data.UserRatingDAO;
+import easyon.dating.app.repository.UserRatingDAO;
 import easyon.dating.app.models.UserRating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

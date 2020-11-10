@@ -1,30 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Footer</title>
+    <link rel="stylesheet" type="text/css" href="/footer.css">
 </head>
+
 <body>
 
 <footer th:fragment="footer">
-    <div>
-        <h3>Kontakt</h3>
-        <h4>Addresse:</h4>
-        <p>Langegade 69, 5823 Sturstrup</p>
-        <h4>Telefon:</h4>
-        <p>+45 58 69 54 58</p>
-        <h4>Email:</h4>
-        <p> <a href="mailto:dateNrate@mail.com" target="_blank" > dateNrate@mail.com </a></p>
-    </div>
-    <div>
-        <h3>Date N' Rate</h3>
-        <a href="https://facebook.com" target="_blank">
-            <img src="/images/facebook.webp" alt="">
-        </a>
-            <img class="imgLogo" src="/images/dateNRateLogo.png" alt="">
+
+        <div>
+            <h3>Kontakt</h3>
+            <h4>Addresse:</h4>
+            <p>Langegade 69, 5823 Sturstrup</p>
+            <h4>Telefon:</h4>
+            <p>+45 58 69 54 58</p>
+            <h4>Email:</h4>
+            <p><a href="mailto:dateNrate@mail.com" target="_blank"> dateNrate@mail.com </a></p>
+        </div>
 
 
-    </div>
+        <div>
+            <h3 style="text-align: center">Date N' Rate</h3>
+            <div style="display: flex">
+                <a href="https://facebook.com" target="_blank">
+                    <img src="/images/facebook.webp" alt="">
+                </a>
+                <img class="imgLogo" src="/images/dateNRateLogo.png" alt="">
+            </div>
+
+        </div>
+
 </footer>
 
 </body>

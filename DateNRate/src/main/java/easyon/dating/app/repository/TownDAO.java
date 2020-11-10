@@ -1,6 +1,6 @@
-package easyon.dating.app.data;
+package easyon.dating.app.repository;
 
-import easyon.dating.app.models.Rating;
+import easyon.dating.app.mapper.TownMapper;
 import easyon.dating.app.models.Town;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,6 +31,14 @@ public class TownDAO {
                 "SELECT * FROM " + table + " WHERE town_id = ?",
                 new TownMapper(),
                 townId
+        );
+    }
+
+    public Town getTownByPostcalCode(int postalCode) {
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM " + table + " WHERE postal_code = ?",
+                new TownMapper(),
+                postalCode
         );
     }
 }
