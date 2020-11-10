@@ -29,6 +29,9 @@ public class FavoriteService {
 
     public List<User> getFavoritesAsUsers(int id){
         List<Favorite> listOfFavorites = getFavoriteList(id);
+        if(listOfFavorites.size() == 0){
+            return new ArrayList<>();
+        }
         List<Integer> favoriteUserIdAsInt = new ArrayList<Integer>();
         for (Favorite favorite: listOfFavorites) {
             favoriteUserIdAsInt.add(favorite.getFavoriteUserId());

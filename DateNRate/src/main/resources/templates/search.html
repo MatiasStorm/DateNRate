@@ -13,7 +13,7 @@
 
 <body>
 
-<div th:replace="/includes/topPart :: topPart"></div>
+<div th:replace="/includes/topPart :: topPart (currentUser = ${currentUser})"></div>
 
 
 <form name="searchBar" action="/postSearch" method="post">

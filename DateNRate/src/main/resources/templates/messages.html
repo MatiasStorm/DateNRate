@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div th:replace="/includes/topPart :: topPart"></div>
+<div th:replace="/includes/topPart :: topPart (currentUser = ${currentUser})"></div>
 
 <div class="messagePage">
     <div class="conversationUserContainer">
@@ -39,9 +39,9 @@
         </div>
         <div class="messagesContainer" id="messageContainer">
             <div th:each="message : ${activeConversation}"
-                 th:style="${message.senderId == myId ? 'text-align: right' : ''}"
+                 th:style="${message.senderId == currentUser.userId ? 'text-align: right' : ''}"
                  >
-                <div th:class="'message ' + ${message.senderId == myId ? 'sendMessage' : 'recievedMessage'}">
+                <div th:class="'message ' + ${message.senderId == currentUser.userId ? 'sendMessage' : 'recievedMessage'}">
                     <p th:text="${message.message}"></p>
                     <span class="messageDate"
                           th:text="${#dates.format(message.messageDate, 'HH:mm dd/MM/yyyy')}"></span>

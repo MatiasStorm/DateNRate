@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div th:replace="/includes/topPart :: topPart"></div>
+<div th:replace="/includes/topPart :: topPart(currentUser = ${ currentUser })"></div>
 
 <div>
     <div class="container justifyContentAround">

@@ -85,14 +85,14 @@ public class DemoController {
 
     @GetMapping("/messages")
     public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, WebRequest request, Model model) {
-        User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
+        User currentUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (currentUser == null) { // If your aren't logged in, redirect to index.html
             return "redirect:/";
         }
-        int recieverId = loggedInUser.getUserId();
+        int recieverId = currentUser.getUserId();
+        model.addAttribute("currentUser", currentUser);
 
-        List<User> conversationUsers;
-        conversationUsers = messageService.getConversationUsers(recieverId);
+        List<User> conversationUsers = messageService.getConversationUsers(recieverId);
         if (conversationUsers.size() == 0 && activeUserId == null) { // If you don't have any messages, and not send any, display No messges page.
             return "noMessages";
         }
@@ -104,7 +104,6 @@ public class DemoController {
         User activeUser = userService.getUser(activeUserId);
         model.addAttribute("conversationUsers", conversationUsers);
         model.addAttribute("activeConversation", activeConversation);
-        model.addAttribute("myId", recieverId);
         model.addAttribute("activeUser", activeUser);
 
         Message newMessage = new Message();
@@ -163,16 +162,27 @@ public class DemoController {
     }
 
     @GetMapping("/search")
-    public String search() {
+    public String search(Model model, WebRequest request) {
+        User currentUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (currentUser == null) { // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
+        model.addAttribute("currentUser", currentUser);
         return "/search";
     }
 
     @GetMapping("/favorite")
-    public String favorite(Model model) {
-        int currentUserId = 1;
-        List<Favorite> favoritesList = favoriteService.getFavoriteList(currentUserId);
+    public String favorite(Model model, WebRequest request) {
+        User currentUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (currentUser == null) { // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
+        model.addAttribute("currentUser", currentUser);
+        int currentUserId = currentUser.getUserId();
         List<User> favoriteAsUserList = favoriteService.getFavoritesAsUsers(currentUserId);
-        model.addAttribute("favoritesList", favoritesList);
+        if(favoriteAsUserList.size() == 0){
+            return "noFavorites";
+        }
         model.addAttribute("favoritesAsUsersList", favoriteAsUserList);
         return "favorite";
     }

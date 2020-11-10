@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<div th:fragment="topPart">
+<div th:fragment="topPart (currentUser)">
     <div class="navbar">
         <a class="navbarBrand" href="/">
             <img src="/images/dateNRateLogo.png">
@@ -24,7 +24,7 @@
                 <img src="/images/magnifying_glass.png" alt="">
             </a>
         </div>
-        <a class="navbarItem" href="/userProfile?userId=" style="margin: 0px 0px 0px 15px">
+        <a class="navbarItem" th:href="${'/userProfile?userId=' + currentUser.userId}" style="margin: 0px 0px 0px 15px">
             <img src="/images/profile.png" alt="">
         </a>
 
