@@ -158,4 +158,11 @@ public class DemoController {
     }
 
 
+
+@GetMapping ("/ratingTest")
+public String ratingTest(WebRequest request, Model model){
+
+    return "/ratingtest";
+}
+
 }
