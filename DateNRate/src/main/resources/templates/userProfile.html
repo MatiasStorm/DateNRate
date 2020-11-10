@@ -60,7 +60,14 @@
         <div class="box">
             <div class="boxHeader"><p>Tags</p></div>
             <div class="boxBody">
-                <p th:text="${user.userDescription}"></p>
+
+                <form th:each="tag : ${tagsList}" th:object="${userTag}" method="post" th:action="@{/userTagPost}">
+                    <input name="tagId"  th:value="${tag.tagId}" hidden="hidden">
+                    <input name="userId"  th:value="${currentUser.userId}" hidden="hidden">
+
+                    <button type="submit" th:text="${tag.tagName}"></button>
+
+                </form>
             </div>
         </div>
     </div>
@@ -93,6 +100,7 @@
     </form>
 
 </div>
+
 
 
 <!--<form method="post" th:action="@{/userProfile/createUserRating}" th:object="${userRatings}">-->

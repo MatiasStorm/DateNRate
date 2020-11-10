@@ -115,7 +115,7 @@ public class DemoController {
 
 
     @GetMapping("/userProfile")
-    public String userProfile(@RequestParam int userId, WebRequest request, Model model, Favorite favorite, UserRating userRating) {
+    public String userProfile(@RequestParam int userId, UserTag userTag, WebRequest request, Model model, Favorite favorite, UserRating userRating) {
         User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
             return "redirect:/";
@@ -131,6 +131,9 @@ public class DemoController {
         model.addAttribute("userRating", userRating);
         List<Rating> ratingList = ratingService.getRatings();
         model.addAttribute("ratingList", ratingList);
+
+        model.addAttribute("userTag", userTag);
+        model.addAttribute("tagsList", tagService.getListOfTags());
         return "userProfile";
     }
 
@@ -184,11 +187,11 @@ public class DemoController {
         return "/test";
     }
 
-    @PostMapping("/testPost")
+    @PostMapping("/userTagPost")
     public String addTagToUser(UserTag userTag, WebRequest request) {
         int userId = 1;
         userTagService.addTagToUser(userTag, userId);
-        return "redirect:/test";
+        return "redirect:/userProfile?userId=" + userTag.getUserId();
     }
 
     @GetMapping("/ratingTest")
