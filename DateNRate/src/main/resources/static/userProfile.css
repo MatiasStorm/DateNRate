@@ -6,7 +6,9 @@
 .imageContainer{
     width: 30%;
 }
-
+h1{
+    margin: 0;
+}
 .contactContainer {
     width: 70%;
     margin-top: 7%;

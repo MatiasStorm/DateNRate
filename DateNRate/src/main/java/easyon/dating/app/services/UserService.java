@@ -7,7 +7,12 @@ import easyon.dating.app.repository.UserDAO;
 import easyon.dating.app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Date;
 import java.util.List;
 
@@ -65,6 +70,18 @@ public class UserService {
             userFormError.setDateOfBirthError(true);
         }
         return userFormError;
+    }
+
+
+    public void uploadProfilePicture(MultipartFile picture) throws IOException {
+        String fileName = picture.getOriginalFilename().replace(" ", "_");
+        String imagePath = "src/main/resources/static/images/" + fileName;
+        String absolutePath = new File(imagePath).getAbsolutePath();
+        File file = new File(absolutePath);
+        file.createNewFile();
+        picture.transferTo(file);
+        int i = 0;
+
     }
 
 

@@ -1,0 +1,41 @@
+.ratingSpace {
+    justify-content: space-around;
+    font-family: Arial, serif;
+    width: 98%;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+
+.ratingOption {
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.ratingButton {
+    background-color: rgb(175,0,0);
+    border: none;
+    color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 1);
+    padding: 15px 32px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8%;
+}
+
+.flexWrap {
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.aboutMe {
+    font-family: Arial, serif;
+    font-size: 20px;
+
+}
