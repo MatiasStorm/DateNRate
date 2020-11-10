@@ -74,7 +74,7 @@ public class UserTagDAO {
         );
     }
 
-    public List<UserTag> getInactiveTagList(int userId, int tagId) {
+    public List<UserTag> getInactiveTagList(int userId) {
         return jdbcTemplate.query(
                 "SELECT * FROM " + table + " WHERE user_id != ?",
                 new UserTagMapper(),

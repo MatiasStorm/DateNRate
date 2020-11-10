@@ -12,13 +12,10 @@
 </head>
 <body>
 
-<form th:each="tag : ${tagsList}" th:object="${userTag}" method="post" th:action="@{/testPost}">
-    <input name="tagId"  th:value="${tag.tagId}">
-    <input name="userId"  th:value="2">
+<div th:each="tag : ${activeTags}" >
+    <h1 th:text="${tag.tagId}"></h1>
+</div>
 
-    <button type="submit" th:text="${tag.tagName}"></button>
-
-</form>
 
 </body>
 </html>
