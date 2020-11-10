@@ -81,6 +81,19 @@ public class UserDAO {
         return getUser(newUserId);
     }
 
+    private List<User> getUserByWhere(String whereClause, String param){
+        return jdbcTemplate.query(
+                "SELECT * FROM " + table + " " + whereClause,
+                userMapper,
+                param
+        );
+    }
 
+    public List<User> getUserByUsername(String username){
+        return getUserByWhere("WHERE username = ?", username);
+    }
 
+    public List<User> getUserByEmail(String email){
+        return getUserByWhere("WHERE email = ?", email);
+    }
 }

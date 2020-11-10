@@ -10,8 +10,8 @@ public class User {
     private String lastName;
     private String email;
     private int townId;
-    private String password;
-    private String password2;
+    private String password = "";
+    private String password2 = "";
     private String username;
     private String profilePicture;
     private Date dateOfBirth;

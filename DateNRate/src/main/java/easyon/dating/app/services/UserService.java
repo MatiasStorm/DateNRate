@@ -1,12 +1,14 @@
 package easyon.dating.app.services;
 
 import easyon.dating.app.models.Town;
+import easyon.dating.app.models.UserFormError;
 import easyon.dating.app.repository.TownDAO;
 import easyon.dating.app.repository.UserDAO;
 import easyon.dating.app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -40,6 +42,29 @@ public class UserService {
 
     public List<User> searchUser(String search) {
         return userDao.getUserSearch(search);
+    }
+
+    public UserFormError getUserFormError(User user){
+        UserFormError userFormError = new UserFormError();
+        if(!user.getPassword().equals(user.getPassword2())){
+            userFormError.setPasswordError(true);
+        }
+        if(userDao.getUserByUsername(user.getUsername()).size() > 0){
+            userFormError.setUsernameError(true);
+        }
+        if(userDao.getUserByEmail(user.getEmail()).size() > 0){
+            userFormError.setEmailError(true);
+        }
+        try {
+            Town town = townDAO.getTownByPostcalCode(user.getTownId());
+        } catch (Exception e){
+            userFormError.setTownError(true);
+        }
+        Date birthDay = user.getDateOfBirth();
+        if(birthDay.after(new Date(System.currentTimeMillis())) || birthDay.before(new Date(1900, 1, 1))){
+            userFormError.setDateOfBirthError(true);
+        }
+        return userFormError;
     }
 
 
