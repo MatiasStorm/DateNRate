@@ -151,21 +151,15 @@ public class DemoController {
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
     }
 
-    @PostMapping("/postSearch")
-    public String postSearch(WebRequest request, Model model) {
-
-        String search = request.getParameter("searchParameter");
-        List<User> searchList = userService.searchUser(search);
-        model.addAttribute("searchList", searchList);
-        return "/search";
-
-    }
-
     @GetMapping("/search")
-    public String search(Model model, WebRequest request) {
+    public String search(@RequestParam(required = false) String search, Model model, WebRequest request) {
         User currentUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         if (currentUser == null) { // If your aren't logged in, redirect to index.html
             return "redirect:/";
+        }
+        if(search != null){
+            List<User> searchList = userService.searchUser(search);
+            model.addAttribute("searchList", searchList);
         }
         model.addAttribute("currentUser", currentUser);
         return "/search";

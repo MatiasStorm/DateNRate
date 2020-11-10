@@ -16,10 +16,10 @@
 <div th:replace="/includes/topPart :: topPart (currentUser = ${currentUser})"></div>
 
 
-<form name="searchBar" action="/postSearch" method="post">
+<form name="searchBar" action="/search" method="get">
     <div class="displayFlexFix">
         <button>Search</button>
-        <input class="searchField" type="search" name="searchParameter" ;>
+        <input class="searchField" type="search" name="search" ;>
     </div>
 </form>
 
