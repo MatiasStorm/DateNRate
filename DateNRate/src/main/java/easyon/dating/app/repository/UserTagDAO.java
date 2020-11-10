@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -73,7 +74,7 @@ public class UserTagDAO {
         );
     }
 
-    public List<UserTag> getInactiveTagList(int userId) {
+    public List<UserTag> getInactiveTagList(int userId, int tagId) {
         return jdbcTemplate.query(
                 "SELECT * FROM " + table + " WHERE user_id != ?",
                 new UserTagMapper(),
