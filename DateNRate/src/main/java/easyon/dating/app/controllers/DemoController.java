@@ -184,9 +184,10 @@ public class DemoController {
     }
 
     @GetMapping("/test")
-    public String test(Model model, UserTag userTag) {
-        model.addAttribute("userTag", userTag);
-        model.addAttribute("tagsList", tagService.getListOfTags());
+    public String test(Model model) {
+        int userId = 13;
+        model.addAttribute("activeTags", userTagService.getActiveTagList(userId));
+        model.addAttribute("inactiveTags", userTagService.getInactiveTagList(userId));
         return "/test";
     }
 
