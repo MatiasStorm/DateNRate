@@ -14,12 +14,12 @@
 <div th:replace="/includes/topPart :: topPart"></div>
 
 <div>
-    <div class="container">
+    <div class="container justifyContentAround">
         <div class="imageContainer">
-            <img class="profilePicture" img th:src="${user.profilePicture != null ? user.profilePicture : '/images/mand_default.webp'}">
+            <img th:src="${user.profilePicture != null ? user.profilePicture : '/images/mand_default.webp'}">
             <form style="text-align: center" th:if="${isMyProfile}" method="POST" enctype="multipart/form-data" action="/uploadProfilePicture">
-                <span>Upload Profilbilled</span>
-                <input type="file" name="file"/>
+                <span>Upload Profilbillede: </span>
+                <input type="file" name="file" placeholder="Vælg billede"/>
                 <button type="submit" value="Upload">Upload billed</button>
             </form>
         </div>
