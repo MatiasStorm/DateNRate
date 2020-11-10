@@ -7,6 +7,7 @@ import easyon.dating.app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,15 +25,12 @@ public class MessageService {
         messageDao.createMessage(message);
     }
 
-    public List<User> getSenders(int recieverId){
-        return getSenders(recieverId, 0);
-    }
-
-    public List<User> getSenders(int recieverId, int activeUserId){
-        List<Integer> senderUserIds = messageDao.getSenderUserIds(recieverId);
-        senderUserIds.add(activeUserId);
-        List<User> senders = userDAO.getUsersByIds(senderUserIds);
-        return senders;
+    public List<User> getConversationUsers(int recieverId){
+        List<Integer> conversationUserIds = messageDao.getConversationUserIds(recieverId);
+        if(conversationUserIds.size() == 0){
+            return new ArrayList<>();
+        }
+        return userDAO.getUsersByIds(conversationUserIds);
     }
 
     public List<Message> getConversation(int recieverId, int senderId){

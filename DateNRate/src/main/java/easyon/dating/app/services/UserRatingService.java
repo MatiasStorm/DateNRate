@@ -1,5 +1,6 @@
 package easyon.dating.app.services;
 
+import easyon.dating.app.models.Rating;
 import easyon.dating.app.repository.UserRatingDAO;
 import easyon.dating.app.models.UserRating;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,9 @@ public class UserRatingService {
         }
         return emptyUserRatingArray;
     }
+
+
+
+
+
 }

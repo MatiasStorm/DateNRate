@@ -1,12 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" type="text/css" href="search.css">
+<link rel="stylesheet" type="text/css" href="/main.css">
+<link rel="stylesheet" type="text/css" href="/topPart.css">
 <head>
     <meta charset="UTF-8">
     <title>Rating Test</title>
 </head>
 <body>
 
+<div th:each="ratingUser : ${ratingList}" th:object="${ratingUser}">
 
+    <p th:text="'' + *{ratingName}">
+
+    </p>
+
+</div>
+
+
+<form method="post" action="/postRating" th:object="${userRating}">
+    <input type="number" th:field="*{rating}">
+    <select th:field="*{ratingId}">
+        <option th:each="ratingUser : ${ratingList}" th:value="${ratingUser.ratingId}" th:text="${ratingUser.ratingName}"> </option>
+    </select>
+    <input type="number" th:field="*{targetUserId}">
+    <input type="number" th:field="*{creatorUserId}">
+    <button type="submit">Giv Rating</button>
+</form>
 
 </body>
 </html>

@@ -24,10 +24,10 @@ public class UserService {
         return userDao.selectUsers();
     }
 
-    public void createUser(User user){
+    public User createUser(User user){
         Town town = townDAO.getTownByPostcalCode(user.getTownId());
         user.setTownId(town.getTownId());
-        userDao.createUser(user);
+        return userDao.createUser(user);
     }
 
     public User getUser(int userId){

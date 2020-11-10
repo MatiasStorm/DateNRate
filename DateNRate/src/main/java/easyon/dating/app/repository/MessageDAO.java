@@ -27,13 +27,18 @@ public class MessageDAO {
         );
     }
 
-    public List<Integer> getSenderUserIds(int userId){
+    public List<Integer> getConversationUserIds(int activeUser){
         return jdbcTemplate.query(
-                "SELECT DISTINCT sender_id FROM " + table + " WHERE reciever_id = ?",
+                "SELECT DISTINCT sender_id as id FROM " + table
+                  + " WHERE reciever_id = ?"
+                  + " UNION "
+                  + "SELECT DISTINCT reciever_id as id FROM " + table
+                  + " WHERE sender_id = ?",
                 (ResultSet rs, int rowCount) -> {
-                    return rs.getInt("sender_id");
+                    return rs.getInt("id");
                 },
-                userId
+                activeUser,
+                activeUser
         );
     }
 

@@ -52,10 +52,9 @@ public class DemoController {
 
     @PostMapping("/createUser")
     public String createUserSubmit(User user, WebRequest request) {
-        userService.createUser(user);
-        // TODO should redirect to user profile!
-        setSessionInfo(request, user);
-        return "redirect:/userProfile?userId=" + user.getUserId();
+        User newUser = userService.createUser(user);
+        setSessionInfo(request, newUser);
+        return "redirect:/userProfile?userId=" + newUser.getUserId();
     }
 
 
@@ -67,20 +66,19 @@ public class DemoController {
 
     @GetMapping("/messages")
     public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, WebRequest request, Model model) {
-        // TODO Move most of this to service and create a class which will contain all conversation information.
         User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
         int recieverId = loggedInUser.getUserId();
 
         List<User> conversationUsers;
-        if (activeUserId == null) {
-            conversationUsers = messageService.getSenders(recieverId);
-            activeUserId = conversationUsers.get(0).getUserId();
-        } else {
-            conversationUsers = messageService.getSenders(recieverId, activeUserId);
-        }
-
-        if (conversationUsers.size() == 0) {
+        conversationUsers = messageService.getConversationUsers(recieverId);
+        if (conversationUsers.size() == 0 && activeUserId == null) { // If you don't have any messages, and not send any, display No messges page.
             return "noMessages";
+        }
+        if (activeUserId == null) { // Set activeUserId as the first user, as default.
+            activeUserId = conversationUsers.get(0).getUserId();
         }
 
         List<Message> activeConversation = messageService.getConversation(recieverId, activeUserId);
@@ -149,7 +147,7 @@ public class DemoController {
     }
 
     @PostMapping("/postFavorite")
-    public String postFavorite(Favorite favorite){
+    public String postFavorite(Favorite favorite) {
         favoriteService.addToFavorites(favorite);
         return "redirect:/userProfile?userId=" + favorite.getFavoriteUserId();
     }
@@ -165,14 +163,25 @@ public class DemoController {
         int userId = 1;
         userTagService.addTagToUser(userTag, userId);
         return "redirect:/test";
+
+
+
+    @GetMapping("/ratingTest")
+    public String ratingTest(UserRating userRating, Model model) {
+        int currentUserId = 1;
+        model.addAttribute("userRating", userRating);
+        List<Rating> ratingList = ratingService.getRatings();
+        model.addAttribute("ratingList", ratingList);
+
+        return "/ratingTest";
     }
 
-
-
-@GetMapping ("/ratingTest")
-public String ratingTest(WebRequest request, Model model){
-
-    return "/ratingtest";
-}
+    @PostMapping("/postRating")
+    public String postRating(UserRating userRating, Model model) {
+        int currentUserId = 1;
+        model.addAttribute("userRating", userRating);
+        userRatingService.createUserRating(userRating);
+        return "/ratingTest";
+    }
 
 }
