@@ -67,6 +67,7 @@
 </div>
 
 <div class="box">
+
     <form method="post" th:action="@{/postRating}" th:object="${userRating}">
 
         <div th:each="ratingUser : ${ratingList}">
@@ -77,6 +78,7 @@
         </div>
         <button type="submit">Giv Rating</button>
     </form>
+
 </div>
 
 
