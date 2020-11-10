@@ -18,7 +18,7 @@
         <div th:each="user : ${conversationUsers}"
              th:class="'conversationUser ' + ${user.userId == activeUser.userId ? 'activeConversationUser' : '' }"
         >
-            <img src="/images/mand_default.webp">
+            <img th:src="${user.profilePicture != null ? user.profilePicture : '/images/mand_default.webp'}">
             <div th:object="${user}">
                 <a class="cleanA" th:href="'/messages?active=' + *{userId}">
                     <h3 class="userName" th:text="*{firstName} + ' ' + *{lastName}"></h3>
@@ -30,7 +30,7 @@
     <div class="conversationContainer">
         <div class="activeUserContainer" th:object="${activeUser}">
             <div style="display: flex" >
-                <img src="/images/mand_default.webp">
+                <img th:src="*{profilePicture != null ? profilePicture : '/images/mand_default.webp'}">
                 <h2 class="userName" th:text="*{firstName} + ' ' + *{lastName}"></h2>
             </div>
             <a class="cleaA" th:href="'userProfile?userId=' + *{userId}">
