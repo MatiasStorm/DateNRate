@@ -226,11 +226,6 @@ public class DemoController {
         return "redirect:/userProfile?userId=" + userRating.getTargetUserId();
     }
 
-    @GetMapping("/fileTest")
-    public String fileTest(){
-        return "fileTest";
-    }
-
     @PostMapping("/uploadProfilePicture")
     public String uploadProfilePicture(@RequestParam("file") MultipartFile file, WebRequest request) throws IOException {
         User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
