@@ -106,7 +106,7 @@ public class DemoController {
 
 
     @GetMapping("/userProfile")
-    public String userProfile(@RequestParam int userId, Model model, Favorite favorite) {
+    public String userProfile(@RequestParam int userId, Model model, Favorite favorite, UserRating userRating) {
         List<Rating> ratings = ratingService.getRatings();
         favorite.setFavoriteUserId(userId);
         favorite.setUserId(1);
@@ -114,6 +114,9 @@ public class DemoController {
         model.addAttribute("ratings", ratings);
         model.addAttribute("user", userService.getUser(userId));
         model.addAttribute("userRatings", userRatingService.getEmptyUserRatingArray(ratings.size()));
+        model.addAttribute("userRating", userRating);
+        List<Rating> ratingList = ratingService.getRatings();
+        model.addAttribute("ratingList", ratingList);
         return "userProfile";
     }
 
@@ -173,15 +176,15 @@ public class DemoController {
         return "redirect:/test";
     }
 
-    @GetMapping("/ratingTest")
-    public String ratingTest(UserRating userRating, Model model) {
-        int currentUserId = 1;
-        model.addAttribute("userRating", userRating);
-        List<Rating> ratingList = ratingService.getRatings();
-        model.addAttribute("ratingList", ratingList);
-
-        return "/ratingTest";
-    }
+//    @GetMapping("/ratingTest")
+//    public String ratingTest(UserRating userRating, Model model) {
+//        int currentUserId = 1;
+//        model.addAttribute("userRating", userRating);
+//        List<Rating> ratingList = ratingService.getRatings();
+//        model.addAttribute("ratingList", ratingList);
+//
+//        return "/ratingTest";
+//    }
 
     @PostMapping("/postRating")
     public String postRating(UserRating userRating, Model model) {
