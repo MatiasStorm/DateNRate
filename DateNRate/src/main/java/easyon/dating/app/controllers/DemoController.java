@@ -67,15 +67,12 @@ public class DemoController {
         int recieverId = loggedInUser.getUserId();
 
         List<User> conversationUsers;
-        if (activeUserId == null) {
-            conversationUsers = messageService.getSenders(recieverId);
-            activeUserId = conversationUsers.get(0).getUserId();
-        } else {
-            conversationUsers = messageService.getSenders(recieverId, activeUserId);
-        }
-
-        if (conversationUsers.size() == 0) {
+        conversationUsers = messageService.getConversationUsers(recieverId);
+        if (conversationUsers.size() == 0 && activeUserId == null) {
             return "noMessages";
+        }
+        if (activeUserId == null) {
+            activeUserId = conversationUsers.get(0).getUserId();
         }
 
         List<Message> activeConversation = messageService.getConversation(recieverId, activeUserId);
