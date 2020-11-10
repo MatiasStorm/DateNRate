@@ -35,11 +35,25 @@ public class DemoController {
         return "index";
     }
 
+    @PostMapping("/login")
+    public String loginUser(WebRequest request) {
+        //Retrieve values from HTML form via WebRequest
+        String email = request.getParameter("username");
+        String pwd = request.getParameter("password");
+
+        User user = userService.login(email, pwd);
+        setSessionInfo(request, user);
+
+        // Go to to page dependent on role
+        return "redirect:/userProfile?userId=" + user.getUserId();
+    }
+
     @PostMapping("/createUser")
-    public String createUserSubmit(User user) {
+    public String createUserSubmit(User user, WebRequest request) {
         userService.createUser(user);
         // TODO should redirect to user profile!
-        return "redirect:/";
+        setSessionInfo(request, user);
+        return "redirect:/userProfile?userId=" + user.getUserId();
     }
 
 
@@ -50,10 +64,10 @@ public class DemoController {
     }
 
     @GetMapping("/messages")
-    public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, Model model) {
+    public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, WebRequest request, Model model) {
         // TODO Move most of this to service and create a class which will contain all conversation information.
-
-        int recieverId = 1; // CHANGE THIS, when implementing sessions, use loggedin users id
+        User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        int recieverId = loggedInUser.getUserId();
 
         List<User> conversationUsers;
         if (activeUserId == null) {
@@ -102,6 +116,11 @@ public class DemoController {
     }
 
 
+    private void setSessionInfo(WebRequest request, User user) {
+        // Place user info on session
+        request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
+    }
+
     @PostMapping("/postSearch")
     public String postSearch(WebRequest request, Model model) {
 
@@ -137,8 +156,6 @@ public class DemoController {
     public String test(Model model){
 
     }
-
-
 
 
 }

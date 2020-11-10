@@ -55,6 +55,15 @@ public class UserDAO {
 
     }
 
+    public User login(String username, String password){
+        return jdbcTemplate.queryForObject(
+                "SELECT * from users WHERE username = ? AND password = ?",
+                userMapper,
+                username,
+                password
+        );
+    }
+
 
 
     public void createUser(User user){

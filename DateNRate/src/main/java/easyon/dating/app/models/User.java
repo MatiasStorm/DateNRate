@@ -1,8 +1,6 @@
 package easyon.dating.app.models;
 
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 public class User {

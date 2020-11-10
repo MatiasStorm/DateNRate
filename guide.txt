@@ -7,6 +7,17 @@ Insert Into database!
 5. I create metode i DAO, skriv SQL statement 
 	fx. "INSERT into users(first_name, last_name, email, password, username, date_of_birth) VALUES(?, ?, ?, ?, ?, ?)"
 
+Select from database
+1. Create mapper  under "data package"
+2. create DAO klasse under "data package"
+3. create service under "service package"
+4. create getMapping i controlleren husk Model model
+5. lav html incl thymeleaf!!!!
+
+
+
+- Indsæt Forenkey til Users og Towns
+
 
 
 Select from database

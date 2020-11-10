@@ -32,7 +32,10 @@ public class UserService {
 
     public User getUser(int userId){
         return userDao.getUser(userId);
+    }
 
+    public User login(String username, String password){
+        return userDao.login(username, password);
     }
 
     public List<User> searchUser(String search) {
