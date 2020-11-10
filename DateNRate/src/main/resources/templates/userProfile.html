@@ -66,6 +66,21 @@
     </div>
 </div>
 
+<div class="box">
+
+    <form method="post" th:action="@{/postRating}" th:object="${userRating}">
+
+        <div th:each="ratingUser : ${ratingList}">
+            <h1 th:text="${ratingUser.ratingName}"></h1>
+            <input type="number" th:field="*{rating}">
+            <input type="number" th:field="*{targetUserId}">
+            <input type="number" th:field="*{creatorUserId}">
+        </div>
+        <button type="submit">Giv Rating</button>
+    </form>
+
+</div>
+
 
 <!--<form method="post" th:action="@{/userProfile/createUserRating}" th:object="${userRatings}">-->
 
