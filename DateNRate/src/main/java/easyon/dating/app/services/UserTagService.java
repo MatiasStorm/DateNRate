@@ -14,16 +14,30 @@ public class UserTagService {
     private final UserTagDAO userTagDAO;
 
     @Autowired
-    public UserTagService(UserTagDAO userTagDAO) { this.userTagDAO = userTagDAO;}
+    public UserTagService(UserTagDAO userTagDAO) {
+        this.userTagDAO = userTagDAO;
+    }
 
-    public List<UserTag> getListOfUserTags() { return userTagDAO.getUserTagList(); }
+    public List<UserTag> getListOfUserTags() {
+        return userTagDAO.getUserTagList();
+    }
 
-    public UserTag getUserTag (int userId) {
+    public UserTag getUserTag(int userId) {
         return userTagDAO.getUserTag(userId);
     }
 
-    public void addTagToUser (UserTag userTag, int userId) {
-        userTagDAO.addTagToUser(userTag, userId);
+    public void addTagToUser(UserTag userTag, int userId) {
+
+        try {
+            userTagDAO.addTagToUser(userTag, userId);
+
+        } catch (Exception e) {
+            userTagDAO.removeTagFromUser(userTag, userId);
+
+        }
     }
+
+
+
 
 }
