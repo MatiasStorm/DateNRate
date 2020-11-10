@@ -73,7 +73,7 @@ public class DemoController {
     @GetMapping("/messages")
     public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, WebRequest request, Model model) {
         User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        if(loggedInUser == null){ // If your aren't logged in, redirect to index.html
+        if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
             return "redirect:/";
         }
         int recieverId = loggedInUser.getUserId();
@@ -153,31 +153,33 @@ public class DemoController {
     }
 
     @PostMapping("/postFavorite")
-    public String postFavorite(Favorite favorite){
+    public String postFavorite(Favorite favorite) {
         favoriteService.addToFavorites(favorite);
         return "redirect:/userProfile?userId=" + favorite.getFavoriteUserId();
     }
 
     @GetMapping("/test")
-    public String test(Model model){
+    public String test(Model model) {
         return "";
     }
 
 
-
-@GetMapping ("/ratingTest")
-public String ratingTest(Model model){
+    @GetMapping("/ratingTest")
+    public String ratingTest(UserRating userRating, Model model) {
         int currentUserId = 1;
+        model.addAttribute("userRating", userRating);
         List<Rating> ratingList = ratingService.getRatings();
         model.addAttribute("ratingList", ratingList);
 
-    return "/ratingTest";
-}
-
-@PostMapping("/postRating")
-    public String postRating(Rating rating) {
-        ratingService.addToUserRating(rating);
         return "/ratingTest";
-}
+    }
+
+    @PostMapping("/postRating")
+    public String postRating(UserRating userRating, Model model) {
+        int currentUserId = 1;
+        model.addAttribute("userRating", userRating);
+        userRatingService.createUserRating(userRating);
+        return "/ratingTest";
+    }
 
 }
