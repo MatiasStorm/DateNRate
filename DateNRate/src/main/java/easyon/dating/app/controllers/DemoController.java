@@ -33,7 +33,7 @@ public class DemoController {
     }
 
     @GetMapping("/")
-    public String index(Model model, User user) {
+    public String index() {
         return "index";
     }
 
@@ -46,15 +46,23 @@ public class DemoController {
         User user = userService.login(email, pwd);
         setSessionInfo(request, user);
 
-        // Go to to page dependent on role
         return "redirect:/userProfile?userId=" + user.getUserId();
     }
 
-    @PostMapping("/createUser")
+    @PostMapping("/createUser/submit")
     public String createUserSubmit(User user, WebRequest request) {
         User newUser = userService.createUser(user);
         setSessionInfo(request, newUser);
         return "redirect:/userProfile?userId=" + newUser.getUserId();
+    }
+
+    @GetMapping("/createUser")
+    public String createUser(Model model, User user){
+        model.addAttribute("user", user);
+        model.addAttribute("title", "Opret Bruger");
+        model.addAttribute("postEndpoint", "/createUser/submit");
+        model.addAttribute("passwordError", true);
+        return "createUser";
     }
 
 

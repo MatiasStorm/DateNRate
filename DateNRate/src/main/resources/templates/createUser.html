@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/createUser.css">
+    <link rel="stylesheet" type="text/css" href="/index.css">
+</head>
+<body>
+<h1 style="text-align: center" th:text="${title}"></h1>
+<form class="modal-content" th:action="${postEndpoint}" th:object="${user}" method="post">
+    <div class="container">
+        <div class="inputContainer">
+            <label>Brugernavn:</label>
+            <input type="text" th:field="*{username}" required>
+        </div>
+        <div class="errorTag" th:if="${usernameError}">Brugernavn er taget</div>
+
+        <div class="inputContainer">
+            <label>Password:</label>
+            <input type="password" th:field="*{password}" required>
+        </div>
+        <div class="errorTag" th:if="${passwordError}">Passwords er ikke ens</div>
+
+        <div class="inputContainer">
+            <label>Gentag Password:</label>
+            <input type="password" th:field="*{password2}" required>
+        </div>
+        <div class="errorTag" th:if="${passwordError}">Passwords er ikke ens</div>
+
+        <div class="inputContainer">
+            <label>Fornavn:</label>
+            <input type="text" th:field="*{firstName}" required>
+        </div>
+        <div class="inputContainer">
+            <label>Efternavn:</label>
+            <input type="text" th:field="*{lastName}" required>
+        </div>
+
+        <div class="inputContainer">
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required>
+        </div>
+        <div class="errorTag" th:if="${emailError}">Email er taget</div>
+
+        <div class="inputContainer">
+            <label>Fødselsdato:</label>
+            <input type="date" th:field="*{dateOfBirth}" required>
+        </div>
+
+        <div class="inputContainer">
+            <label>Post Nummer:</label>
+            <input type="number" th:field="*{townId}" required>
+        </div>
+        <div class="errorTag" th:if="${townError}">Postnummer findes ikke</div>
+
+        <div class="inputContainer">
+            <label>Køn:</label>
+            <select name="male" required>
+                <option th:value="1">Mand</option>
+                <option th:value="0">Kvinde</option>
+            </select>
+        </div>
+        <div style="display: flex">
+            <button type="button" onclick="document.location.href = '/'"
+                    class="button">
+                Fortryd
+            </button>
+            <button class="button" type="submit">Opret</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

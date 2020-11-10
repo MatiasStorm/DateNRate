@@ -1,0 +1,23 @@
+.inputContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.inputContainer input, select {
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.inputContainer label {
+    width: 20%;
+    text-align: left;
+}
+
+.errorTag {
+    color: red;
+    text-align: center;
+}
