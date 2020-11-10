@@ -65,17 +65,17 @@ public class DemoController {
     @GetMapping("/messages")
     public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, WebRequest request, Model model) {
         User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        if(loggedInUser == null){
+        if(loggedInUser == null){ // If your aren't logged in, redirect to index.html
             return "redirect:/";
         }
         int recieverId = loggedInUser.getUserId();
 
         List<User> conversationUsers;
         conversationUsers = messageService.getConversationUsers(recieverId);
-        if (conversationUsers.size() == 0 && activeUserId == null) {
+        if (conversationUsers.size() == 0 && activeUserId == null) { // If you don't have any messages, and not send any, display No messges page.
             return "noMessages";
         }
-        if (activeUserId == null) {
+        if (activeUserId == null) { // Set activeUserId as the first user, as default.
             activeUserId = conversationUsers.get(0).getUserId();
         }
 
