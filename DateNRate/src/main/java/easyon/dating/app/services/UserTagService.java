@@ -49,10 +49,14 @@ public class UserTagService {
 
 
         for (int i = 0; i < allTags.size(); i++) {
+            int count = 0;
             for (int j = 0; j < activeUserTagList.size(); j++) {
                 if (allTags.get(i).getTagId() != activeUserTagList.get(j).getTagId()) {
-                    unusedUserTagList.add(allTags.get(i)
-                    );
+                    count++;
+                    if (count==activeUserTagList.size()) {
+                        unusedUserTagList.add(allTags.get(i)
+                        );
+                    }
                 }
 
             }

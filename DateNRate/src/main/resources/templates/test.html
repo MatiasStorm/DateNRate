@@ -16,6 +16,12 @@
     <h1 th:text="${tag.tagId}"></h1>
 </div>
 
+<p> down inactive -------------------------------------------------------------------------------------------------- up active</p>
+
+<div th:each="tag : ${inactiveTags}" >
+    <h1 th:text="${tag.tagName}"></h1>
+</div>
+
 
 </body>
 </html>
