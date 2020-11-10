@@ -26,5 +26,13 @@ public class RatingDAO {
         );
     }
 
+    public void addToUserRating(Rating rating){
+        jdbcTemplate.update(
+                "INSERT into user_ratings(target_user_id, rating, rating_id, creator_user_id) VALUES (?,?,?,?) ",
+                rating.getRatingId(),
+                rating.getRatingName()
+        );
+    }
+
 }
 

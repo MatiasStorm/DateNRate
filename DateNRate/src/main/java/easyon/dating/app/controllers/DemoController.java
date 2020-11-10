@@ -158,9 +158,18 @@ public class DemoController {
 
 
 @GetMapping ("/ratingTest")
-public String ratingTest(WebRequest request, Model model){
+public String ratingTest(Model model){
+        int currentUserId = 1;
+        List<Rating> ratingList = ratingService.getRatings();
+        model.addAttribute("ratingList", ratingList);
 
-    return "/ratingtest";
+    return "/ratingTest";
+}
+
+@PostMapping("/postRating")
+    public String postRating(Rating rating) {
+        ratingService.addToUserRating(rating);
+        return "/ratingTest";
 }
 
 }
