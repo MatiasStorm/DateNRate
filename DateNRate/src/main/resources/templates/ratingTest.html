@@ -11,16 +11,20 @@
 </head>
 <body>
 
-<div th:each="ratingUser : ${ratingList}" th:object="${ratingUser}" >
+<div th:each="ratingUser : ${ratingList}" th:object="${ratingUser}">
 
     <p th:text="'' + *{ratingName}">
 
     </p>
 
-
 </div>
 
 
+<form method="post" action="/postRating" th:object="${userRating}">
+    <input hidden="hidden" type="number" th:field="*{rating}">
+    <input hidden="hidden" type="number" th:field="*{ratingId}">
+    <button type="submit">Testmigher</button>
+</form>
 
 </body>
 </html>

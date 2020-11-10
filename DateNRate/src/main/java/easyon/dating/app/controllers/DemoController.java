@@ -166,8 +166,9 @@ public String ratingTest(Model model){
 }
 
 @PostMapping("/postRating")
-    public String postRating(Rating rating) {
-        ratingService.addToUserRating(rating);
+    public String postRating(UserRating userRating, Model model) {
+        model.addAttribute("userRating", userRating);
+        userRatingService.createUserRating(userRating);
         return "/ratingTest";
 }
 
