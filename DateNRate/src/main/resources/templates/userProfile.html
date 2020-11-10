@@ -16,7 +16,12 @@
 <div>
     <div class="container">
         <div class="imageContainer">
-            <img class="profilePicture" img src="/images/mand_default.webp">
+            <img class="profilePicture" img th:src="${user.profilePicture != null ? user.profilePicture : '/images/mand_default.webp'}">
+            <form style="text-align: center" th:if="${isMyProfile}" method="POST" enctype="multipart/form-data" action="/uploadProfilePicture">
+                <span>Upload Profilbilled</span>
+                <input type="file" name="file"/>
+                <button type="submit" value="Upload">Upload billed</button>
+            </form>
         </div>
 
         <div class="contactContainer">
@@ -51,7 +56,7 @@
             </div>
         </div>
     </div>
-<div class="container">
+    <div class="container">
         <div class="box">
             <div class="boxHeader"><h1>Om mig</h1></div>
             <div class="boxBody">
@@ -64,8 +69,8 @@
             <div class="boxBody flexWrap">
 
                 <form th:each="tag : ${tagsList}" th:object="${userTag}" method="post" th:action="@{/userTagPost}">
-                    <input name="tagId"  th:value="${tag.tagId}" hidden="hidden">
-                    <input name="userId"  th:value="${currentUser.userId}" hidden="hidden">
+                    <input name="tagId" th:value="${tag.tagId}" hidden="hidden">
+                    <input name="userId" th:value="${currentUser.userId}" hidden="hidden">
 
                     <button class="ratingButton" type="submit" th:text="${tag.tagName}"></button>
 
@@ -76,7 +81,7 @@
 </div>
 
 <div class="box ratingSpace">
-<div class="boxHeader"><h1> Giv rating </h1></div>
+    <div class="boxHeader"><h1> Giv rating </h1></div>
     <form method="post" action="/postRating" th:object="${userRating}">
         <select class="ratingOption ratingButton" th:field="*{rating}">
             <option value="1">1</option>
@@ -102,7 +107,6 @@
     </form>
 
 </div>
-
 
 
 <!--<form method="post" th:action="@{/userProfile/createUserRating}" th:object="${userRatings}">-->

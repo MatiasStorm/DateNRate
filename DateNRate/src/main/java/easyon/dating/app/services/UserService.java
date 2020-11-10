@@ -73,15 +73,15 @@ public class UserService {
     }
 
 
-    public void uploadProfilePicture(MultipartFile picture) throws IOException {
-        String fileName = picture.getOriginalFilename().replace(" ", "_");
-        String imagePath = "src/main/resources/static/images/" + fileName;
+    public User uploadProfilePicture(MultipartFile picture, User user ) throws IOException {
+        String fileName = "/images/" + picture.getOriginalFilename().replace(" ", "_");
+        String imagePath = "src/main/resources/static" + fileName;
         String absolutePath = new File(imagePath).getAbsolutePath();
         File file = new File(absolutePath);
         file.createNewFile();
         picture.transferTo(file);
-        int i = 0;
-
+        user.setProfilePicture(fileName);
+        return userDao.updateUser(user);
     }
 
 

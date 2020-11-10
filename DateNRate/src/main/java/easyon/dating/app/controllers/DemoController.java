@@ -124,7 +124,8 @@ public class DemoController {
         }
         List<Rating> ratings = ratingService.getRatings();
         favorite.setFavoriteUserId(userId);
-        favorite.setUserId(1);
+        favorite.setUserId(loggedInUser.getUserId());
+        model.addAttribute("isMyProfile", loggedInUser.getUserId() == userId);
         model.addAttribute("currentUser", loggedInUser);
         model.addAttribute("favorite", favorite);
         model.addAttribute("ratings", ratings);
@@ -220,9 +221,14 @@ public class DemoController {
     }
 
     @PostMapping("/uploadProfilePicture")
-    public String uploadProfilePicture(@RequestParam("file") MultipartFile file) throws IOException {
-        userService.uploadProfilePicture(file);
-        return "fileTest";
+    public String uploadProfilePicture(@RequestParam("file") MultipartFile file, WebRequest request) throws IOException {
+        User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
+        User user = userService.uploadProfilePicture(file, loggedInUser);
+        setSessionInfo(request, user);
+        return "redirect:/userProfile?userId=" + user.getUserId();
     }
 
 }

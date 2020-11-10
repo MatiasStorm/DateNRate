@@ -81,6 +81,24 @@ public class UserDAO {
         return getUser(newUserId);
     }
 
+    public User updateUser(User user){
+        jdbcTemplate.update(
+                "UPDATE users " +
+                        "SET first_name = ?, last_name = ?, email = ?, password = ?, username = ?, date_of_birth = ?, is_male = ?, profile_picture = ? " +
+                        "WHERE user_id = ?",
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getUsername(),
+                user.getDateOfBirth(),
+                user.getIsMale(),
+                user.getProfilePicture(),
+                user.getUserId()
+        );
+        return getUser(user.getUserId());
+    }
+
     private List<User> getUserByWhere(String whereClause, String param){
         return jdbcTemplate.query(
                 "SELECT * FROM " + table + " " + whereClause,
