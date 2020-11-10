@@ -57,7 +57,7 @@ public class DemoController {
     }
 
     @GetMapping("/createUser")
-    public String createUser(Model model, User user){
+    public String createUser(Model model, User user) {
         model.addAttribute("user", user);
         model.addAttribute("title", "Opret Bruger");
         model.addAttribute("postEndpoint", "/createUser/submit");
@@ -106,10 +106,15 @@ public class DemoController {
 
 
     @GetMapping("/userProfile")
-    public String userProfile(@RequestParam int userId, Model model, Favorite favorite, UserRating userRating) {
+    public String userProfile(@RequestParam int userId, WebRequest request, Model model, Favorite favorite, UserRating userRating) {
+        User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
         List<Rating> ratings = ratingService.getRatings();
         favorite.setFavoriteUserId(userId);
         favorite.setUserId(1);
+        model.addAttribute("currentUser", loggedInUser);
         model.addAttribute("favorite", favorite);
         model.addAttribute("ratings", ratings);
         model.addAttribute("user", userService.getUser(userId));
@@ -164,12 +169,13 @@ public class DemoController {
     }
 
     @GetMapping("/test")
-    public String test(Model model, UserTag userTag){
+    public String test(Model model, UserTag userTag) {
         model.addAttribute("userTag", userTag);
         model.addAttribute("tagsList", tagService.getListOfTags());
         return "/test";
     }
-    @PostMapping ("/testPost")
+
+    @PostMapping("/testPost")
     public String addTagToUser(UserTag userTag, WebRequest request) {
         int userId = 1;
         userTagService.addTagToUser(userTag, userId);
@@ -191,7 +197,7 @@ public class DemoController {
         int currentUserId = 1;
         model.addAttribute("userRating", userRating);
         userRatingService.createUserRating(userRating);
-        return "/ratingTest";
+        return "redirect:/userProfile?userId=" + userRating.getTargetUserId();
     }
 
 }
