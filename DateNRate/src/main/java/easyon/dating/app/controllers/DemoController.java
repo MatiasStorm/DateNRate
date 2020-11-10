@@ -1,6 +1,7 @@
 package easyon.dating.app.controllers;
 
 import easyon.dating.app.models.*;
+import easyon.dating.app.repository.TagDAO;
 import easyon.dating.app.services.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +19,15 @@ public class DemoController {
     private final RatingService ratingService;
     private final UserRatingService userRatingService;
     private final FavoriteService favoriteService;
+    private final TagService tagService;
 
-    public DemoController(UserService userService, RatingService ratingService, MessageService messageService, UserRatingService userRatingService, FavoriteService favoriteService) {
+    public DemoController(UserService userService, RatingService ratingService, MessageService messageService, UserRatingService userRatingService, FavoriteService favoriteService, TagService tagService) {
         this.userService = userService;
         this.ratingService = ratingService;
         this.messageService = messageService;
         this.userRatingService = userRatingService;
         this.favoriteService = favoriteService;
+        this.tagService = tagService;
     }
 
     @GetMapping("/")
@@ -128,6 +131,11 @@ public class DemoController {
     public String postFavorite(Favorite favorite){
         favoriteService.addToFavorites(favorite);
         return "redirect:/userProfile?userId=" + favorite.getFavoriteUserId();
+    }
+
+    @GetMapping("/test")
+    public String test(Model model){
+
     }
 
 
