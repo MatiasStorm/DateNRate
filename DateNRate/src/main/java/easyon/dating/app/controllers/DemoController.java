@@ -171,8 +171,7 @@ public class DemoController {
         int userId = 1;
         userTagService.addTagToUser(userTag, userId);
         return "redirect:/test";
-
-
+    }
 
     @GetMapping("/ratingTest")
     public String ratingTest(UserRating userRating, Model model) {
