@@ -69,6 +69,8 @@
 <div class="box">
 <form method="post" action="/postRating" th:object="${userRating}">
     <input type="number" th:field="*{rating}">
+
+
     <select th:field="*{ratingId}">
         <option th:each="ratingUser : ${ratingList}" th:value="${ratingUser.ratingId}" th:text="${ratingUser.ratingName}"> </option>
     </select>

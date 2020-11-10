@@ -176,15 +176,15 @@ public class DemoController {
         return "redirect:/test";
     }
 
-//    @GetMapping("/ratingTest")
-//    public String ratingTest(UserRating userRating, Model model) {
-//        int currentUserId = 1;
-//        model.addAttribute("userRating", userRating);
-//        List<Rating> ratingList = ratingService.getRatings();
-//        model.addAttribute("ratingList", ratingList);
-//
-//        return "/ratingTest";
-//    }
+    @GetMapping("/ratingTest")
+    public String ratingTest(UserRating userRating, Model model) {
+        int currentUserId = 1;
+        model.addAttribute("userRating", userRating);
+        List<Rating> ratingList = ratingService.getRatings();
+        model.addAttribute("ratingList", ratingList);
+
+        return "/ratingTest";
+    }
 
     @PostMapping("/postRating")
     public String postRating(UserRating userRating, Model model) {
