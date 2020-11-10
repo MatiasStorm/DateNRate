@@ -16,19 +16,19 @@
             <label>Brugernavn:</label>
             <input type="text" th:field="*{username}" required>
         </div>
-        <div class="errorTag" th:if="${usernameError}">Brugernavn er taget</div>
+        <div class="errorTag" th:if="${errors.usernameError}">Brugernavn er taget</div>
 
         <div class="inputContainer">
             <label>Password:</label>
             <input type="password" th:field="*{password}" required>
         </div>
-        <div class="errorTag" th:if="${passwordError}">Passwords er ikke ens</div>
+        <div class="errorTag" th:if="${errors.passwordError}">Passwords er ikke ens</div>
 
         <div class="inputContainer">
             <label>Gentag Password:</label>
             <input type="password" th:field="*{password2}" required>
         </div>
-        <div class="errorTag" th:if="${passwordError}">Passwords er ikke ens</div>
+        <div class="errorTag" th:if="${errors.passwordError}">Passwords er ikke ens</div>
 
         <div class="inputContainer">
             <label>Fornavn:</label>
@@ -43,18 +43,19 @@
             <label>Email:</label>
             <input type="email" th:field="*{email}" required>
         </div>
-        <div class="errorTag" th:if="${emailError}">Email er taget</div>
+        <div class="errorTag" th:if="${errors.emailError}">Email er taget</div>
 
         <div class="inputContainer">
             <label>Fødselsdato:</label>
             <input type="date" th:field="*{dateOfBirth}" required>
         </div>
+        <div class="errorTag" th:if="${errors.dateOfBirthError}">Din alder er urealistisk</div>
 
         <div class="inputContainer">
             <label>Post Nummer:</label>
             <input type="number" th:field="*{townId}" required>
         </div>
-        <div class="errorTag" th:if="${townError}">Postnummer findes ikke</div>
+        <div class="errorTag" th:if="${errors.townError}">Postnummer findes ikke</div>
 
         <div class="inputContainer">
             <label>Køn:</label>

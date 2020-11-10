@@ -50,7 +50,15 @@ public class DemoController {
     }
 
     @PostMapping("/createUser/submit")
-    public String createUserSubmit(User user, WebRequest request) {
+    public String createUserSubmit(User user, Model model, WebRequest request) {
+        UserFormError userFormError = userService.getUserFormError(user);
+        if(userFormError.containsErrors()){
+            model.addAttribute("errors", userFormError);
+            model.addAttribute("user", user);
+            model.addAttribute("title", "Opret Bruger");
+            model.addAttribute("postEndpoint", "/createUser/submit");
+            return "/createUser";
+        }
         User newUser = userService.createUser(user);
         setSessionInfo(request, newUser);
         return "redirect:/userProfile?userId=" + newUser.getUserId();
@@ -59,6 +67,7 @@ public class DemoController {
     @GetMapping("/createUser")
     public String createUser(Model model, User user){
         model.addAttribute("user", user);
+        model.addAttribute("errors", new UserFormError());
         model.addAttribute("title", "Opret Bruger");
         model.addAttribute("postEndpoint", "/createUser/submit");
         model.addAttribute("passwordError", true);
