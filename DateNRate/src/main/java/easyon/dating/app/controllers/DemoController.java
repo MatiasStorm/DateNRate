@@ -50,10 +50,9 @@ public class DemoController {
 
     @PostMapping("/createUser")
     public String createUserSubmit(User user, WebRequest request) {
-        userService.createUser(user);
-        // TODO should redirect to user profile!
-        setSessionInfo(request, user);
-        return "redirect:/userProfile?userId=" + user.getUserId();
+        User newUser = userService.createUser(user);
+        setSessionInfo(request, newUser);
+        return "redirect:/userProfile?userId=" + newUser.getUserId();
     }
 
 
@@ -65,8 +64,10 @@ public class DemoController {
 
     @GetMapping("/messages")
     public String messages(@RequestParam(required = false, name = "active") Integer activeUserId, WebRequest request, Model model) {
-        // TODO Move most of this to service and create a class which will contain all conversation information.
         User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if(loggedInUser == null){
+            return "redirect:/";
+        }
         int recieverId = loggedInUser.getUserId();
 
         List<User> conversationUsers;
