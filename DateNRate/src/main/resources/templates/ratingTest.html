@@ -25,6 +25,7 @@
     <select th:field="*{ratingId}">
         <option th:each="ratingUser : ${ratingList}" th:value="${ratingUser.ratingId}" th:text="${ratingUser.ratingName}"> </option>
     </select>
+
     <input type="number" th:field="*{targetUserId}">
     <input type="number" th:field="*{creatorUserId}">
     <button type="submit">Giv Rating</button>

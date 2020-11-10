@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="userProfile.css">
     <link rel="stylesheet" type="text/css" href="/topPart.css">
     <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/rating.css">
 </head>
 <body>
 
@@ -50,36 +51,58 @@
             </div>
         </div>
     </div>
-    <div class="container" style="margin-top: 20px">
+<div class="container">
         <div class="box">
-            <div class="boxHeader"><p>Om mig</p></div>
+            <div class="boxHeader"><h1>Om mig</h1></div>
             <div class="boxBody">
-                <p th:text="${user.userDescription}"></p>
+                <p class="aboutMe" th:text="${user.userDescription}"></p>
             </div>
         </div>
         <div class="box">
-            <div class="boxHeader"><p>Tags</p></div>
-            <div class="boxBody">
-                <p th:text="${user.userDescription}"></p>
+
+            <div class="boxHeader"><h1> Tags </h1></div>
+            <div class="boxBody flexWrap">
+
+                <form th:each="tag : ${tagsList}" th:object="${userTag}" method="post" th:action="@{/userTagPost}">
+                    <input name="tagId"  th:value="${tag.tagId}" hidden="hidden">
+                    <input name="userId"  th:value="${currentUser.userId}" hidden="hidden">
+
+                    <button class="ratingButton" type="submit" th:text="${tag.tagName}"></button>
+
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<div class="box">
+<div class="box ratingSpace">
+<div class="boxHeader"><h1> Giv rating </h1></div>
+    <form method="post" action="/postRating" th:object="${userRating}">
+        <select class="ratingOption ratingButton" th:field="*{rating}">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
 
-    <form method="post" th:action="@{/postRating}" th:object="${userRating}">
+        </select>
+        <select class="ratingButton" th:field="*{ratingId}">
+            <option th:each="ratingUser : ${ratingList}" th:value="${ratingUser.ratingId}"
+                    th:text="${ratingUser.ratingName}"></option>
+        </select>
 
-        <div th:each="ratingUser : ${ratingList}">
-            <h1 th:text="${ratingUser.ratingName}"></h1>
-            <input type="number" th:field="*{rating}">
-            <input type="number" th:field="*{targetUserId}">
-            <input type="number" th:field="*{creatorUserId}">
-        </div>
-        <button type="submit">Giv Rating</button>
+        <input type="number" hidden="hidden" th:value="${user.userId}" name="targetUserId">
+        <input type="number" hidden="hidden" th:value="${currentUser.userId}" name="creatorUserId">
+        <button class="ratingButton" type="submit">Giv Rating</button>
     </form>
 
 </div>
+
 
 
 <!--<form method="post" th:action="@{/userProfile/createUserRating}" th:object="${userRatings}">-->
