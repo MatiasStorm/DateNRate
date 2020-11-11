@@ -122,13 +122,9 @@ public class UserDAO {
     }
 
     public List<User> getTheFiveNewestProfiles(){
-<<<<<<< HEAD
-        return jdbcTemplate.query("SELECT * FROM " + table + " ORDER BY user_id LIMIT 5", userMapper);
-=======
         return jdbcTemplate.query(
                 "SELECT * FROM " + table + " LEFT JOIN towns on users.town_id = towns.town_id "
                 + " ORDER BY user_id DESC LIMIT 5"
                 , userMapper);
->>>>>>> 55b66a65f3d67334b5d76ae33f8ea17e561c37b8
     }
 }
