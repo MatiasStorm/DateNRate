@@ -15,21 +15,25 @@ public class UserDAO {
     private final JdbcTemplate jdbcTemplate;
     private final String table = "users";
     private final UserMapper userMapper = new UserMapper();
-    private final String selectStatement = "SELECT * FROM " + table
-            + "SELECT users.user_id, users.first_name, users.last_name, users.email, users.username"
-            + ", AVG(rating) as rating, towns.town_id, towns.town_name, towns.postal_code from user_ratings"
+    private final String selectStatement = "SELECT "
+            + "users.user_id, users.first_name, users.created, users.date_of_birth, users.user_description, "
+            + "users.last_name, users.profile_picture, users.email, users.username, users.password, users.is_male, "
+            + "AVG(rating) as rating, towns.town_id, towns.town_name, towns.postal_code from user_ratings"
             + " RIGHT JOIN users on user_ratings.target_user_id = users.user_id"
-            + " LEFT JOIN towns on users.town_id = towns.town_id "
-            + " GROUP by user_id";
+            + " LEFT JOIN towns on users.town_id = towns.town_id ";
 
     @Autowired
     public UserDAO(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    private String createSelect(String where){
+        return selectStatement + where + " GROUP by user_id";
+    }
+
     public List<User> selectUsers(){
         return jdbcTemplate.query(
-                selectStatement,
+                createSelect(""),
 //                "SELECT * FROM " + table + " LEFT JOIN towns on users.town_id = towns.town_id",
                 userMapper
         );
@@ -37,7 +41,7 @@ public class UserDAO {
 
     public User getUser(int id){
         return jdbcTemplate.queryForObject(
-                selectStatement + " WHERE user_id =  ?",
+                createSelect(" WHERE user_id =  ?"),
 //                "SELECT * FROM " + table
 //                        + " LEFT JOIN towns on users.town_id = towns.town_id"
 //                        + " WHERE user_id =  ? ",
@@ -49,7 +53,7 @@ public class UserDAO {
     public List<User> getUsersByIds(List<Integer> userIds){
         String inSql = '(' + String.join(",", Collections.nCopies(userIds.size(), "?")) + ") ";
         return jdbcTemplate.query(
-                selectStatement + " WHERE user_id IN " + inSql,
+                createSelect(" WHERE user_id IN " + inSql),
 //                "SELECT * FROM " + table
 //                        + " LEFT JOIN towns on users.town_id = towns.town_id"
 //                        + " WHERE user_id IN " + inSql,
@@ -61,11 +65,12 @@ public class UserDAO {
 
     public List<User> getUserSearch(String search) {
         List<User> listOfUsers = jdbcTemplate.query(
-                selectStatement + " WHERE first_name LIKE ? OR last_name LIKE ? OR username like?"
+                createSelect(" WHERE first_name LIKE ? OR last_name LIKE ? OR username LIKE ? "),
 //                "SELECT * FROM users"
 //                        + " LEFT JOIN towns on users.town_id = towns.town_id"
 //                        + " WHERE first_name LIKE ? OR last_name LIKE ? OR username like?"
-                ,userMapper, "%"+search+"%", "%"+search+"%", "%"+search+"%");
+                userMapper,
+                "%"+search+"%", "%"+search+"%", "%"+search+"%");
 
        return listOfUsers;
 
@@ -73,9 +78,8 @@ public class UserDAO {
 
     public User login(String username, String password){
         return jdbcTemplate.queryForObject(
-                selectStatement
+                createSelect(" WHERE username = ? AND password = ?"),
 //                "SELECT * from users" + " LEFT JOIN towns on users.town_id = towns.town_id"
-                        + " WHERE username = ? AND password = ?",
                 userMapper,
                 username,
                 password
@@ -121,9 +125,8 @@ public class UserDAO {
 
     private List<User> getUserByWhere(String whereClause, String param){
         return jdbcTemplate.query(
+                createSelect(whereClause),
 //                "SELECT * FROM " + table + " LEFT JOIN towns on users.town_id = towns.town_id "
-                selectStatement + " "
-                        + whereClause,
                 userMapper,
                 param
         );

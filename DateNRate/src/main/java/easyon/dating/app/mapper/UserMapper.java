@@ -41,6 +41,12 @@ public class UserMapper implements RowMapper<User>{
         user.setDateOfBirth(resultSet.getDate("date_of_birth"));
         user.setCreated(resultSet.getDate("created"));
         user.setUserDescription(resultSet.getString("user_description"));
+        try {
+            user.setAvgRating(resultSet.getDouble("rating"));
+        }
+        catch  (SQLException e){
+            user.setAvgRating(0);
+        }
 
         return user;
     }
