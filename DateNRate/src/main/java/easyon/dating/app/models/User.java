@@ -17,6 +17,7 @@ public class User {
     private Date dateOfBirth;
     private Date created;
     private String userDescription;
+    private Town town;
     private boolean isMale;
 
 
@@ -26,6 +27,14 @@ public class User {
 
     public void setMale(Boolean male) {
         isMale = male;
+    }
+
+    public Town getTown() {
+        return town;
+    }
+
+    public void setTown(Town town) {
+        this.town = town;
     }
 
     public int getUserId() {
