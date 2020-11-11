@@ -23,23 +23,27 @@ public class UserDAO {
 
     public List<User> selectUsers(){
         return jdbcTemplate.query(
-                "SELECT * FROM " + table,
+                "SELECT * FROM " + table + " LEFT JOIN towns on users.town_id = towns.town_id",
                 userMapper
         );
     }
 
     public User getUser(int id){
         return jdbcTemplate.queryForObject(
-                "SELECT * FROM " + table + " WHERE user_id =  ?",
+                "SELECT * FROM " + table
+                        + " LEFT JOIN towns on users.town_id = towns.town_id"
+                        + " WHERE user_id =  ? ",
                userMapper,
                id
         );
     }
 
     public List<User> getUsersByIds(List<Integer> userIds){
-        String inSql = '(' + String.join(",", Collections.nCopies(userIds.size(), "?")) + ')';
+        String inSql = '(' + String.join(",", Collections.nCopies(userIds.size(), "?")) + ") ";
         return jdbcTemplate.query(
-                "SELECT * FROM " + table + " WHERE user_id IN " + inSql,
+                "SELECT * FROM " + table
+                        + " LEFT JOIN towns on users.town_id = towns.town_id"
+                        + " WHERE user_id IN " + inSql,
                 userMapper,
                 userIds.toArray()
         );
@@ -48,7 +52,9 @@ public class UserDAO {
 
     public List<User> getUserSearch(String search) {
         List<User> listOfUsers = jdbcTemplate.query(
-                "SELECT * FROM users WHERE first_name LIKE ? OR last_name LIKE ? OR username like?"
+                "SELECT * FROM users"
+                        + " LEFT JOIN towns on users.town_id = towns.town_id"
+                        + " WHERE first_name LIKE ? OR last_name LIKE ? OR username like?"
                 ,userMapper, "%"+search+"%", "%"+search+"%", "%"+search+"%");
 
        return listOfUsers;
@@ -57,7 +63,7 @@ public class UserDAO {
 
     public User login(String username, String password){
         return jdbcTemplate.queryForObject(
-                "SELECT * from users WHERE username = ? AND password = ?",
+                "SELECT * from users" + " LEFT JOIN towns on users.town_id = towns.town_id" + " WHERE username = ? AND password = ?",
                 userMapper,
                 username,
                 password
@@ -101,7 +107,7 @@ public class UserDAO {
 
     private List<User> getUserByWhere(String whereClause, String param){
         return jdbcTemplate.query(
-                "SELECT * FROM " + table + " " + whereClause,
+                "SELECT * FROM " + table + " LEFT JOIN towns on users.town_id = towns.town_id " + whereClause,
                 userMapper,
                 param
         );
@@ -116,6 +122,9 @@ public class UserDAO {
     }
 
     public List<User> getTheFiveNewestProfiles(){
-        return jdbcTemplate.query("SELECT * FROM " + table + " ORDER BY user_id DESC LIMIT 5", userMapper);
+        return jdbcTemplate.query(
+                "SELECT * FROM " + table + " LEFT JOIN towns on users.town_id = towns.town_id "
+                + " ORDER BY user_id DESC LIMIT 5"
+                , userMapper);
     }
 }

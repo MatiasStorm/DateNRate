@@ -145,17 +145,15 @@ public class DemoController {
     }
 
     @GetMapping("/updateUser")
-    public String updateUser(User user, WebRequest request, Model model){
+    public String updateUser(WebRequest request, Model model){
         User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
             return "redirect:/";
         }
-        if(loggedInUser.getUserId() != user.getUserId()){
-            return "redirect:/";
-        }
         model.addAttribute("errors", new UserFormError());
-        model.addAttribute("user", user);
+        model.addAttribute("user", loggedInUser);
         model.addAttribute("title", "Opdater Brugeroplysninger");
+        model.addAttribute("submitButtonText", "Opdater");
         model.addAttribute("postEndpoint", "/updateUser/submit");
         return "/createUser";
     }
@@ -174,6 +172,7 @@ public class DemoController {
             model.addAttribute("errors", userFormError);
             model.addAttribute("user", user);
             model.addAttribute("title", "Opdater Brugeroplysninger");
+            model.addAttribute("submitButtonText", "Opdater");
             model.addAttribute("postEndpoint", "/updateUser/submit");
             return "/createUser";
         }

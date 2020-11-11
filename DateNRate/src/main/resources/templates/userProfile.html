@@ -30,6 +30,7 @@
                     <h1 th:text="${user.username}"></h1>
                     <h2>Rating: 10/10</h2>
                     <h3>Indsæt by, brug join i UserDAO</h3>
+                    <button th:if="${isMyProfile}" onclick="window.location.href='/updateUser'">Ændre stamoplysninger</button>
                 </div>
                 <div class="buttonContainer">
                     <form method="post" action="/postFavorite" th:object="${favorite}">
