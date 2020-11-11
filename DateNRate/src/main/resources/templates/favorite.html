@@ -33,7 +33,7 @@
         <form style="text-align: center" method="post" action="/favorite/remove" th:object="${favorite}">
             <input hidden="hidden" type="number" name="userId" th:value="${currentUser.userId}">
             <input hidden="hidden" type="number" name="favoriteUserId" th:value="${favoriteUser.userId}">
-            <button type="submit">
+            <button type="submit" style="cursor: pointer">
                 Fjern fra favorit
             </button>
         </form>
