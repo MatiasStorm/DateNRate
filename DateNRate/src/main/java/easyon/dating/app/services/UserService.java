@@ -93,5 +93,9 @@ public class UserService {
         return userDao.updateUser(user);
     }
 
+    public User updateUser(User user){
+        return userDao.updateUser(user);
+    }
+
 
 }
