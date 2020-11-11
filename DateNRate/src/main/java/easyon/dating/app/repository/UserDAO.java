@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -67,12 +68,16 @@ public class UserDAO {
     }
 
     public User login(String username, String password){
-        return jdbcTemplate.queryForObject(
-                createSelect(" WHERE username = ? AND password = ?"),
-                userMapper,
-                username,
-                password
+        List<User> users = jdbcTemplate.query(
+            createSelect(" WHERE username = ? AND password = ?"),
+            userMapper,
+            username,
+            password
         );
+        if(users.size() == 0){
+            return null;
+        }
+        return users.get(0);
     }
 
 
