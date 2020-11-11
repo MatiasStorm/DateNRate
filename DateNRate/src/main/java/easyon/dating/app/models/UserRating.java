@@ -7,6 +7,7 @@ public class UserRating {
     private int targetUserId;
     private int rating;
     private int creatorUserId;
+    private String ratingName;
 
     public int getUserRatingId() {
         return userRatingId;
@@ -48,4 +49,11 @@ public class UserRating {
         this.creatorUserId = creatorUserId;
     }
 
+    public String getRatingName() {
+        return ratingName;
+    }
+
+    public void setRatingName(String ratingName) {
+        this.ratingName = ratingName;
+    }
 }

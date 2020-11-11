@@ -219,7 +219,9 @@ public class DemoController {
 
     @GetMapping("/test")
     public String test(Model model) {
-        model.addAttribute("newUsers", userService.getTheFiveNewestProfiles());
+//        model.addAttribute("newUsers", userService.getTheFiveNewestProfiles());
+        int userId = 2;
+        model.addAttribute("ratings", userRatingService.getUserRatings(userId));
         return "/test";
     }
 
