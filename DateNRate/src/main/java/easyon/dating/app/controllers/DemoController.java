@@ -268,7 +268,12 @@ public class DemoController {
     }
 
     @GetMapping("/userFrontpage")
-    public String userFrontpage(){
+    public String userFrontpage(WebRequest request, Model model){
+        User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
+        model.addAttribute("currentUser", loggedInUser);
         return "/userFrontpage";
     }
 
