@@ -95,3 +95,29 @@ h1{
         width: 100%;
     }
 }
+
+.activeTags {
+    background-color: forestgreen;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 1);
+    padding: 15px 32px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8%;
+}
+
+.inactiveTags {
+    background-color: gray;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 1);
+    padding: 15px 32px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8%;
+}
