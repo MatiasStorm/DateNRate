@@ -12,8 +12,6 @@ public class UserTagMapper implements RowMapper<UserTag> {
     public UserTag mapRow(ResultSet resulSet, int i) throws SQLException {
         UserTag userTag = new UserTag();
         userTag.setTagId(resulSet.getInt("tag_id"));
-//        ---------------HVEM FANDEN LAVEDE DEN HER ?????? JØRGEN??!!!!!!!! ------------------------------
-//        userTag.setUserId(resulSet.getInt("tag_name"));
         userTag.setUserId(resulSet.getInt("user_id"));
 
         return userTag;

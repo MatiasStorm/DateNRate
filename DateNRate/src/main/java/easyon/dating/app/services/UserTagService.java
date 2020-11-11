@@ -46,7 +46,9 @@ public class UserTagService {
         List<Tag> allTags = tagDAO.getTagListForUsers();
         List<UserTag> activeUserTagList = userTagDAO.getActiveTagList(userId);
 
-
+        if (activeUserTagList.size()==0){
+            return allTags;
+        }
 
         for (int i = 0; i < allTags.size(); i++) {
             int count = 0;
