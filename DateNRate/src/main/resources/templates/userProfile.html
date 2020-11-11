@@ -32,6 +32,9 @@
                         <i  th:if="${isMyProfile}" onclick="window.location.href='/updateUser'" class="fas fa-users-cog userSettingsIcon"></i>
                     </div>
                     <h1 th:text="${user.username}"></h1>
+                    <br>
+                    <h1 th:text="${user.firstName} +' '+ ${user.lastName}"></h1>
+
                     <h2 th:text="'Rating ' + ${user.avgRating} + '/10 Antal af rating(s) ' + ${user.amountOfRatings}"></h2>
                     <h3 th:text="'Hjemby ' + ${user.town.townName}"></h3>
 <!--                    <button th:if="${isMyProfile}" onclick="window.location.href='/updateUser'">Ændre stamoplysninger</button>-->
@@ -117,6 +120,19 @@
     </form>
 
 </div>
+
+<div class="box ratingSpace">
+    <div class="boxHeader"><h1> Giv rating </h1></div>
+
+    <div th:each="rating :${ratingList}">
+        <p th:text="${rating.ratingName}">
+        </p>
+
+    </div>
+
+
+</div>
+
 
 
 <!--<form method="post" th:action="@{/userProfile/createUserRating}" th:object="${userRatings}">-->

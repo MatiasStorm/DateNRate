@@ -12,11 +12,9 @@
 </head>
 <body>
 
-<div th:each="user : ${newUsers}" >
-    <img th:src="${user.profilePicture}">
-    <h1 th:text="${user.username}"></h1>
+<div th:each="ratingss : ${ratings}">
+<h1 th:text="${ratingss.ratingName}"></h1>
 </div>
-
 
 </body>
 </html>
