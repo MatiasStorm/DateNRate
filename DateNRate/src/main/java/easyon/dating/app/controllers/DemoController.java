@@ -187,9 +187,7 @@ public class DemoController {
 
     @GetMapping("/test")
     public String test(Model model) {
-        int userId = 13;
-        model.addAttribute("activeTags", tagService.getSelectedTags(userId));
-        model.addAttribute("inactiveTags", userTagService.getInactiveTagList(userId));
+        model.addAttribute("newUsers", userService.getTheFiveNewestProfiles());
         return "/test";
     }
 

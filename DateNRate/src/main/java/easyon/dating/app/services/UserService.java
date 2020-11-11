@@ -93,5 +93,9 @@ public class UserService {
         return userDao.updateUser(user);
     }
 
+    public List<User> getTheFiveNewestProfiles(){
+        return userDao.getTheFiveNewestProfiles();
+    }
+
 
 }

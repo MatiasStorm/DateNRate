@@ -114,4 +114,8 @@ public class UserDAO {
     public List<User> getUserByEmail(String email){
         return getUserByWhere("WHERE email = ?", email);
     }
+
+    public List<User> getTheFiveNewestProfiles(){
+        return jdbcTemplate.query("SELECT * FROM " + table + " ORDER BY user_id DESC LIMIT 5", userMapper);
+    }
 }
