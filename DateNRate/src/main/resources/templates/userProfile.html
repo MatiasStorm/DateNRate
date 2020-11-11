@@ -87,7 +87,7 @@
                 </form>
             </div>
             <div class="boxBody flexWrap" th:unless="${isMyProfile}">
-                <span class="activeTags" style="cursor: default" th:each="tag : ${activeTags}" th:object="${userTag}" th:text="${tag.tagName}"></span>
+                <span class="activeTag tag" style="cursor: default" th:each="tag : ${activeTags}" th:object="${userTag}" th:text="${tag.tagName}"></span>
             </div>
         </div>
     </div>
