@@ -25,18 +25,18 @@ Each user should be able to rate another user on a fixed set of characteristics 
 
 ## Run
 1. Setup Database
-Execute the `database.sql` file in MySQL, to create the database called `dateNrate`
+Source the `database.sql` file in MySQL, to create the `dateNrate` database.
+Can be done with this command `source database.sql` while loggedin to the MySQL server from the folder where `database.sql` is located.
 
 2. Create application.properties
 Navigate to `DateNRate/DateNRate/src/main/resources` and create a new file called `application.properties`.
 
 Fill it with the following:
 ```
-spring.datasource.url=jdbc:localhost:3306/dateNrate?serverTimezone=UTC
+spring.datasource.url=jdbc:mysql://localhost:3306/dateNrate?serverTimezone=UTC
 spring.datasource.username=[username]
 spring.datasource.password=[password]
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.database-platform = org.hibernate.dialect.MySQL5Dialect
 ```
 Replace `[username]` and `[password]` with the username and password of the MySQL user you used to create the database.
 
