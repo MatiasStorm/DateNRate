@@ -37,7 +37,7 @@
 </div>
 
 
-<div id="loginModal" class="modal">
+<div id="loginModal" class="modal" th:style="${loginError} ? 'display: block' : 'display: none'">
     <form class="modal-content animate" action="/login" method="post">
     <span onclick="document.getElementById('loginModal').style.display='none'" class="close"
           title="Close Modal">&times;</span>
@@ -46,6 +46,8 @@
             <input type="text" placeholder="Enter Username" name="username" required>
             <label><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required>
+            <div th:if="${loginError}" style="color: red; text-align: center">Username eller Password er forkert</div>
+
             <div style="display: flex">
                 <button type="button" onclick="document.getElementById('loginModal').style.display='none'"
                         class="button">

@@ -39,12 +39,16 @@ public class DemoController {
     }
 
     @PostMapping("/login")
-    public String loginUser(WebRequest request) {
+    public String loginUser(WebRequest request, Model model) {
         //Retrieve values from HTML form via WebRequest
         String email = request.getParameter("username");
         String pwd = request.getParameter("password");
 
         User user = userService.login(email, pwd);
+        if(user == null){
+            model.addAttribute("loginError", true);
+            return "index";
+        }
         setSessionInfo(request, user);
 
         return "redirect:/userProfile?userId=" + user.getUserId();
