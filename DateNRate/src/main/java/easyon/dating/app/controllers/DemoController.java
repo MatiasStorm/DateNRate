@@ -1,7 +1,6 @@
 package easyon.dating.app.controllers;
 
 import easyon.dating.app.models.*;
-import easyon.dating.app.repository.TagDAO;
 import easyon.dating.app.services.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -207,8 +206,8 @@ public class DemoController {
         model.addAttribute("userRating", userRating);
         List<Rating> ratingList = ratingService.getRatings();
         model.addAttribute("ratingList", ratingList);
-
         return "/ratingTest";
+
     }
 
     @PostMapping("/postRating")
@@ -228,6 +227,11 @@ public class DemoController {
         User user = userService.uploadProfilePicture(file, loggedInUser);
         setSessionInfo(request, user);
         return "redirect:/userProfile?userId=" + user.getUserId();
+    }
+
+    @GetMapping("/userFrontpage")
+    public String userFrontpage(){
+        return "/userFrontpage";
     }
 
 }
