@@ -119,6 +119,10 @@ public class UserDAO {
         return getUser(user.getUserId());
     }
 
+    public void deleteUser(int userId){
+        jdbcTemplate.update("DELETE FROM " + table + " WHERE user_id = ?", userId);
+    }
+
     private List<User> getUserByWhere(String whereClause, String param){
         return jdbcTemplate.query(
                 createSelect(whereClause),

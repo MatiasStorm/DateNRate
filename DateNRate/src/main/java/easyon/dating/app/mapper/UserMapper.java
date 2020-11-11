@@ -32,10 +32,11 @@ public class UserMapper implements RowMapper<User>{
         user.setPassword2(password);
         user.setUsername(resultSet.getString("username"));
         String profilePicture = resultSet.getString("profile_picture");
-        if(profilePicture != null){
-            if(profilePicture.length() == 0){
-                profilePicture = "/images/mand_default.webp";
-            }
+        if(profilePicture == null){
+            profilePicture = "/images/mand_default.webp";
+        }
+        else if(profilePicture.length() == 0){
+            profilePicture = "/images/mand_default.webp";
         }
         user.setProfilePicture(profilePicture);
         user.setDateOfBirth(resultSet.getDate("date_of_birth"));
