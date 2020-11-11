@@ -2,9 +2,8 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="/main.css">
-<link rel="stylesheet" type="text/css" href="userProfile.css">
 <link rel="stylesheet" type="text/css" href="/topPart.css">
-<link rel="stylesheet" type="text/css" href="/rating.css">
+<link rel="stylesheet" type="text/css" href="/userFrontpage.css">
 <head>
     <meta charset="UTF-8">
     <title>User frontpage</title>
@@ -13,19 +12,38 @@
 
 <div th:replace="/includes/topPart :: topPart(currentUser = ${ currentUser })"></div>
 
-<div class="container">
-    <div class="box">
-        <div class="boxHeader"><h1>Top 5</h1></div>
-        <div class="boxBody">
+<div>
+    <div class="Userbox">
+        <div class="UserboxHeader"><h1>Top 5</h1></div>
+        <div class="UserboxBody">
             <p>asdasdasdasd </p></div>
     </div>
 </div>
 
-<div class="container">
-    <div class="box">
-        <div class="boxHeader"><h1>Byd de nye velkommen</h1></div>
+<div style="justify-content: space-around">
+    <div class="Userbox">
+        <div class="UserboxHeader"><h1>Byd de nye velkommen</h1></div>
         <div class="boxBody">
-            <p>asdasdasdasd </p></div>
+            <div class="displayFlexWrap">
+                <div th:each="user : ${newUsers}">
+                    <div class="SingleUserBox">
+                        <h1 class="userNameFixer" th:text="${user.username}"></h1>
+                        <a th:href="'/userProfile?userId=' + ${user.userId}">
+
+                            <div th:if="${user.profilePicture==null}">
+                                <img class="profilePicture"
+                                     th:src="*{profilePicture != null ? profilePicture : '/images/mand_default.webp'}">
+                            </div>
+                            <div th:unless="${user.profilePicture==null}">
+                                <img class="profilePicture" th:src="${user.profilePicture}">
+                            </div>
+
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </div>

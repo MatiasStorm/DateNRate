@@ -32,15 +32,17 @@ h1{
 .box {
     z-index: 1;
     width: 50%;
-    background: #fff;
-    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .2);
+    background-color: rgb(230,230,230);
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .8);
     border-radius: 12px;
     margin: 0px 20px;
+    border: 2px solid lightgray;
+
 }
 
 
 .boxHeader {
-    background: #f0f0f0;
+    background: lightgray;
     height: 50px;
     line-height: 50px;
     border-radius: 12px 12px 0 0;

@@ -260,6 +260,7 @@ public class DemoController {
             return "redirect:/";
         }
         model.addAttribute("currentUser", loggedInUser);
+        model.addAttribute("newUsers", userService.getTheFiveNewestProfiles());
         return "/userFrontpage";
     }
 
