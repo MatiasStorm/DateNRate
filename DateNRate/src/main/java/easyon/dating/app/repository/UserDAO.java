@@ -131,4 +131,8 @@ public class UserDAO {
     public List<User> getTheFiveNewestProfiles(){
         return jdbcTemplate.query("SELECT * FROM " + table + " ORDER BY user_id DESC LIMIT 5", userMapper);
     }
+
+    public List<User> getTopRatedProfiles(){
+        return jdbcTemplate.query( selectStatement + " ORDER BY rating DESC LIMIT 5", userMapper);
+    }
 }

@@ -1,18 +1,16 @@
 package easyon.dating.app.services;
 
 import easyon.dating.app.models.Town;
+import easyon.dating.app.models.User;
 import easyon.dating.app.models.UserFormError;
 import easyon.dating.app.repository.TownDAO;
 import easyon.dating.app.repository.UserDAO;
-import easyon.dating.app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.ContextLoader;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.Date;
 import java.util.List;
 
@@ -124,5 +122,9 @@ public class UserService {
         Town town = townDAO.getTownByPostcalCode(user.getTown().getPostalCode());
         user.setTown(town);
         return userDao.updateUser(user);
+    }
+
+    public List<User> getTopRatedProfiles(){
+        return userDao.getTopRatedProfiles();
     }
 }

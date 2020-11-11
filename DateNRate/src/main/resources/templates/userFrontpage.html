@@ -15,9 +15,27 @@
 <div>
     <div class="Userbox">
         <div class="UserboxHeader"><h1>Top 5</h1></div>
-        <div class="UserboxBody">
-            <p>asdasdasdasd </p></div>
-    </div>
+        <div class="boxBody">
+            <div class="displayFlexWrap">
+                <div th:each="user : ${topRated}">
+                    <div class="SingleUserBox">
+                        <h1 class="userNameFixer" th:text="${user.username}"></h1>
+                        <a th:href="'/userProfile?userId=' + ${user.userId}">
+
+                            <div th:if="${user.profilePicture==null}">
+                                <img class="profilePicture"
+                                     th:src="*{profilePicture != null ? profilePicture : '/images/mand_default.webp'}">
+                            </div>
+                            <div th:unless="${user.profilePicture==null}">
+                                <img class="profilePicture" th:src="${user.profilePicture}">
+                            </div>
+
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 
 <div style="justify-content: space-around">

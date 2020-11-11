@@ -110,6 +110,7 @@ public class DemoController {
         model.addAttribute("ratingList", ratingList);
         model.addAttribute("activeTags", tagService.getSelectedTags(userId));
         model.addAttribute("inactiveTags", userTagService.getInactiveTagList(userId));
+
         return "userProfile";
     }
 
@@ -261,6 +262,7 @@ public class DemoController {
         }
         model.addAttribute("currentUser", loggedInUser);
         model.addAttribute("newUsers", userService.getTheFiveNewestProfiles());
+        model.addAttribute("topRated", userService.getTopRatedProfiles());
         return "/userFrontpage";
     }
 
