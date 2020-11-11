@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="/index.css">
 </head>
 <body>
-<h1 style="text-align: center">Opret bruger</h1>
-<form class="modal-content" action="/createUser/submit" th:object="${user}" method="post">
+<h1 style="text-align: center">Opdater brugeroplysninger</h1>
+<form class="modal-content" action="/updateUser/submit" th:object="${user}" method="post">
     <div class="container">
         <div class="inputContainer">
             <label>Brugernavn:</label>
@@ -20,13 +20,13 @@
 
         <div class="inputContainer">
             <label>Password:</label>
-            <input type="password" th:field="*{password}" required>
+            <input type="text" th:field="*{password}" required>
         </div>
         <div class="errorTag" th:if="${errors.passwordError}">Passwords er ikke ens</div>
 
         <div class="inputContainer">
             <label>Gentag Password:</label>
-            <input type="password" th:field="*{password2}" required>
+            <input type="text" th:field="*{password2}" required>
         </div>
         <div class="errorTag" th:if="${errors.passwordError}">Passwords er ikke ens</div>
 
@@ -65,11 +65,14 @@
             </select>
         </div>
         <div style="display: flex">
-            <button type="button" onclick="document.location.href = '/'"
-                    class="button">
-                Fortryd
-            </button>
-            <button class="button" type="submit">Opret</button>
+            <a th:href="${'/userProfile?userId=' + userId}">
+                <button type="button"
+                        class="button">
+                    Fortryd
+                </button>
+
+            </a>
+            <button class="button" type="submit">Gem</button>
         </div>
     </div>
 </form>

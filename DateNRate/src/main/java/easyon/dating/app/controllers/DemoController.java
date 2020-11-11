@@ -50,21 +50,6 @@ public class DemoController {
         return "redirect:/userProfile?userId=" + user.getUserId();
     }
 
-    @PostMapping("/createUser/submit")
-    public String createUserSubmit(User user, Model model, WebRequest request) {
-        UserFormError userFormError = userService.getUserFormError(user);
-        if(userFormError.containsErrors()){
-            model.addAttribute("errors", userFormError);
-            model.addAttribute("user", user);
-            model.addAttribute("title", "Opret Bruger");
-            model.addAttribute("postEndpoint", "/createUser/submit");
-            return "/createUser";
-        }
-        User newUser = userService.createUser(user);
-        setSessionInfo(request, newUser);
-        return "redirect:/userProfile?userId=" + newUser.getUserId();
-    }
-
 
 
     @PostMapping("/createMessage")
@@ -138,10 +123,20 @@ public class DemoController {
     public String createUser(Model model, User user) {
         model.addAttribute("user", user);
         model.addAttribute("errors", new UserFormError());
-        model.addAttribute("title", "Opret Bruger");
-        model.addAttribute("postEndpoint", "/createUser/submit");
-        model.addAttribute("passwordError", true);
         return "createUser";
+    }
+
+    @PostMapping("/createUser/submit")
+    public String createUserSubmit(User user, Model model, WebRequest request) {
+        UserFormError userFormError = userService.getUserFormError(user);
+        if(userFormError.containsErrors()){
+            model.addAttribute("errors", userFormError);
+            model.addAttribute("user", user);
+            return "/createUser";
+        }
+        User newUser = userService.createUser(user);
+        setSessionInfo(request, newUser);
+        return "redirect:/userProfile?userId=" + newUser.getUserId();
     }
 
     @GetMapping("/updateUser")
@@ -152,9 +147,6 @@ public class DemoController {
         }
         model.addAttribute("errors", new UserFormError());
         model.addAttribute("user", loggedInUser);
-        model.addAttribute("title", "Opdater Brugeroplysninger");
-        model.addAttribute("submitButtonText", "Opdater");
-        model.addAttribute("postEndpoint", "/updateUser/submit");
         return "/createUser";
     }
 
@@ -171,9 +163,6 @@ public class DemoController {
         if(userFormError.containsErrors()){
             model.addAttribute("errors", userFormError);
             model.addAttribute("user", user);
-            model.addAttribute("title", "Opdater Brugeroplysninger");
-            model.addAttribute("submitButtonText", "Opdater");
-            model.addAttribute("postEndpoint", "/updateUser/submit");
             return "/createUser";
         }
         User updatedUser = userService.updateUser(user);

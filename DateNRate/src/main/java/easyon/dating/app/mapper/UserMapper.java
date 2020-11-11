@@ -15,6 +15,13 @@ public class UserMapper implements RowMapper<User>{
     @Override
     public User mapRow(ResultSet resultSet, int i) throws SQLException {
         User user = new User();
+        try {
+            TownMapper townMapper = new TownMapper();
+            user.setTown(townMapper.mapRow(resultSet, i));
+        }
+        catch(SQLException ex){
+            user.setTown(null);
+        }
         user.setUserId(resultSet.getInt("user_id"));
         user.setFirstName(resultSet.getString("first_name"));
         user.setLastName(resultSet.getString("last_name"));

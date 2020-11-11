@@ -32,8 +32,8 @@ public class UserService {
     }
 
     public User createUser(User user){
-        Town town = townDAO.getTownByPostcalCode(user.getTownId());
-        user.setTownId(town.getTownId());
+        Town town = townDAO.getTownByPostcalCode(user.getTown().getPostalCode());
+        user.setTown(town);
         return userDao.createUser(user);
     }
 
@@ -61,12 +61,12 @@ public class UserService {
             userFormError.setEmailError(true);
         }
         try {
-            Town town = townDAO.getTownByPostcalCode(user.getTownId());
+            Town town = townDAO.getTownByPostcalCode(user.getTown().getPostalCode());
         } catch (Exception e){
             userFormError.setTownError(true);
         }
         Date birthDay = user.getDateOfBirth();
-        if(birthDay.after(new Date(System.currentTimeMillis())) || birthDay.before(new Date(1900, 1, 1))){
+        if(birthDay.after(new Date(System.currentTimeMillis()))){
             userFormError.setDateOfBirthError(true);
         }
         return userFormError;
