@@ -196,7 +196,7 @@ public class DemoController {
     }
 
     @GetMapping("/favorite")
-    public String favorite(Model model, WebRequest request) {
+    public String favorite(Model model, WebRequest request, Favorite favorite) {
         User currentUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         if (currentUser == null) { // If your aren't logged in, redirect to index.html
             return "redirect:/";
@@ -211,10 +211,16 @@ public class DemoController {
         return "favorite";
     }
 
-    @PostMapping("/postFavorite")
+    @PostMapping("/favorite/submit")
     public String postFavorite(Favorite favorite) {
         favoriteService.addToFavorites(favorite);
         return "redirect:/userProfile?userId=" + favorite.getFavoriteUserId();
+    }
+
+    @PostMapping("/favorite/remove")
+    public String removeFavorite(Favorite favorite){
+        favoriteService.removeFavorite(favorite);
+        return "redirect:/favorite";
     }
 
     @GetMapping("/test")

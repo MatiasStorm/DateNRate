@@ -35,6 +35,13 @@ public class FavoriteDAO {
                 favorite.getUserId(),
                 favorite.getFavoriteUserId()
         );
+    }
 
+    public void removeFavorite(Favorite favorite){
+        jdbcTemplate.update(
+                "DELETE FROM favorites WHERE user_id = ? AND favorite_user_id = ?",
+                favorite.getUserId(),
+                favorite.getFavoriteUserId()
+        );
     }
 }

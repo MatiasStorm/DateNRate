@@ -43,6 +43,10 @@ public class FavoriteService {
         favoriteDAO.addToFavorite(favorite);
     }
 
+    public void removeFavorite(Favorite favorite){
+        favoriteDAO.removeFavorite(favorite);
+    }
+
 
 
 }

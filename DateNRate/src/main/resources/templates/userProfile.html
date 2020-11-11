@@ -33,7 +33,7 @@
                     <button th:if="${isMyProfile}" onclick="window.location.href='/updateUser'">Ændre stamoplysninger</button>
                 </div>
                 <div class="buttonContainer">
-                    <form method="post" action="/postFavorite" th:object="${favorite}">
+                    <form method="post" action="/favorite/submit" th:object="${favorite}">
                         <input hidden="hidden" type="number" th:field="*{userId}">
                         <input hidden="hidden" type="number" th:field="*{favoriteUserId}">
 

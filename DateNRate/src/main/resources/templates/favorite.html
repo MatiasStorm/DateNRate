@@ -17,20 +17,27 @@
 </h1>
 
 <div class="displayFlexFix">
-    <div class="favoritebox" th:each="favoriteUser : ${favoritesAsUsersList}" th:object="${favoriteUser}">
-
-        <a class="cleanA" th:href="'/userProfile?userId=' + *{userId}">
-            <img th:src="*{profilePicture != null ? profilePicture : '/images/mand_default.webp'}">
-        </a>
-        <a class="cleanA" th:href="'/userProfile?userId=' + *{userId}">
-            <div class="seachText">
-                <p th:text="'Fornavn: ' + *{firstName}"></p>
-                <p th:text="'Efternavn: ' + *{lastName}"></p>
-                <p th:text="'Brugernavn: ' + *{username}"></p>
-            </div>
-        </a>
+    <div  class="favoritebox" th:each="favoriteUser : ${favoritesAsUsersList}" th:object="${favoriteUser}">
+        <div class="displayFlex">
+            <a class="cleanA" th:href="'/userProfile?userId=' + *{userId}">
+                <img th:src="*{profilePicture != null ? profilePicture : '/images/mand_default.webp'}">
+            </a>
+            <a class="cleanA" th:href="'/userProfile?userId=' + *{userId}">
+                <div class="seachText">
+                    <p th:text="'Fornavn: ' + *{firstName}"></p>
+                    <p th:text="'Efternavn: ' + *{lastName}"></p>
+                    <p th:text="'Brugernavn: ' + *{username}"></p>
+                </div>
+            </a>
+        </div>
+        <form style="text-align: center" method="post" action="/favorite/remove" th:object="${favorite}">
+            <input hidden="hidden" type="number" name="userId" th:value="${currentUser.userId}">
+            <input hidden="hidden" type="number" name="favoriteUserId" th:value="${favoriteUser.userId}">
+            <button type="submit">
+                Fjern fra favorit
+            </button>
+        </form>
     </div>
-
 
 </div>
 
