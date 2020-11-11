@@ -109,8 +109,7 @@ h1{
     }
 }
 
-.activeTags {
-    background-color: forestgreen;
+.tag {
     border: none;
     color: white;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 1);
@@ -120,19 +119,20 @@ h1{
     font-size: 16px;
     cursor: pointer;
     border-radius: 8%;
+    transition: transform .25s;
 }
 
-.inactiveTags {
-    background-color: gray;
-    border: none;
-    color: white;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 1);
-    padding: 15px 32px;
-    margin-top: 20px;
-    margin-left: 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8%;
+.tag:hover{
+    transform: scale(1.05);
+}
+
+.activeTag {
+    background-color: forestgreen;
+}
+
+.inactiveTag {
+    background-color: black;
+    opacity: 0.3;
 }
 
 .userSettingsIcon {

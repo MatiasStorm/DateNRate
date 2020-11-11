@@ -77,13 +77,13 @@
                 <form th:each="tag : ${activeTags}" th:object="${userTag}" method="post" th:action="@{/userTagPost}">
                     <input name="tagId" th:value="${tag.tagId}" hidden="hidden">
                     <input name="userId" th:value="${currentUser.userId}" hidden="hidden">
-                    <button class="activeTags" type="submit" th:text="${tag.tagName}"></button>
+                    <button class="activeTag tag" type="submit" th:text="${tag.tagName}"></button>
                 </form>
 
                 <form th:each="tag : ${inactiveTags}" th:object="${userTag}" method="post" th:action="@{/userTagPost}">
                     <input name="tagId" th:value="${tag.tagId}" hidden="hidden">
                     <input name="userId" th:value="${currentUser.userId}" hidden="hidden">
-                    <button class="inactiveTags" type="submit" th:text="${tag.tagName}"></button>
+                    <button class="inactiveTag tag" type="submit" th:text="${tag.tagName}"></button>
                 </form>
             </div>
             <div class="boxBody flexWrap" th:unless="${isMyProfile}">
