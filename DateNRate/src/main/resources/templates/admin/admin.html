@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="search.css">
+<link rel="stylesheet" type="text/css" href="/main.css">
+<link rel="stylesheet" type="text/css" href="/topPart.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="displayFlexFix">
+    <div  class="favoritebox" th:each="user : ${users}" th:object="${user}">
+        <div class="displayFlex">
+            <a class="cleanA" th:href="'/userProfile?userId=' + *{userId}">
+                <img th:src="*{profilePicture}">
+            </a>
+            <a class="cleanA" th:href="'/userProfile?userId=' + *{userId}">
+                <div class="seachText">
+                    <p th:text="'Fornavn: ' + *{firstName}"></p>
+                    <p th:text="'Efternavn: ' + *{lastName}"></p>
+                    <p th:text="'Brugernavn: ' + *{username}"></p>
+                </div>
+            </a>
+        </div>
+        <form style="text-align: center" method="post" action="/admin/deleteUser">
+            <input hidden="hidden" type="number" name="userId" th:value="*{userId}">
+            <button type="submit">
+                Fjern bruger
+            </button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

@@ -128,4 +128,8 @@ public class UserService {
     public List<User> getTopRatedProfiles(){
         return userDao.getTopRatedProfiles();
     }
+
+    public void deleteUser(int userId){
+        userDao.deleteUser(userId);
+    }
 }
