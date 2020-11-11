@@ -185,6 +185,25 @@ INSERT INTO `towns` VALUES (1,800,'Høje Taastrup'),(2,900,'København C'),(3,91
 /*!40000 ALTER TABLE `towns` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Dumping data for table `ratings`
+--
+
+LOCK TABLES `ratings` WRITE;
+/*!40000 ALTER TABLE `ratings` DISABLE KEYS */;
+INSERT INTO `ratings` VALUES (7,'Chance for sex'),(2,'Humor'),(4,'Romance'),(6,'Rundhåndet'),(1,'Udseende'),(3,'VenligHed'),(5,'Åbenhed');
+/*!40000 ALTER TABLE `ratings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `tags`
+--
+
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+INSERT INTO `tags` VALUES (1,'Blond'),(2,'Brunette'),(13,'Emo'),(3,'Ginger'),(12,'God Røv'),(14,'Goth'),(17,'Grissebasse'),(7,'Høj'),(8,'Lav'),(16,'Lummergøj'),(18,'Narkoman'),(6,'Ok Tyk'),(11,'Piercing'),(15,'Punk'),(5,'Slank'),(9,'Solbrun'),(4,'Store Bryster'),(10,'Tattoo');
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
 
 SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
