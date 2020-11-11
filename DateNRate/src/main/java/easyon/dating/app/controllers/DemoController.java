@@ -147,7 +147,7 @@ public class DemoController {
         }
         model.addAttribute("errors", new UserFormError());
         model.addAttribute("user", loggedInUser);
-        return "/createUser";
+        return "/updateUser";
     }
 
     @PostMapping("/updateUser/submit")
@@ -159,11 +159,11 @@ public class DemoController {
         if(loggedInUser.getUserId() != user.getUserId()){
             return "redirect:/";
         }
-        UserFormError userFormError = userService.getUserFormError(user);
+        UserFormError userFormError = userService.getUserFormError(user, loggedInUser);
         if(userFormError.containsErrors()){
             model.addAttribute("errors", userFormError);
             model.addAttribute("user", user);
-            return "/createUser";
+            return "/updateUser";
         }
         User updatedUser = userService.updateUser(user);
         setSessionInfo(request, updatedUser);

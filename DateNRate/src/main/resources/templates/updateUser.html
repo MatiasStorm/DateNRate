@@ -12,6 +12,8 @@
 <h1 style="text-align: center">Opdater brugeroplysninger</h1>
 <form class="modal-content" action="/updateUser/submit" th:object="${user}" method="post">
     <div class="container">
+        <input th:field="*{userId}" hidden="hidden">
+        <input th:field="*{profilePicture}" hidden="hidden">
         <div class="inputContainer">
             <label>Brugernavn:</label>
             <input type="text" th:field="*{username}" required>
@@ -65,13 +67,11 @@
             </select>
         </div>
         <div style="display: flex">
-            <a th:href="${'/userProfile?userId=' + userId}">
-                <button type="button"
-                        class="button">
-                    Fortryd
-                </button>
-
-            </a>
+            <button type="button"
+                    th:onclick="|document.location.href = '${''/userProfile?userId='' + user.userId}'|"
+                    class="button">
+                Fortryd
+            </button>
             <button class="button" type="submit">Gem</button>
         </div>
     </div>

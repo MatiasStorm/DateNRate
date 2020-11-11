@@ -13,6 +13,7 @@ public class TownMapper implements RowMapper<Town> {
         Town town = new Town();
         town.setPostalCode(resultSet.getInt("postal_code"));
         town.setTownName(resultSet.getString("town_name"));
+        town.setTownId(resultSet.getInt("town_id"));
         return town;
     }
 }

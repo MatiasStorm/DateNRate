@@ -27,7 +27,9 @@ public class UserMapper implements RowMapper<User>{
         user.setLastName(resultSet.getString("last_name"));
         user.setEmail(resultSet.getString("email"));
         user.setTownId(resultSet.getInt("town_id"));
-        user.setPassword(resultSet.getString("password"));
+        String password = resultSet.getString("password");
+        user.setPassword(password);
+        user.setPassword2(password);
         user.setUsername(resultSet.getString("username"));
         String profilePicture = resultSet.getString("profile_picture");
         if(profilePicture != null){

@@ -19,7 +19,15 @@ public class User {
     private String userDescription;
     private Town town;
     private boolean isMale;
+    private double avgRating;
 
+    public double getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(double avgRating) {
+        this.avgRating = avgRating;
+    }
 
     public boolean getIsMale() {
         return isMale;

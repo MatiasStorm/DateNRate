@@ -60,6 +60,28 @@ public class UserService {
         if(userDao.getUserByEmail(user.getEmail()).size() > 0){
             userFormError.setEmailError(true);
         }
+        userFormError = checkTownAndDate(user, userFormError);
+        return userFormError;
+    }
+
+    public UserFormError getUserFormError(User user, User currentUser){
+        UserFormError userFormError = new UserFormError();
+        if(!user.getPassword().equals(user.getPassword2())){
+            userFormError.setPasswordError(true);
+        }
+        if(userDao.getUserByUsername(user.getUsername()).size() > 0
+                && !user.getUsername().equals(currentUser.getUsername())){
+            userFormError.setUsernameError(true);
+        }
+        if(userDao.getUserByEmail(user.getEmail()).size() > 0
+                && !user.getEmail().equals(currentUser.getEmail())){
+            userFormError.setEmailError(true);
+        }
+        userFormError = checkTownAndDate(user, userFormError);
+        return userFormError;
+    }
+
+    private UserFormError checkTownAndDate(User user, UserFormError userFormError){
         try {
             Town town = townDAO.getTownByPostcalCode(user.getTown().getPostalCode());
         } catch (Exception e){
@@ -97,10 +119,10 @@ public class UserService {
     public List<User> getTheFiveNewestProfiles() {
         return userDao.getTheFiveNewestProfiles();
     }
+
     public User updateUser(User user){
+        Town town = townDAO.getTownByPostcalCode(user.getTown().getPostalCode());
+        user.setTown(town);
         return userDao.updateUser(user);
-
     }
-
-
 }
