@@ -29,6 +29,17 @@ h1{
     margin-left: 20px;
 }
 
+.bigBox {
+    z-index: 1;
+    width: 98%;
+    background-color: rgb(230, 230, 230);
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .8);
+    border-radius: 12px;
+    margin: 0px 20px;
+    border: 2px solid lightgray;
+
+}
+
 .box {
     z-index: 1;
     width: 50%;

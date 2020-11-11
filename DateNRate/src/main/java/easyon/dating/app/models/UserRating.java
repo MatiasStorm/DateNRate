@@ -8,6 +8,15 @@ public class UserRating {
     private int rating;
     private int creatorUserId;
     private String ratingName;
+    private double avgRating;
+
+    public double getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(double avgRating) {
+        this.avgRating = avgRating;
+    }
 
     public int getUserRatingId() {
         return userRatingId;

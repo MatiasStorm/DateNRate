@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<div class="box ratingSpace">
+<div  th:unless="${isMyProfile}" class="box ratingSpace">
     <div class="boxHeader"><h1> Giv rating </h1></div>
     <form method="post" action="/postRating" th:object="${userRating}">
         <select class="ratingOption ratingButton" th:field="*{rating}">
@@ -121,47 +121,21 @@
 
 </div>
 
-<div class="box ratingSpace">
-    <div class="boxHeader"><h1> Giv rating </h1></div>
-
-    <div th:each="rating :${ratingList}">
-        <p th:text="${rating.ratingName}">
-        </p>
-
+<div class="bigBox" style="margin-bottom: 10px; margin-top: 30px">
+    <div class="boxHeader"><h1> Scoreboard </h1></div>
+    <div class="flexWrap justifyContentAround" >
+    <div th:each="rating : ${ratings}">
+        <h1 th:text="${rating.ratingName}"></h1>
+        <h1 class="aboutMe" th:text="'Rating: ' + ${rating.avgRating}"></h1>
+    </div>
+    </div>
     </div>
 
 
+
+
+
 </div>
-
-
-
-<!--<form method="post" th:action="@{/userProfile/createUserRating}" th:object="${userRatings}">-->
-
-
-<!--    <div th:each="r, iter : ${ratings}">-->
-<!--        <label th:text="${r.ratingName}"></label>-->
-<!--&lt;!&ndash;        <input type="number" th:field="*{userRatings[iter.index]}">&ndash;&gt;-->
-<!--        <select>-->
-<!--        <option value="1">1</option>-->
-<!--        <option value="2">2</option>-->
-<!--        <option value="3">3</option>-->
-<!--        <option value="4">4</option>-->
-<!--        <option value="5">5</option>-->
-<!--        <option value="6">6</option>-->
-<!--        <option value="7">7</option>-->
-<!--        <option value="8">8</option>-->
-<!--        <option value="9">9</option>-->
-<!--        <option value="10">10</option>-->
-<!--        </select>-->
-<!--     </div>-->
-<!--    <button type="submit">Bedøm</button>-->
-<!--    <button>Fortryd</button>-->
-<!--</form>-->
-
-
-<!--  <form method="post" th:action="@{/createUserRating/submit}" th:object="${userRatings}">-->
-
-<!--  </form>-->
 
 
 </body>

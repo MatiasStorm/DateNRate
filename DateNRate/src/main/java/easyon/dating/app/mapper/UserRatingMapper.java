@@ -14,6 +14,7 @@ public class UserRatingMapper implements RowMapper<UserRating> {
         userRating.setTargetUserId(resultSet.getInt("target_user_id"));
         userRating.setUserRatingId(resultSet.getInt("rating_id"));
         userRating.setRatingName(resultSet.getString("ratings.rating_name"));
+        userRating.setAvgRating(resultSet.getDouble("rating"));
 
         return userRating;
     }

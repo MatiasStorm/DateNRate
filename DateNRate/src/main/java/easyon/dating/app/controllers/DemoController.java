@@ -106,7 +106,7 @@ public class DemoController {
         model.addAttribute("isMyProfile", loggedInUser.getUserId() == userId);
         model.addAttribute("currentUser", loggedInUser);
         model.addAttribute("favorite", favorite);
-        model.addAttribute("ratings", ratings);
+//        model.addAttribute("ratings", ratings);
         model.addAttribute("user", userService.getUser(userId));
         model.addAttribute("userRatings", userRatingService.getEmptyUserRatingArray(ratings.size()));
         model.addAttribute("userRating", userRating);
@@ -114,6 +114,7 @@ public class DemoController {
         model.addAttribute("ratingList", ratingList);
         model.addAttribute("activeTags", tagService.getSelectedTags(userId));
         model.addAttribute("inactiveTags", userTagService.getInactiveTagList(userId));
+        model.addAttribute("ratings", userRatingService.getUserRatings(userId));
 
         return "userProfile";
     }
@@ -226,7 +227,7 @@ public class DemoController {
     @GetMapping("/test")
     public String test(Model model) {
 //        model.addAttribute("newUsers", userService.getTheFiveNewestProfiles());
-        int userId = 2;
+        int userId = 13;
         model.addAttribute("ratings", userRatingService.getUserRatings(userId));
         return "/test";
     }
