@@ -50,21 +50,6 @@ public class DemoController {
         return "redirect:/userProfile?userId=" + user.getUserId();
     }
 
-    @PostMapping("/createUser/submit")
-    public String createUserSubmit(User user, Model model, WebRequest request) {
-        UserFormError userFormError = userService.getUserFormError(user);
-        if(userFormError.containsErrors()){
-            model.addAttribute("errors", userFormError);
-            model.addAttribute("user", user);
-            model.addAttribute("title", "Opret Bruger");
-            model.addAttribute("postEndpoint", "/createUser/submit");
-            return "/createUser";
-        }
-        User newUser = userService.createUser(user);
-        setSessionInfo(request, newUser);
-        return "redirect:/userProfile?userId=" + newUser.getUserId();
-    }
-
 
 
     @PostMapping("/createMessage")
@@ -138,25 +123,30 @@ public class DemoController {
     public String createUser(Model model, User user) {
         model.addAttribute("user", user);
         model.addAttribute("errors", new UserFormError());
-        model.addAttribute("title", "Opret Bruger");
-        model.addAttribute("postEndpoint", "/createUser/submit");
-        model.addAttribute("passwordError", true);
         return "createUser";
     }
 
+    @PostMapping("/createUser/submit")
+    public String createUserSubmit(User user, Model model, WebRequest request) {
+        UserFormError userFormError = userService.getUserFormError(user);
+        if(userFormError.containsErrors()){
+            model.addAttribute("errors", userFormError);
+            model.addAttribute("user", user);
+            return "/createUser";
+        }
+        User newUser = userService.createUser(user);
+        setSessionInfo(request, newUser);
+        return "redirect:/userProfile?userId=" + newUser.getUserId();
+    }
+
     @GetMapping("/updateUser")
-    public String updateUser(User user, WebRequest request, Model model){
+    public String updateUser(WebRequest request, Model model){
         User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
             return "redirect:/";
         }
-        if(loggedInUser.getUserId() != user.getUserId()){
-            return "redirect:/";
-        }
         model.addAttribute("errors", new UserFormError());
-        model.addAttribute("user", user);
-        model.addAttribute("title", "Opdater Brugeroplysninger");
-        model.addAttribute("postEndpoint", "/updateUser/submit");
+        model.addAttribute("user", loggedInUser);
         return "/createUser";
     }
 
@@ -173,8 +163,6 @@ public class DemoController {
         if(userFormError.containsErrors()){
             model.addAttribute("errors", userFormError);
             model.addAttribute("user", user);
-            model.addAttribute("title", "Opdater Brugeroplysninger");
-            model.addAttribute("postEndpoint", "/createUser/submit");
             return "/createUser";
         }
         User updatedUser = userService.updateUser(user);
