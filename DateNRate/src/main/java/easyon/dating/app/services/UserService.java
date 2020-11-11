@@ -130,6 +130,7 @@ public class UserService {
     }
 
     public void deleteUser(int userId){
+        // messages, ratings, tags, favorite
         userDao.deleteUser(userId);
     }
 }

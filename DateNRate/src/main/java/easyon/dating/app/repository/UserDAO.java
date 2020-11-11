@@ -120,6 +120,11 @@ public class UserDAO {
     }
 
     public void deleteUser(int userId){
+        // messages, ratings, tags, favorite
+        jdbcTemplate.update("DELETE FROM user_tags WHERE user_id  = ?", userId);
+        jdbcTemplate.update("DELETE FROM user_ratings WHERE target_user_id = ? OR creator_user_id = ? ", userId, userId);
+        jdbcTemplate.update("DELETE FROM favorites WHERE user_id = ? OR favorite_user_id = ?", userId, userId);
+        jdbcTemplate.update("DELETE FROM messages WHERE sender_id = ? OR reciever_id = ?", userId, userId);
         jdbcTemplate.update("DELETE FROM " + table + " WHERE user_id = ?", userId);
     }
 
