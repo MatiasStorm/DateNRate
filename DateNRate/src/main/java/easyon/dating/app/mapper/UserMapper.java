@@ -25,7 +25,7 @@ public class UserMapper implements RowMapper<User>{
         String profilePicture = resultSet.getString("profile_picture");
         if(profilePicture != null){
             if(profilePicture.length() == 0){
-                profilePicture = null;
+                profilePicture = "/images/mand_default.webp";
             }
         }
         user.setProfilePicture(profilePicture);
