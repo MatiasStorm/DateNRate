@@ -65,15 +65,6 @@ public class DemoController {
         return "redirect:/userProfile?userId=" + newUser.getUserId();
     }
 
-    @GetMapping("/createUser")
-    public String createUser(Model model, User user) {
-        model.addAttribute("user", user);
-        model.addAttribute("errors", new UserFormError());
-        model.addAttribute("title", "Opret Bruger");
-        model.addAttribute("postEndpoint", "/createUser/submit");
-        model.addAttribute("passwordError", true);
-        return "createUser";
-    }
 
 
     @PostMapping("/createMessage")
@@ -143,6 +134,54 @@ public class DemoController {
         return "redirect:/userProfile?userId=4";
     }
 
+    @GetMapping("/createUser")
+    public String createUser(Model model, User user) {
+        model.addAttribute("user", user);
+        model.addAttribute("errors", new UserFormError());
+        model.addAttribute("title", "Opret Bruger");
+        model.addAttribute("postEndpoint", "/createUser/submit");
+        model.addAttribute("passwordError", true);
+        return "createUser";
+    }
+
+    @GetMapping("/updateUser")
+    public String updateUser(User user, WebRequest request, Model model){
+        User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
+        if(loggedInUser.getUserId() != user.getUserId()){
+            return "redirect:/";
+        }
+        model.addAttribute("errors", new UserFormError());
+        model.addAttribute("user", user);
+        model.addAttribute("title", "Opdater Brugeroplysninger");
+        model.addAttribute("postEndpoint", "/updateUser/submit");
+        return "/createUser";
+    }
+
+    @PostMapping("/updateUser/submit")
+    public String updateUserSubmit(User user, WebRequest request, Model model){
+        User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
+        if(loggedInUser.getUserId() != user.getUserId()){
+            return "redirect:/";
+        }
+        UserFormError userFormError = userService.getUserFormError(user);
+        if(userFormError.containsErrors()){
+            model.addAttribute("errors", userFormError);
+            model.addAttribute("user", user);
+            model.addAttribute("title", "Opdater Brugeroplysninger");
+            model.addAttribute("postEndpoint", "/createUser/submit");
+            return "/createUser";
+        }
+        User updatedUser = userService.updateUser(user);
+        setSessionInfo(request, updatedUser);
+        return "redirect:/userProfile?userId=" + user.getUserId();
+    }
+
 
     private void setSessionInfo(WebRequest request, User user) {
         // Place user info on session
@@ -205,7 +244,6 @@ public class DemoController {
         List<Rating> ratingList = ratingService.getRatings();
         model.addAttribute("ratingList", ratingList);
         return "/ratingTest";
-
     }
 
     @PostMapping("/postRating")
@@ -228,7 +266,12 @@ public class DemoController {
     }
 
     @GetMapping("/userFrontpage")
-    public String userFrontpage(){
+    public String userFrontpage(WebRequest request, Model model){
+        User loggedInUser = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
+            return "redirect:/";
+        }
+        model.addAttribute("currentUser", loggedInUser);
         return "/userFrontpage";
     }
 
