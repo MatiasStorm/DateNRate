@@ -133,10 +133,6 @@ public class DemoController {
         model.addAttribute("userRating", userRating);
         List<Rating> ratingList = ratingService.getRatings();
         model.addAttribute("ratingList", ratingList);
-
-//        model.addAttribute("userTag", userTag);
-//        model.addAttribute("tagsList", tagService.getListOfTags());
-
         model.addAttribute("activeTags", tagService.getSelectedTags(userId));
         model.addAttribute("inactiveTags", userTagService.getInactiveTagList(userId));
         return "userProfile";
