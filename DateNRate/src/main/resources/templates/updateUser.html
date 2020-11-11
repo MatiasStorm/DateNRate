@@ -68,7 +68,7 @@
         </div>
         <div style="display: flex">
             <button type="button"
-                    th:onclick="|document.location.href = '${''/userProfile?userId='' + user.userId}'|"
+                    th:onclick="'document.location.href = \'/userProfile?userId=' + ${user.userId} + '\''"
                     class="button">
                 Fortryd
             </button>
