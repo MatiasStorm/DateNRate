@@ -123,3 +123,13 @@ h1{
     cursor: pointer;
     border-radius: 8%;
 }
+
+.userSettingsIcon {
+    font-size: 60px;
+    transition: font-size .2s;
+    cursor: pointer;
+}
+
+.userSettingsIcon:hover {
+    font-size: 65px;
+}

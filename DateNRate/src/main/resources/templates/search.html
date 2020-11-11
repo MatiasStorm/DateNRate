@@ -18,14 +18,14 @@
 
 <form name="searchBar" action="/search" method="get">
     <div class="displayFlexFix">
-        <button>Search</button>
+        <button class="searchButton">Search</button>
         <input class="searchField" type="search" name="search" ;>
     </div>
 </form>
 
 
 <div class="displayFlexFix">
-    <div class="favoritebox" th:each="user: ${searchList}">
+    <div class="favoritebox displayFlex" th:each="user: ${searchList}">
 
         <a class="cleanA" th:href="'/userProfile?userId=' + ${user.userId}">
         <img th:src="${user.profilePicture != null ? user.profilePicture : '/images/mand_default.webp'}">

@@ -83,7 +83,7 @@ public class UserDAO {
 
     public User createUser(User user){
         jdbcTemplate.update(
-                "INSERT into users(first_name, last_name, email, password, username, date_of_birth, is_male, town_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT into users(first_name, last_name, email, password, username, date_of_birth, is_male, town_id, user_description) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
@@ -91,7 +91,8 @@ public class UserDAO {
                 user.getUsername(),
                 user.getDateOfBirth(),
                 user.getIsMale(),
-                user.getTown().getTownId()
+                user.getTown().getTownId(),
+                user.getUserDescription()
         );
         int newUserId = jdbcTemplate.queryForObject("SELECT last_insert_id() as id", (rs, i) -> rs.getInt("id"));
         return getUser(newUserId);
@@ -100,7 +101,8 @@ public class UserDAO {
     public User updateUser(User user){
         jdbcTemplate.update(
                 "UPDATE users " +
-                        "SET first_name = ?, last_name = ?, email = ?, password = ?, username = ?, date_of_birth = ?, is_male = ?, profile_picture = ?, town_id = ? " +
+                        "SET first_name = ?, last_name = ?, email = ?, password = ?, username = ?, date_of_birth = ?" +
+                        ", is_male = ?, profile_picture = ?, town_id = ?, user_description = ? " +
                         "WHERE user_id = ?",
                 user.getFirstName(),
                 user.getLastName(),
@@ -111,6 +113,7 @@ public class UserDAO {
                 user.getIsMale(),
                 user.getProfilePicture(),
                 user.getTown().getTownId(),
+                user.getUserDescription(),
                 user.getUserId()
         );
         return getUser(user.getUserId());
