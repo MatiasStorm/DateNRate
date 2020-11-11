@@ -3,16 +3,16 @@
 Second mandatory assignment on the 2. semester of the Computer Science education at KEA.
 
 We had to create a dating website with the following requirements:
-    -   Users should be created with a user profile containing at least the following:
-        - Name
-        - Contact info
-        - Picture
-        - Description
-        - Tags
-    - Only the loggedin user should be able to edit and view its contact info.
-    - Users should be able to chat with each other.
-    - An admin should be able to remove users from the site.
-    - Nice to have: Dynamic upload of profile pictures.
+1. Users should be created with a user profile containing at least the following:
+    * Name
+    * Contact info
+    * Picture
+    * Description
+    * Tags
+2. Only the loggedin user should be able to edit and view its contact info.
+3. Users should be able to chat with each other.
+4. An admin should be able to remove users from the site.
+5. Nice to have: Dynamic upload of profile pictures.
 
 Our website comply with all the requirements and also implements a rating system.
 
@@ -50,5 +50,7 @@ Finally navigate to [localhost:8080](localhost:8080) to use the website.
 
 ## Contributors
 [JoergenKoeldal](https://github.com/JoergenKoeldal)
+
 [PVGlimoe](https://github.com/PVGlimoe)
+
 [MatiasStorm](https://github.com/MatiasStorm)
