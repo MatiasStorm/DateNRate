@@ -174,7 +174,7 @@ public class DemoController {
             model.addAttribute("errors", userFormError);
             model.addAttribute("user", user);
             model.addAttribute("title", "Opdater Brugeroplysninger");
-            model.addAttribute("postEndpoint", "/createUser/submit");
+            model.addAttribute("postEndpoint", "/updateUser/submit");
             return "/createUser";
         }
         User updatedUser = userService.updateUser(user);
