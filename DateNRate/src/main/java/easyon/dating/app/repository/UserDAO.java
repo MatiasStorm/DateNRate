@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -138,6 +137,6 @@ public class UserDAO {
     }
 
     public List<User> getTopRatedProfiles(){
-        return jdbcTemplate.query( selectStatement + " ORDER BY rating DESC LIMIT 5", userMapper);
+        return jdbcTemplate.query( createSelect("") + " ORDER BY rating DESC LIMIT 5", userMapper);
     }
 }
