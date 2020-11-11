@@ -18,7 +18,7 @@ public class UserDAO {
     private final String selectStatement = "SELECT "
             + "users.user_id, users.first_name, users.created, users.date_of_birth, users.user_description, "
             + "users.last_name, users.profile_picture, users.email, users.username, users.password, users.is_male, "
-            + "AVG(rating) as rating, towns.town_id, towns.town_name, towns.postal_code from user_ratings"
+            + "AVG(rating) as rating, COUNT(*) as amount_of_ratings, towns.town_id, towns.town_name, towns.postal_code from user_ratings"
             + " RIGHT JOIN users on user_ratings.target_user_id = users.user_id"
             + " LEFT JOIN towns on users.town_id = towns.town_id ";
 
@@ -141,6 +141,6 @@ public class UserDAO {
     }
 
     public List<User> getTheFiveNewestProfiles(){
-        return jdbcTemplate.query("SELECT * FROM " + table + " ORDER BY user_id LIMIT 5", userMapper);
+        return jdbcTemplate.query("SELECT * FROM " + table + " ORDER BY user_id DESC LIMIT 5", userMapper);
     }
 }

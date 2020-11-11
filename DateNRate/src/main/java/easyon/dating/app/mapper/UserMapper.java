@@ -43,9 +43,11 @@ public class UserMapper implements RowMapper<User>{
         user.setUserDescription(resultSet.getString("user_description"));
         try {
             user.setAvgRating(resultSet.getDouble("rating"));
+            user.setAmountOfRatings((resultSet.getInt("amount_of_ratings")));
         }
         catch  (SQLException e){
             user.setAvgRating(0);
+            user.setAmountOfRatings(0);
         }
 
         return user;

@@ -21,6 +21,15 @@ public class User {
     private Town town;
     private boolean isMale;
     private double avgRating;
+    private int amountOfRatings;
+
+    public int getAmountOfRatings() {
+        return amountOfRatings;
+    }
+
+    public void setAmountOfRatings(int amountOfRatings) {
+        this.amountOfRatings = amountOfRatings;
+    }
 
     public double getAvgRating() {
         return avgRating;
