@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+actor "User" as u
+actor "Admin" as a
+
+rectangle DateNRate {
+    usecase "Login" as UC_login
+    usecase "Opret bruger" as UC_opret
+    UC_opret .right.> (Indtast oplysninger) : include
+
+    usecase "Søg" as UC_søg
+    usecase "Gå til bruger profil" as UC_gå
+
+    UC_gå ..> (Tilføj til favorit) : include
+    UC_gå ..> (Tilføj rating) : include
+
+    usecase "Gå til message Side" as UC_message_side
+    UC_message_side .down.> (Send Besked) : include
+
+
+    usecase "Gå til favorite side" as UC_favorite_side
+    UC_favorite_side .down.> (Slet favorit) : include
+
+    usecase "Min profil" as UC_min
+    UC_min .down.> (Ændre stamoplysninger) : include
+    UC_min .down.> (Upload Billede) : include
+    UC_min .down.> (Ændre tags) : include
+    UC_min .down.> (Log ud) : include
+
+
+    usecase "Slet bruger" as UC_slet
+}
+
+u --> UC_login
+u --> UC_opret
+u --> UC_søg
+u --> UC_gå
+u --> UC_message_side
+u --> UC_favorite_side
+u --> UC_min
+
+a --> UC_login
+a --> UC_slet
+
+
+
+@enduml

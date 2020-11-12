@@ -42,6 +42,5 @@ class UserRatingMapperTest {
         Assertions.assertEquals(userRating.getTargetUserId(),targetUserId);
         Assertions.assertEquals(userRating.getAvgRating(), avgRating);
         Assertions.assertEquals(userRating.getRatingName(), ratingName);
-
     }
 }
