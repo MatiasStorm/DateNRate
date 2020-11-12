@@ -37,7 +37,6 @@
 
                     <h2 th:text="'Rating ' + ${user.avgRating} + '/10 Antal af rating(s) ' + ${user.amountOfRatings}"></h2>
                     <h3 th:text="'Hjemby ' + ${user.town.townName}"></h3>
-<!--                    <button th:if="${isMyProfile}" onclick="window.location.href='/updateUser'">Ændre stamoplysninger</button>-->
                 </div>
                 <div class="buttonContainer">
                     <form method="post" action="/favorite/submit" th:object="${favorite}">

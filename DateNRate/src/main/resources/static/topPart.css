@@ -31,3 +31,16 @@
 .navbarBrand, .navbarItem {
     text-decoration: none;
 }
+
+.logoutIcon{
+    position:relative;
+    font-size: 40px;
+    top: -18px;
+    margin-right: 10px ;
+    cursor: pointer;
+    transition: font-size .1s;
+}
+
+.logoutIcon:hover{
+    font-size: 42px;
+}

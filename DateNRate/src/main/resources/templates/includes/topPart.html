@@ -24,10 +24,12 @@
                 <img src="/images/magnifying_glass.png" alt="">
             </a>
         </div>
-        <a class="navbarItem" th:href="${'/userProfile?userId=' + currentUser.userId}" style="margin: 0px 0px 0px 15px">
-            <img src="/images/profile.png" alt="">
-        </a>
-
+        <div>
+            <a class="navbarItem" th:href="${'/userProfile?userId=' + currentUser.userId}" style="margin: 0px 0px 0px 15px">
+                <img src="/images/profile.png" alt="">
+            </a>
+            <i class="fas fa-sign-out-alt logoutIcon" onclick="window.location.href='/logout'"></i>
+        </div>
     </div>
 
 

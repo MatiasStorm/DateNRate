@@ -54,6 +54,12 @@ public class DemoController {
         return "redirect:/userProfile?userId=" + user.getUserId();
     }
 
+    @GetMapping("/logout")
+    public String logout(WebRequest request){
+        setSessionInfo(request, null);
+        return "redirect:/";
+    }
+
 
 
     @PostMapping("/createMessage")
