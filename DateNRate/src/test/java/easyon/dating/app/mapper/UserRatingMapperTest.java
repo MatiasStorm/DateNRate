@@ -30,7 +30,7 @@ class UserRatingMapperTest {
     private void setup() throws SQLException{
         Mockito.when(resultSet.getInt("target_user_id")).thenReturn(targetUserId);
         Mockito.when(resultSet.getInt("rating_id")).thenReturn(ratingId);
-        Mockito.when(resultSet.getDouble("rating")).thenReturn(avgRating);
+        Mockito.when(resultSet.getDouble("avg_rating")).thenReturn(avgRating);
         Mockito.when(resultSet.getString("ratings.rating_name")).thenReturn(ratingName);
 
     }
