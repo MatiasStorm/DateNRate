@@ -17,19 +17,21 @@ import java.util.List;
 public class DemoController {
     private final UserService userService;
     private final MessageService messageService;
-    private final RatingService ratingService;
     private final UserRatingService userRatingService;
     private final FavoriteService favoriteService;
-    private final TagService tagService;
     private final UserTagService userTagService;
 
-    public DemoController(UserService userService, RatingService ratingService, MessageService messageService, UserRatingService userRatingService, FavoriteService favoriteService, TagService tagService, UserTagService userTagService) {
+    public DemoController(
+            UserService userService,
+            MessageService messageService,
+            UserRatingService userRatingService,
+            FavoriteService favoriteService,
+            UserTagService userTagService
+    ) {
         this.userService = userService;
-        this.ratingService = ratingService;
         this.messageService = messageService;
         this.userRatingService = userRatingService;
         this.favoriteService = favoriteService;
-        this.tagService = tagService;
         this.userTagService = userTagService;
     }
 
@@ -106,19 +108,18 @@ public class DemoController {
         if (loggedInUser == null) { // If your aren't logged in, redirect to index.html
             return "redirect:/";
         }
-        List<Rating> ratings = ratingService.getRatings();
+        List<Rating> ratings = userRatingService.getRatings();
         favorite.setFavoriteUserId(userId);
         favorite.setUserId(loggedInUser.getUserId());
         model.addAttribute("isMyProfile", loggedInUser.getUserId() == userId);
         model.addAttribute("currentUser", loggedInUser);
         model.addAttribute("favorite", favorite);
-//        model.addAttribute("ratings", ratings);
         model.addAttribute("user", userService.getUser(userId));
         model.addAttribute("userRatings", userRatingService.getEmptyUserRatingArray(ratings.size()));
         model.addAttribute("userRating", userRating);
-        List<Rating> ratingList = ratingService.getRatings();
+        List<Rating> ratingList = userRatingService.getRatings();
         model.addAttribute("ratingList", ratingList);
-        model.addAttribute("activeTags", tagService.getSelectedTags(userId));
+        model.addAttribute("activeTags", userTagService.getActiveTagList(userId));
         model.addAttribute("inactiveTags", userTagService.getInactiveTagList(userId));
         model.addAttribute("ratings", userRatingService.getUserRatings(userId));
 
@@ -230,28 +231,11 @@ public class DemoController {
         return "redirect:/favorite";
     }
 
-    @GetMapping("/test")
-    public String test(Model model) {
-//        model.addAttribute("newUsers", userService.getTheFiveNewestProfiles());
-        int userId = 13;
-        model.addAttribute("ratings", userRatingService.getUserRatings(userId));
-        return "/test";
-    }
-
     @PostMapping("/userTagPost")
     public String addTagToUser(UserTag userTag) {
         int userId = userTag.getUserId();
         userTagService.addTagToUser(userTag, userId);
         return "redirect:/userProfile?userId=" + userTag.getUserId();
-    }
-
-    @GetMapping("/ratingTest")
-    public String ratingTest(UserRating userRating, Model model) {
-        int currentUserId = 1;
-        model.addAttribute("userRating", userRating);
-        List<Rating> ratingList = ratingService.getRatings();
-        model.addAttribute("ratingList", ratingList);
-        return "/ratingTest";
     }
 
     @PostMapping("/postRating")

@@ -22,25 +22,16 @@ public class UserTagService {
         this.tagDAO = tagDAO;
     }
 
-    public List<UserTag> getListOfUserTags() {
-        return userTagDAO.getUserTagList();
-    }
-
-    public UserTag getUserTag(int userId) {
-        return userTagDAO.getUserTag(userId);
-    }
-
     public void addTagToUser(UserTag userTag, int userId) {
-
         try {
             userTagDAO.addTagToUser(userTag, userId);
 
         } catch (Exception e) {
             userTagDAO.removeTagFromUser(userTag, userId);
-
         }
     }
-//  --------------------------- MOVE TO TAG SERVICE?? ------------------------------
+
+
     public List<Tag> getInactiveTagList(int userId){
         List<Tag> unusedUserTagList = new ArrayList<>();
         List<Tag> allTags = tagDAO.getTagListForUsers();
@@ -60,17 +51,23 @@ public class UserTagService {
                         );
                     }
                 }
-
             }
         }
         return unusedUserTagList;
     }
 
-    public List<UserTag> getActiveTagList(int userId){
-       return userTagDAO.getActiveTagList(userId);
+    public List<Tag> getActiveTagList(int userId) {
+        List<Tag> activeTags = new ArrayList<>();
+        List<Tag> allTags = tagDAO.getTagList();
+        List<UserTag> activeUserTags = userTagDAO.getActiveTagList(userId);
+
+        for (int i = 0; i < activeUserTags.size(); i++) {
+            for (int j = 0; j < allTags.size(); j++) {
+                if (activeUserTags.get(i).getTagId() == allTags.get(j).getTagId()) {
+                    activeTags.add(allTags.get(j));
+                }
+            }
+        }
+        return activeTags;
     }
-
-
-
-
 }
