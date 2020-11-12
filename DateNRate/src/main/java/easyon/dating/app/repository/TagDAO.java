@@ -23,14 +23,6 @@ public class TagDAO {
                 );
     }
 
-    public Tag getTag(int tagId) {
-        return  jdbcTemplate.queryForObject(
-                "SELECT * FROM " + table + " WHERE tag_id = ?",
-                new TagMapper(),
-                tagId
-        );
-    }
-
     public List<Tag> getTagListForUsers() {
         return jdbcTemplate.query(
                 "SELECT * FROM " + table,

@@ -23,23 +23,6 @@ public class UserTagDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
-    public List<UserTag> getUserTagList() {
-        return jdbcTemplate.query(
-                "SELECT * FROM " + table,
-                new UserTagMapper()
-        );
-    }
-
-    public UserTag getUserTag(int userTag) {
-        return jdbcTemplate.queryForObject(
-                "SELECT * FROM " + table + " WHERE tag_id = ?",
-                new UserTagMapper(),
-                userTag
-
-        );
-    }
-
     public void addTagToUser(UserTag userTag, int userId){
         jdbcTemplate.update(
                 "INSERT INTO " + table + "(tag_id, user_id) VALUES(?, ?)",
@@ -55,16 +38,6 @@ public class UserTagDAO {
         );
     }
 
-    public UserTag getUsersTag(int tagId, int userId) {
-        return jdbcTemplate.queryForObject(
-                "SELECT * FROM " + table + " WHERE tag_id = ? AND user_id = ?",
-                new UserTagMapper(),
-                tagId,
-                userId
-
-        );
-    }
-
     public List<UserTag> getActiveTagList(int userId) {
         return jdbcTemplate.query(
                 "SELECT * FROM " + table + " WHERE user_id = ?",
@@ -73,20 +46,6 @@ public class UserTagDAO {
 
         );
     }
-
-    public List<UserTag> getInactiveTagList(int userId) {
-        return jdbcTemplate.query(
-                "SELECT * FROM " + table + " WHERE user_id != ?",
-                new UserTagMapper(),
-                userId
-
-        );
-    }
-
-
-
-
-
 }
 
 

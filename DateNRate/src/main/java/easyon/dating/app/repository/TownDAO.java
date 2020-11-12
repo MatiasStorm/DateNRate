@@ -19,21 +19,6 @@ public class TownDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Town> getTownList() {
-        return jdbcTemplate.query(
-                "SELECT * FROM " + table,
-                new TownMapper()
-        );
-    }
-
-    public Town getTown(int townId) {
-        return jdbcTemplate.queryForObject(
-                "SELECT * FROM " + table + " WHERE town_id = ?",
-                new TownMapper(),
-                townId
-        );
-    }
-
     public Town getTownByPostcalCode(int postalCode) {
         return jdbcTemplate.queryForObject(
                 "SELECT * FROM " + table + " WHERE postal_code = ?",
