@@ -33,7 +33,8 @@ public class UserService {
     public User createUser(User user){
         Town town = townDAO.getTownByPostcalCode(user.getTown().getPostalCode());
         user.setTown(town);
-        return userDao.createUser(user);
+        int userId = userDao.createUser(user);
+        return userDao.getUser(userId);
     }
 
     public User getUser(int userId){

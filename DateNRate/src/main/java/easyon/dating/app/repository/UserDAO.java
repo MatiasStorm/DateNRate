@@ -4,8 +4,12 @@ import easyon.dating.app.mapper.UserMapper;
 import easyon.dating.app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
+import java.sql.PreparedStatement;
 import java.util.Collections;
 import java.util.List;
 
@@ -81,21 +85,28 @@ public class UserDAO {
 
 
 
-    public User createUser(User user){
+    public int createUser(User user){
+        KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
-                "INSERT into users(first_name, last_name, email, password, username, date_of_birth, is_male, town_id, user_description) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getUsername(),
-                user.getDateOfBirth(),
-                user.getIsMale(),
-                user.getTown().getTownId(),
-                user.getUserDescription()
-        );
-        int newUserId = jdbcTemplate.queryForObject("SELECT last_insert_id() as id", (rs, i) -> rs.getInt("id"));
-        return getUser(newUserId);
+                connection -> {
+                    PreparedStatement preparedStatement = connection.prepareStatement(
+                        "INSERT into users(first_name, last_name, email, password, username, date_of_birth, is_male, town_id, user_description) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        new String[]{"user_id"}
+                    );
+                    preparedStatement.setString(1, user.getFirstName() );
+                    preparedStatement.setString(2, user.getLastName());
+                    preparedStatement.setString(3, user.getEmail());
+                    preparedStatement.setString(4, user.getPassword());
+                    preparedStatement.setString(5, user.getUsername());
+                    preparedStatement.setDate(6, user.getDateOfBirth());
+                    preparedStatement.setBoolean(7, user.getIsMale());
+                    preparedStatement.setInt(8, user.getTown().getTownId());
+                    preparedStatement.setString(9, user.getUserDescription());
+                    return preparedStatement;
+                }, keyHolder );
+
+        Number userId = keyHolder.getKey();
+        return userId.intValue();
     }
 
     public User updateUser(User user){
