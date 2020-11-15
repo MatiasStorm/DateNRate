@@ -1,3 +1,14 @@
+DROP TABLE IF EXISTS `user_tags`;
+DROP TABLE IF EXISTS `tags`;
+
+DROP TABLE IF EXISTS `user_ratings`;
+DROP TABLE IF EXISTS `ratings`;
+
+DROP TABLE IF EXISTS `messages`;
+DROP TABLE IF EXISTS `favorites`;
+DROP TABLE IF EXISTS  `users`;
+
+DROP TABLE IF EXISTS `towns`;
 CREATE TABLE `towns`
 (
     `town_id`     int          NOT NULL AUTO_INCREMENT,
@@ -58,6 +69,7 @@ CREATE TABLE `ratings`
     PRIMARY KEY (`rating_id`),
     UNIQUE KEY `rating_name_UNIQUE` (`rating_name`)
 );
+
 
 CREATE TABLE `tags`
 (
