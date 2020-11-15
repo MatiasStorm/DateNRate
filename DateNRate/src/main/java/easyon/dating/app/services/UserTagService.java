@@ -34,7 +34,7 @@ public class UserTagService {
 
     public List<Tag> getInactiveTagList(int userId){
         List<Tag> unusedUserTagList = new ArrayList<>();
-        List<Tag> allTags = tagDAO.getTagListForUsers();
+        List<Tag> allTags = tagDAO.getTagList();
         List<UserTag> activeUserTagList = userTagDAO.getActiveTagList(userId);
 
         if (activeUserTagList.size()==0){

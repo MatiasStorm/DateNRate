@@ -23,14 +23,4 @@ public class TagDAO {
                 );
     }
 
-    public List<Tag> getTagListForUsers() {
-        return jdbcTemplate.query(
-                "SELECT * FROM " + table,
-                new TagMapper()
-        );
-    }
-
-
-
-
 }
