@@ -185,6 +185,19 @@ class UserServiceTest {
     }
 
     @Test
+    void getUserFormErrorDateOfBirth_newUser(){
+        user1.setPassword2(user1.getPassword());
+        user1.setDateOfBirth(new Date(System.currentTimeMillis() + 172800000)); // 2 Days in milliseconds.
+        UserFormError userFormError = userService.getUserFormError(user1);
+        assertTrue(userFormError.containsErrors(), "ContainsErrors should return True");
+        assertTrue(userFormError.isDateOfBirthError(), "DateOfBirthError should return true");
+        assertFalse(userFormError.isTownError());
+        assertFalse(userFormError.isEmailError());
+        assertFalse(userFormError.isUsernameError());
+        assertFalse(userFormError.isPasswordError());
+    }
+
+    @Test
     void testGetUserFormError() {
     }
 

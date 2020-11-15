@@ -89,7 +89,7 @@ public class UserService {
             userFormError.setTownError(true);
         }
         Date birthDay = user.getDateOfBirth();
-        if(birthDay.after(new Date(System.currentTimeMillis()))){
+        if(birthDay.after(new Date(System.currentTimeMillis())) || birthDay.getTime() < new Date(1900, 01, 01).getTime()){
             userFormError.setDateOfBirthError(true);
         }
         return userFormError;
