@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
@@ -97,7 +96,11 @@ public class UserService {
         String absolutePath = new File(path).getAbsolutePath();
         File file = new File(absolutePath);
         file.createNewFile();
-        multipartFile.transferTo(file);
+        OutputStream outputStream = new FileOutputStream(file);
+        InputStream inputStream = multipartFile.getInputStream();
+        inputStream.transferTo(outputStream);
+        inputStream.close();
+        outputStream.close();
     }
 
     public User uploadProfilePicture(MultipartFile picture, User user ) throws IOException {
@@ -105,6 +108,7 @@ public class UserService {
         // Save file in target folder (Enables hot reload of pictures)
         String targetPath = "target/classes/static/images/" + fileName;
         saveFile(picture, targetPath);
+
         // Save file in static folder (Keeps it between reloads)
         String picturePath = "/images/" + fileName;
         String staticPath = "src/main/resources/static" + picturePath;
