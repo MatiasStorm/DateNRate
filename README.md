@@ -21,6 +21,9 @@ Each user should be able to rate another user on a fixed set of characteristics 
 
 
 ## Structure
+The `documents` folder contains all our design documents and diagram, and our assignment in the `Aflevering.DateNRate.pdf` file.
+
+The program itself is located in the `DateNRate` directory.
 
 
 ## Run
