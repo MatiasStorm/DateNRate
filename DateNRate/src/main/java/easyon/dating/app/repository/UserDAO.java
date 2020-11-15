@@ -8,7 +8,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
 import java.sql.PreparedStatement;
 import java.util.Collections;
 import java.util.List;

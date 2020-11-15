@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -147,9 +148,17 @@ public class DemoController {
             model.addAttribute("user", user);
             return "/createUser";
         }
-        User newUser = userService.createUser(user);
-        setSessionInfo(request, newUser);
-        return "redirect:/userProfile?userId=" + newUser.getUserId();
+        try {
+            User newUser = userService.createUser(user);
+            setSessionInfo(request, newUser);
+            return "redirect:/userProfile?userId=" + newUser.getUserId();
+        }
+        catch (SQLException e){
+            userFormError = userService.getUserFormError(user);
+            model.addAttribute("errors", userFormError);
+            model.addAttribute("user", user);
+            return "/createUser";
+        }
     }
 
     @GetMapping("/updateUser")
@@ -178,9 +187,17 @@ public class DemoController {
             model.addAttribute("user", user);
             return "/updateUser";
         }
-        User updatedUser = userService.updateUser(user);
-        setSessionInfo(request, updatedUser);
-        return "redirect:/userProfile?userId=" + user.getUserId();
+        try {
+            User updatedUser = userService.updateUser(user);
+            setSessionInfo(request, updatedUser);
+            return "redirect:/userProfile?userId=" + user.getUserId();
+        }
+        catch (SQLException e){
+            userFormError = userService.getUserFormError(user, loggedInUser);
+            model.addAttribute("errors", userFormError);
+            model.addAttribute("user", user);
+            return "/updateUser";
+        }
     }
 
 
