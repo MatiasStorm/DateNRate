@@ -73,20 +73,20 @@
         <div class="box">
             <div class="boxHeader"><h1> Tags </h1></div>
             <div class="boxBody flexWrap" th:if="${isMyProfile}">
-                <form th:each="tag : ${activeTags}" th:object="${userTag}" method="post" th:action="@{/userTagPost}">
+                <form th:each="tag : ${activeTags}" method="post" th:action="@{/userTagPost}">
                     <input name="tagId" th:value="${tag.tagId}" hidden="hidden">
                     <input name="userId" th:value="${currentUser.userId}" hidden="hidden">
                     <button class="activeTag tag" type="submit" th:text="${tag.tagName}"></button>
                 </form>
 
-                <form th:each="tag : ${inactiveTags}" th:object="${userTag}" method="post" th:action="@{/userTagPost}">
+                <form th:each="tag : ${inactiveTags}" method="post" th:action="@{/userTagPost}">
                     <input name="tagId" th:value="${tag.tagId}" hidden="hidden">
                     <input name="userId" th:value="${currentUser.userId}" hidden="hidden">
                     <button class="inactiveTag tag" type="submit" th:text="${tag.tagName}"></button>
                 </form>
             </div>
             <div class="boxBody flexWrap" th:unless="${isMyProfile}">
-                <span class="activeTag tag" style="cursor: default" th:each="tag : ${activeTags}" th:object="${userTag}" th:text="${tag.tagName}"></span>
+                <span class="activeTag tag" style="cursor: default" th:each="tag : ${activeTags}" th:text="${tag.tagName}"></span>
             </div>
         </div>
     </div>

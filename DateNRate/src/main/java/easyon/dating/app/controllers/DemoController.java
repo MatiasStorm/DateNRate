@@ -119,6 +119,7 @@ public class DemoController {
         model.addAttribute("userRating", userRating);
         List<Rating> ratingList = userRatingService.getRatings();
         model.addAttribute("ratingList", ratingList);
+        model.addAttribute("userTag", userTag);
         model.addAttribute("activeTags", userTagService.getActiveTagList(userId));
         model.addAttribute("inactiveTags", userTagService.getInactiveTagList(userId));
         model.addAttribute("ratings", userRatingService.getUserRatings(userId));
