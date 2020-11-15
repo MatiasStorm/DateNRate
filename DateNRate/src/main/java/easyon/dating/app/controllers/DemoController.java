@@ -239,7 +239,6 @@ public class DemoController {
 
     @PostMapping("/postRating")
     public String postRating(UserRating userRating, Model model) {
-        int currentUserId = 1;
         model.addAttribute("userRating", userRating);
         userRatingService.createUserRating(userRating);
         return "redirect:/userProfile?userId=" + userRating.getTargetUserId();
