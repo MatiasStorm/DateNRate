@@ -22,12 +22,12 @@ public class UserTagService {
         this.tagDAO = tagDAO;
     }
 
-    public void addTagToUser(UserTag userTag, int userId) {
+    public void addTagToUser(UserTag userTag) {
         try {
-            userTagDAO.addTagToUser(userTag, userId);
+            userTagDAO.addTagToUser(userTag);
 
         } catch (Exception e) {
-            userTagDAO.removeTagFromUser(userTag, userId);
+            userTagDAO.removeTagFromUser(userTag);
         }
     }
 

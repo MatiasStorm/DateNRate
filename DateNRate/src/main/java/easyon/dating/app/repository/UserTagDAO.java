@@ -23,18 +23,18 @@ public class UserTagDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void addTagToUser(UserTag userTag, int userId){
+    public void addTagToUser(UserTag userTag){
         jdbcTemplate.update(
                 "INSERT INTO " + table + "(tag_id, user_id) VALUES(?, ?)",
                 userTag.getTagId(),
-                userId
+                userTag.getUserId()
         );
     }
-    public void removeTagFromUser(UserTag userTag, int userId){
+    public void removeTagFromUser(UserTag userTag){
         jdbcTemplate.update(
                 "DELETE FROM " + table + " WHERE tag_id = ? AND user_id = ?",
                 userTag.getTagId(),
-                userId
+                userTag.getUserId()
         );
     }
 
