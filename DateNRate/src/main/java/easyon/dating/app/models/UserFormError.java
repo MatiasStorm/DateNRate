@@ -12,7 +12,7 @@ public class UserFormError {
     }
 
     public boolean containsErrors (){
-        return (passwordError || usernameError || emailError || townError);
+        return (passwordError || usernameError || emailError || townError || dateOfBirthError);
     }
 
     public boolean isDateOfBirthError() {

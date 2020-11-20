@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Component
@@ -19,7 +20,7 @@ public class TownDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Town getTownByPostcalCode(int postalCode) {
+    public Town getTownByPostcalCode(int postalCode) throws SQLException{
         return jdbcTemplate.queryForObject(
                 "SELECT * FROM " + table + " WHERE postal_code = ?",
                 new TownMapper(),

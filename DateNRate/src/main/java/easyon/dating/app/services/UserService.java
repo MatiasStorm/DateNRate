@@ -6,6 +6,7 @@ import easyon.dating.app.models.UserFormError;
 import easyon.dating.app.repository.TownDAO;
 import easyon.dating.app.repository.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.SQL;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,10 +30,11 @@ public class UserService {
         return userDao.selectUsers();
     }
 
-    public User createUser(User user){
+    public User createUser(User user) throws SQLException{
         Town town = townDAO.getTownByPostcalCode(user.getTown().getPostalCode());
         user.setTown(town);
-        return userDao.createUser(user);
+        int userId = userDao.createUser(user);
+        return userDao.getUser(userId);
     }
 
     public User getUser(int userId){
@@ -86,7 +88,7 @@ public class UserService {
             userFormError.setTownError(true);
         }
         Date birthDay = user.getDateOfBirth();
-        if(birthDay.after(new Date(System.currentTimeMillis()))){
+        if(birthDay.after(new Date(System.currentTimeMillis())) || birthDay.getTime() < new Date(1900, 01, 01).getTime()){
             userFormError.setDateOfBirthError(true);
         }
         return userFormError;
@@ -123,7 +125,7 @@ public class UserService {
         return userDao.getTheFiveNewestProfiles();
     }
 
-    public User updateUser(User user){
+    public User updateUser(User user) throws SQLException {
         Town town = townDAO.getTownByPostcalCode(user.getTown().getPostalCode());
         user.setTown(town);
         return userDao.updateUser(user);
