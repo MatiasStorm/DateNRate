@@ -48,9 +48,9 @@ Navigate to `DateNRate/DateNRate` and execute:
 `./mvn spring-boot:run` - Linux
 `./mvnw spring-boot:run` - Windows
  
-Finally navigate to [localhost:8080](localhost:8080) to use the website.
+Finally navigate to [localhost:8080](http://localhost:8080) to use the website.
 
-The admin page, where one can delete users, is located at [localhost:8080/admin](localhost:8080/admin), username is `admin` and password is `admin`.
+The admin page, where one can delete users, is located at [localhost:8080/admin](http://localhost:8080/admin), username is `admin` and password is `admin`.
 
 
 ## Contributors
